@@ -36,7 +36,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Mulai Ujian</h5>
+                <h5 class="modal-title">Mulai Ujian  </h5>
                 <button class="close" data-dismiss="modal">&times;</button>
             </div>
             <form action="{{ route('ujian.mulai') }}" method="POST">
