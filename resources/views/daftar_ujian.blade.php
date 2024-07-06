@@ -10,7 +10,7 @@
 
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Daftar Ujian</h4>
+                <h4 class="card-title">Daftar Ujian  </h4>
             </div>
             <div class="card-body">
                 <table class="table table-striped display text-center w-100" id="table">
