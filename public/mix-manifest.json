@@ -1,0 +1,14 @@
+{
+    "/js/admin/kelas.js": "/js/admin/kelas.js",
+    "/js/admin/rombel.js": "/js/admin/rombel.js",
+    "/js/admin/siswa.js": "/js/admin/siswa.js",
+    "/js/admin/mapel.js": "/js/admin/mapel.js",
+    "/js/admin/paket_soal.js": "/js/admin/paket_soal.js",
+    "/js/admin/soal.js": "/js/admin/soal.js",
+    "/js/admin/soal_create.js": "/js/admin/soal_create.js",
+    "/js/admin/ujian.js": "/js/admin/ujian.js",
+    "/js/admin/riwayat_ujian.js": "/js/admin/riwayat_ujian.js",
+    "/js/admin/riwayat_ujian_hasil.js": "/js/admin/riwayat_ujian_hasil.js",
+    "/js/daftar_ujian.js": "/js/daftar_ujian.js",
+    "/js/ujian.js": "/js/ujian.js"
+}
