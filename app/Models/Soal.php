@@ -8,28 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Soal extends Model
 {
     use HasFactory;
-
     protected $table = 'soal';
-
-    public function pilihan()
-    {
-        return $this->hasMany(SoalPilihan::class);
-    }
-
-    public function pilihanBenar()
-    {
-        return $this->hasOne(SoalPilihan::class)->where('status', 1);
-    }
-
+    protected $fillable = [
+        'paket_soal_id',
+        'jenis',
+        'pertanyaan',
+        'pertanyaan_a',
+        'pertanyaan_b',
+        'pertanyaan_c',
+        'pertanyaan_d',
+        'media',
+        'ulang_media',
+        'jawaban_benar',
+    ];
     public function paketSoal()
     {
-        return $this->belongsTo(PaketSoal::class);
+        return $this->hasOne(PaketSoal::class, 'id', 'paket_soal_id');
     }
-
-    public function hasil()
+    public function soalPilihan()
     {
-        return $this->hasOne(UjianHasil::class)->whereHas('ujianSiswa', function ($q) {
-            $q->where('siswa_id', auth()->id());
-        });
+        return $this->hasMany(SoalPilihan::class, 'soal_id');
     }
 }

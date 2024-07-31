@@ -8,23 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class PaketSoal extends Model
 {
     use HasFactory;
-
     protected $table = 'paket_soal';
-
-    protected $guarded = [];
+    public $guarded = [];
 
     public function kelas()
     {
-        return $this->belongsTo(Kelas::class);
+        return $this->belongsTo(Kelas::class, 'kode_kelas', 'id');
     }
 
-    public function mapel()
+    public function mataPelajaran()
     {
-        return $this->belongsTo(Mapel::class);
+        return $this->belongsTo(MataPelajaran::class, 'kode_mata_pelajaran', 'id');
     }
 
-    public function soal()
+    public function soals()
     {
-        return $this->hasMany(Soal::class);
+        return $this->hasMany(Soal::class, 'paket_soal_id');
     }
 }

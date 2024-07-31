@@ -1,25 +1,22 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+import forms from "@tailwindcss/forms";
+import typography from "@tailwindcss/typography";
 
-module.exports = {
-    purge: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
+/* @type {import('tailwindcss').Config} */
+export default {
+    content: [
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./vendor/protonemedia/laravel-splade/lib/**/*.vue",
+        "./vendor/protonemedia/laravel-splade/resources/views/**/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
+        "./resources/js/**/*.vue",
+        // "./app/Forms/*.php",
+        // "./app/Tables/*.php",
     ],
 
     theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-            },
-        },
+        extend: {},
     },
 
-    variants: {
-        extend: {
-            opacity: ['disabled'],
-        },
-    },
-
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [forms, typography],
 };

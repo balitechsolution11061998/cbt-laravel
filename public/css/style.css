@@ -1,0 +1,1886 @@
+.custom-tooltip-class {
+    background-color: #ccc; /* Gray background color */
+    border-radius: 10px; /* Rounded corners */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and text color */
+}
+
+/* Title color set to black */
+
+.custom-tooltip-class .introjs-tooltipbuttons .btn {
+    background-color: #28a745; /* Green button background color */
+    border-color: #28a745; /* Green button border color */
+    transition: background-color 0.3s ease, border-color 0.3s ease,
+        color 0.3s ease; /* Smooth transition for button */
+    border-radius: 50px; /* Round button corners to make them appear elliptical */
+    padding: 8px 16px; /* Optional: Adjust padding for button size */
+}
+
+.custom-tooltip-class .introjs-tooltipbuttons .btn:hover {
+    background-color: #218838; /* Darker green on hover */
+    border-color: #218838;
+    color: #000;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.loader-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.7
+    ); /* Semi-transparent white background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-overlay .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+.card{
+    color:black;
+}
+
+.card-loading {
+    position: relative;
+}
+
+.card-title {
+    color: #000; /* Black color */
+    font-size: 1.25rem; /* Adjust font size if needed */
+    font-weight: 700; /* Optional: Bold font weight */
+}
+
+.card-loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-loading .card-body {
+    visibility: hidden;
+}
+
+.card-loading .card-body > * {
+    visibility: hidden;
+}
+
+.card-loading .card-body::after {
+    content: "Loading...";
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.custom-font {
+    font-family: "Courier New", Courier, monospace; /* Example font */
+    font-size: 14px; /* Example font size */
+    font-weight: bold; /* Example font weight */
+    color: #333; /* Example color */
+}
+
+/* Default styles for light mode */
+.custom-font,
+.badge,
+.btn {
+    color: black;
+}
+
+/* Styling for Intro.js tooltips */
+.introjs-tooltip {
+    background-color: #ffffff; /* Tooltip background color */
+    color: #333333; /* Tooltip text color */
+    border: 1px solid #cccccc; /* Tooltip border */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tooltip shadow */
+    font-size: 14px; /* Tooltip font size */
+    max-width: 300px; /* Maximum width of the tooltip */
+}
+
+/* Styling for Intro.js tooltip title */
+.introjs-tooltip-title {
+    font-weight: bold; /* Bold title text */
+    margin-bottom: 8px; /* Bottom margin */
+}
+
+/* Styling for Intro.js tooltip content */
+.introjs-tooltip-content {
+    line-height: 1.5; /* Line height for content */
+    padding: 8px 12px; /* Padding inside the tooltip */
+}
+
+/* Styling for Intro.js tooltip buttons (next, previous, etc.) */
+.introjs-tooltipbuttons {
+    text-align: right; /* Align buttons to the right */
+    margin-top: 12px; /* Top margin for buttons */
+}
+
+/* Styling for Intro.js overlay */
+.introjs-overlay {
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.5
+    ); /* Overlay background color and opacity */
+}
+
+/* Custom styles for the spinner and modal */
+.modal-content {
+    border-radius: 15px; /* Rounded corners */
+    animation: fadeIn 0.5s; /* Fade-in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.spinner-border {
+    display: block;
+    margin: 0 auto;
+}
+
+.custom-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.custom-modal-header .modal-title {
+    flex: 1;
+    text-align: center;
+}
+
+.custom-modal-header .btn-close {
+    position: absolute;
+    right: 1rem;
+}
+
+[data-bs-theme="dark"] .modal-content {
+    background-color: #222;
+    color: #fff;
+}
+
+[data-bs-theme="light"] .modal-content {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Custom styles for the modal */
+.modal-content {
+    border-radius: 15px; /* Rounded corners */
+    animation: fadeIn 0.5s; /* Fade-in animation */
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.custom-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #5c67f2;
+    color: #fff;
+}
+
+.custom-modal-header .modal-title {
+    flex: 1;
+    text-align: center;
+}
+
+.custom-modal-header .btn-close {
+    position: absolute;
+    right: 1rem;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.cart-item,
+.card-details {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    color:#000000;
+}
+
+.item-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.item-price,
+.item-delete {
+    margin-left: 1rem;
+}
+
+.item-delete {
+    cursor: pointer;
+    color: #dc3545;
+}
+
+.card-types img {
+    width: 50px;
+    height: auto;
+    margin-right: 0.5rem;
+}
+
+.btn-primary {
+    background-color: #5c67f2;
+    border: none;
+}
+.cart-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-details > div {
+    margin-right: 20px;
+}
+
+.item-cost-fulfillable {
+    display: flex;
+    align-items: center;
+}
+
+.item-price {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.form-group.qty-fulfillable-group {
+    display: flex;
+    align-items: center;
+}
+
+.qty-fulfillable-input {
+    width: 80px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+.qty-decrease,
+.qty-increase {
+    background-color: #000000;
+    border: 1px solid #ccc;
+    color:white;
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.qty-decrease:hover,
+.qty-increase:hover {
+    background-color: #e0e0e0;
+}
+
+.item-delete {
+    cursor: pointer;
+    color: red;
+    margin-left: 10px;
+}
+
+.item-details p,
+.item-details span {
+    margin: 0;
+    padding: 0;
+}
+nav {
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.search-group {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.search-group i {
+    color: #ccc;
+}
+
+.search-bar {
+    border: none;
+    outline: none;
+    background: transparent;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    width: 200px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    padding: 10px 15px;
+}
+
+nav ul li a.active {
+    background-color: #fcbf49;
+    border-radius: 5px;
+}
+
+.main-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.main-banner {
+    background-color: #e9f5f1;
+    padding: 40px 20px;
+    border-radius: 10px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-banner h1 {
+    color: #333;
+    margin: 0;
+    font-size: 24px;
+}
+
+.illustration {
+    margin-top: 20px;
+}
+
+.illustration img {
+    width: 100%;
+}
+
+.main-banner h6 {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+#cart-items {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.parcels {
+    width: 60%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.parcels h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.parcel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.parcel-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+
+.parcel-item.active {
+    background-color: #e9f5f1;
+}
+
+.parcel-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.parcel-info {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.parcel-info p {
+    margin: 0;
+    color: #333;
+}
+
+.parcel-status {
+    text-align: right;
+}
+
+.parcel-status p {
+    margin: 0;
+    color: #333;
+}
+
+.sidebar {
+    width: 30%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shipping-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shipping-info h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.shipping-info p {
+    margin: 0;
+    color: #333;
+}
+
+.map {
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+/* Custom Leaflet styles to resemble Google Maps */
+.leaflet-container {
+    height: 300px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.leaflet-control-zoom {
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-popup-tip {
+    background: #fff;
+}
+
+.leaflet-control-attribution {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+}
+
+.sender-receiver {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sender,
+.receiver {
+    width: 48%;
+}
+
+.sender h3,
+.receiver h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.sender p,
+.receiver p {
+    margin: 0;
+    color: #333;
+}
+
+.status-timeline {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.status-item {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.status-item.active {
+    background-color: #e9f5f1;
+}
+
+.status-item p {
+    margin: 0;
+    color: #333;
+}
+
+.total-cost {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-cost p {
+    margin: 0;
+    color: #333;
+}
+
+.payment-button {
+    background-color: #fcbf49;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+}
+
+#tracking{
+    background: #fff
+ }
+ .tracking-detail {
+   padding: 3rem 0;
+ }
+ #tracking {
+   margin-bottom: 1rem;
+ }
+ [class*="tracking-status-"] p {
+   margin: 0;
+   font-size: 1.1rem;
+   color: #fff;
+   text-transform: uppercase;
+   text-align: center;
+ }
+ [class*="tracking-status-"] {
+   padding: 1.6rem 0;
+ }
+ .tracking-list {
+   border: 1px solid #e5e5e5;
+ }
+ .tracking-item {
+   border-left: 4px solid #00ba0d;
+   position: relative;
+   padding: 2rem 1.5rem 0.5rem 2.5rem;
+   font-size: 0.9rem;
+   margin-left: 3rem;
+   min-height: 5rem;
+ }
+ .tracking-item:last-child {
+   padding-bottom: 4rem;
+ }
+ .tracking-item .tracking-date {
+   margin-bottom: 0.5rem;
+ }
+ .tracking-item .tracking-date span {
+   color: #888;
+   font-size: 85%;
+   padding-left: 0.4rem;
+ }
+ .tracking-item .tracking-content {
+   padding: 0.5rem 0.8rem;
+   background-color: #f4f4f4;
+   border-radius: 0.5rem;
+ }
+ .tracking-item .tracking-content span {
+   display: block;
+   color: #767676;
+   font-size: 13px;
+ }
+ .tracking-item .tracking-icon {
+   position: absolute;
+   left: -0.7rem;
+   width: 1.1rem;
+   height: 1.1rem;
+   text-align: center;
+   border-radius: 50%;
+   font-size: 1.1rem;
+   background-color: #fff;
+   color: #fff;
+ }
+
+ .tracking-item-pending {
+   border-left: 4px solid #d6d6d6;
+   position: relative;
+   padding: 2rem 1.5rem 0.5rem 2.5rem;
+   font-size: 0.9rem;
+   margin-left: 3rem;
+   min-height: 5rem;
+ }
+ .tracking-item-pending:last-child {
+   padding-bottom: 4rem;
+ }
+ .tracking-item-pending .tracking-date {
+   margin-bottom: 0.5rem;
+ }
+ .tracking-item-pending .tracking-date span {
+   color: #888;
+   font-size: 85%;
+   padding-left: 0.4rem;
+ }
+ .tracking-item-pending .tracking-content {
+   padding: 0.5rem 0.8rem;
+   background-color: #f4f4f4;
+   border-radius: 0.5rem;
+ }
+ .tracking-item-pending .tracking-content span {
+   display: block;
+   color: #767676;
+   font-size: 13px;
+ }
+ .tracking-item-pending .tracking-icon {
+   line-height: 2.6rem;
+   position: absolute;
+   left: -0.7rem;
+   width: 1.1rem;
+   height: 1.1rem;
+   text-align: center;
+   border-radius: 50%;
+   font-size: 1.1rem;
+   color: #d6d6d6;
+ }
+ .tracking-item-pending .tracking-content {
+   font-weight: 600;
+   font-size: 17px;
+ }
+
+ .tracking-item .tracking-icon.status-current {
+   width: 1.9rem;
+   height: 1.9rem;
+   left: -1.1rem;
+ }
+ .tracking-item .tracking-icon.status-intransit {
+   color: #00ba0d;
+   font-size: 0.6rem;
+ }
+ .tracking-item .tracking-icon.status-current {
+   color: #00ba0d;
+   font-size: 0.6rem;
+ }
+ @media (min-width: 992px) {
+   .tracking-item {
+     margin-left: 10rem;
+   }
+   .tracking-item .tracking-date {
+     position: absolute;
+     left: -10rem;
+     width: 7.5rem;
+     text-align: right;
+   }
+   .tracking-item .tracking-date span {
+     display: block;
+   }
+   .tracking-item .tracking-content {
+     padding: 0;
+     background-color: transparent;
+   }
+
+   .tracking-item-pending {
+     margin-left: 10rem;
+   }
+   .tracking-item-pending .tracking-date {
+     position: absolute;
+     left: -10rem;
+     width: 7.5rem;
+     text-align: right;
+   }
+   .tracking-item-pending .tracking-date span {
+     display: block;
+   }
+   .tracking-item-pending .tracking-content {
+     padding: 0;
+     background-color: transparent;
+   }
+ }
+
+ .tracking-item .tracking-content {
+   font-weight: 600;
+   font-size: 17px;
+ }
+
+ .blinker {
+   border: 7px solid #e9f8ea;
+   animation: blink 1s;
+   animation-iteration-count: infinite;
+ }
+ @keyframes blink { 50% { border-color:#fff ; }  }
+
+
+ .pretty-checkbox {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.pretty-checkbox input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.pretty-checkbox input[type="checkbox"] + span {
+    position: relative;
+    display: inline-block;
+    padding: 5px 0 5px 30px; /* Add padding to the label */
+    cursor: pointer;
+    user-select: none;
+}
+
+.pretty-checkbox input[type="checkbox"] + span:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    background: #fff;
+    border-radius: 4px;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.pretty-checkbox input[type="checkbox"]:checked + span:before {
+    background: #007bff;
+    border-color: #007bff;
+}
+
+.pretty-checkbox input[type="checkbox"]:checked + span:after {
+    content: '\2713';
+    position: absolute;
+    top: 0;
+    left: 4px;
+    font-size: 18px;
+    color: #fff;
+    line-height: 20px;
+}
+.drop-zone {
+    max-width: 100%;
+    padding: 25px;
+    border: 2px dashed #007bff;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    color: #999;
+    transition: border-color 0.3s;
+}
+
+.drop-zone--over {
+    border-color: #666;
+}
+
+.drop-zone__prompt {
+    margin-bottom: 10px;
+}
+
+.drop-zone__input {
+    display: none;
+}
+.drop-zone__thumb {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.drop-zone__thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    box-sizing: border-box;
+}
+.badge-sm {
+    font-size: 0.75rem;
+    padding: 0.25em 0.4em;
+}
+.spinner {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+}
+.truncated-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Adjust as needed */
+    display: inline-block;
+    vertical-align: middle;
+}
+.read-more {
+    color: #007bff;
+    cursor: pointer;
+}
+
+.number-font {
+    font-family: 'Courier New', Courier, monospace; /* Example: Monospaced font */
+    font-weight: bold; /* Example: Bold font */
+    color: black; /* Example: Blue color */
+}
+
+.card-footer {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    border-radius: 0 0 0.25rem 0.25rem;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+.card-footer p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+.card-footer a {
+    text-decoration: none;
+    color: #3c8dbc;
+}
+.card-footer a:hover {
+    text-decoration: underline;
+}
+.card-footer b {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.badge-pretty {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+.bg-pretty-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+.bg-pretty-success {
+    background-color: #28a745;
+    color: #fff;
+}
+.bg-pretty-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+.chart-container {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Common styles for all custom badges */
+.badge-pretty {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 14px;
+}
+
+/* Specific styles for each status */
+.custom-progress {
+    background-color: #ffc107; /* Matches bg-pretty-warning color */
+}
+
+.custom-approve {
+    background-color: #28a745; /* Matches bg-pretty-success color */
+}
+
+.custom-info-badge {
+    display: inline-block;
+    padding: 5px 10px; /* Custom padding */
+    background-color: #87CEEB; /* Sky blue color */
+    color: #fff; /* White text color */
+    border-radius: 20px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+}
+
+.custom-reject {
+    background-color: #dc3545; /* Matches bg-pretty-danger color */
+}
+
+/* Margin for icons */
+.badge-pretty .fas {
+    margin-right: 5px;
+}
+
+/* Timeline styles */
+.timeline {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline .event {
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline .event::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #000; /* Black color for the dot */
+    border-radius: 50%;
+}
+
+.timeline .event::after {
+    content: attr(data-date);
+    position: absolute;
+    left: -150px;
+    top: 0;
+    white-space: nowrap;
+    color: #000; /* Black color for the date */
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.timeline .event h3 {
+    color: #000; /* Black color for the event title */
+    font-size: 18px;
+    margin: 0 0 5px;
+}
+
+.timeline .event p {
+    color: #000; /* Black color for the event description */
+    font-size: 14px;
+    margin: 0;
+}
+
+
+/* Styles for checkbox animation */
+.form-check-input {
+    transition: all 0.3s ease;
+}
+
+.form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.form-check-input:checked + .form-check-label {
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.error {
+    color: red;
+}
+.valid {
+    border-color: green;
+}
+.error-input {
+    border-color: red;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-control {
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 5px;
+}
+.modal-header {
+    border-bottom: 1px solid black !important;
+}
+.modal-footer {
+    background-color: #f7f7f7;
+    border-top: 1px solid black !important;
+}
+.modal-content {
+    border-radius: 10px;
+}
+.introjs-tooltip {
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    background-color: #fff;
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+    font-family: 'Roboto', sans-serif; /* Use a modern, clean font */
+}
+.introjs-button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.introjs-button:hover {
+    background-color: #45a049;
+}
+.introjs-nextpage-button {
+    background-color: #007BFF;
+}
+.introjs-nextpage-button:hover {
+    background-color: #0056b3;
+}
+.introjs-tooltip h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center; /* Center the title */
+}
+.introjs-tooltip p {
+    margin-bottom: 15px;
+}
+.introjs-tooltip img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+/* Custom CSS for Modal */
+
+
+.modal-header .btn-close {
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-close {
+    border: none;
+    background: none;
+}
+
+.btn-close:focus,
+.btn-close:hover {
+    color: #000;
+    text-decoration: none;
+    opacity: 0.75;
+}
+
+.modal-body .form-label {
+    font-weight: bold;
+}
+
+.modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+}
+
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    flex: 1 1 20%;
+    margin: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.chart-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-animate {
+    font-size: 48px;
+    margin-right: 10px;
+}
+
+.chart-number {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.custom-font {
+    font-family: 'Evergreen Memories', sans-serif;
+    color: #000; /* Example font color */
+}
+
+@media (max-width: 1200px) {
+    .section-title {
+        font-size: 22px;
+    }
+    .icon-animate {
+        font-size: 42px;
+    }
+    .chart-number {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 992px) {
+    .section-title {
+        font-size: 20px;
+    }
+    .icon-animate {
+        font-size: 36px;
+    }
+    .chart-number {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 45%;
+    }
+    .section-title {
+        font-size: 18px;
+    }
+    .icon-animate {
+        font-size: 32px;
+    }
+    .chart-number {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card {
+        flex: 1 1 100%;
+    }
+    .section-title {
+        font-size: 16px;
+    }
+    .icon-animate {
+        font-size: 28px;
+    }
+    .chart-number {
+        font-size: 20px;
+    }
+}
+
+/* Container for the grid layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid with flexible columns */
+    gap: 20px;
+    padding: 10px;
+}
+
+/* Styling for each grid item */
+.jam-kerja-container, .leave-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
+    color: #000; /* Set text color to black */
+}
+
+/* Title styling */
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    color: #000; /* Set text color to black */
+}
+
+/* Icon styling within the title */
+.section-title i {
+    margin-right: 10px;
+    color: #007bff; /* Icon color remains blue */
+}
+
+/* Content container styling */
+.jam-kerja-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Item styling within the content container */
+.jam-kerja-item, .leave-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+    color: #000; /* Set text color to black */
+}
+
+/* Hover effect for items */
+.jam-kerja-item:hover, .leave-item:hover {
+    transform: scale(1.05);
+}
+
+/* Day heading styling within items */
+.jam-kerja-item .day, .leave-item .day {
+    font-size: 18px;
+    font-weight: 500;
+    color: #000; /* Set text color to black */
+}
+
+/* Time text styling within items */
+.jam-kerja-item .time {
+    font-size: 16px;
+    color: #000; /* Set text color to black */
+}
+
+/* Keyframe animation for fade-in effect */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.not-found-message {
+    text-align: center;
+    padding: 30px;
+    border: 2px solid #FFAA00;
+    border-radius: 10px;
+    background-color: #fff5e6;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 80%;
+}
+
+.icon-container {
+    margin-bottom: 15px;
+}
+
+.message-text {
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFAA00;
+}
+      /* Card styling */
+      .card-bordered {
+        border: 2px solid #007bff; /* Blue border color */
+        border-radius: 0.375rem; /* Adjust border radius if needed */
+    }
+    .card-body {
+        padding: 1.25rem; /* Adjust padding as needed */
+    }
+    /* Responsive chart container */
+    #kt_apexcharts_1 {
+        height: 350px; /* Default height */
+    }
+    /* Media queries for responsiveness */
+    @media (max-width: 1200px) {
+        #kt_apexcharts_1 {
+            height: 300px; /* Height for tablets and smaller screens */
+        }
+    }
+    @media (max-width: 992px) {
+        #kt_apexcharts_1 {
+            height: 250px; /* Height for tablets in portrait mode */
+        }
+    }
+    @media (max-width: 768px) {
+        #kt_apexcharts_1 {
+            height: 200px; /* Height for mobile devices */
+        }
+    }
+    /* Card title styling */
+    .card-title {
+        color: #000; /* Black color */
+        font-size: 1.25rem; /* Adjust font size if needed */
+        font-weight: 700; /* Optional: Bold font weight */
+    }
+/* General Card Styling */
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Card Title Styling */
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Filter Container Styling */
+#filter-container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Label Styling */
+.filter-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+}
+
+/* Input Wrapper Styling */
+.input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Select Styling */
+.form-select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Spinner Styling */
+.spinner {
+    text-align: center;
+    font-size: 16px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px; /* Smaller padding for smaller buttons */
+    font-size: 14px; /* Smaller font size */
+    font-weight: 600;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn i {
+    margin-right: 6px; /* Smaller margin for smaller buttons */
+}
+
+.btn-sm {
+    font-size: 14px; /* Smaller font size */
+    padding: 6px 12px; /* Smaller padding */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* New color on hover */
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: #007bff; /* Default background color */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Hover background color */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Container for the checkboxes */
+#checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between checkboxes */
+    padding: 10px;
+}
+
+/* Style for each checkbox label */
+#checkbox-container label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+/* Style for the checkbox input */
+#checkbox-container input[type="checkbox"] {
+    appearance: none; /* Remove default checkbox appearance */
+    width: 20px;
+    height: 20px;
+    background-color: #f0f0f0;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    margin-right: 10px; /* Padding between checkbox and text */
+    transition: background-color 0.3s, border-color 0.3s;
+    vertical-align: middle; /* Align checkbox vertically */
+}
+
+/* Style for the checked state */
+#checkbox-container input[type="checkbox"]:checked {
+    background-color: #2ecc71; /* Green color when checked */
+    border-color: #2ecc71;
+}
+
+/* Custom checkmark styling */
+#checkbox-container input[type="checkbox"]:checked::before {
+    content: '✔'; /* Unicode checkmark */
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+}
+
+/* Hover and focus effects */
+#checkbox-container input[type="checkbox"]:hover,
+#checkbox-container input[type="checkbox"]:focus {
+    border-color: #3498db; /* Blue border on hover/focus */
+    background-color: #e1f5fe; /* Light blue background on hover/focus */
+}
+
+/* Label hover effect */
+#checkbox-container label:hover {
+    color: #3498db; /* Change text color on hover */
+    transform: scale(1.02); /* Slightly enlarge label on hover */
+}
+
+/* Animation for appearing/disappearing of checkbox labels */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Apply animations to checkbox labels when toggled */
+#checkbox-container label {
+    animation: fadeIn 0.5s ease-in-out;
+}
+.form-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+    gap: 20px; /* Space between columns */
+    align-items: center; /* Center items vertically */
+    padding: 20px; /* Padding around the container */
+}
+
+/* Burger Menu Button */
+.burger-menu {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    cursor: pointer;
+    position: relative;
+    margin: 15px;
+}
+
+.burger-menu .bar {
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Menu Container */
+.menu-container {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+/* Show Menu */
+.menu-container.active {
+    display: block;
+    transform: translateX(0);
+}
+
+/* Checkbox Container */
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-container label {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Burger Menu Button Active State */
+.burger-menu.active .bar:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+}
+
+.burger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+}
+/* Default styles for light mode */
+.form-label {
+    color: black;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    .form-label {
+        color: white;
+    }
+}
+
+.custom-dropdown-menu {
+    background-color: white; /* Set the background color to white */
+    border: 1px solid #dee2e6; /* Optional: Add a border to match Bootstrap's default dropdown */
+    border-radius: .25rem; /* Optional: Round the corners */
+}
+
+.custom-dropdown-menu .dropdown-item {
+    color: #495057; /* Set text color for better visibility on white background */
+}
+
+.custom-dropdown-menu .form-check-input:checked ~ .form-check-label {
+    color: #007bff; /* Change label color when checkbox is checked */
+}
+
+.alert-red {
+    color: red; /* Change to your preferred styling */
+    font-weight: bold;
+}
+.timeline-container {
+    flex: 1; /* Allow the container to grow and fill available space */
+    overflow-y: auto; /* Add scrolling if content overflows */
+}
+/* CSS for tab bullets */
+.bullet-custom {
+    transition: all 0.3s ease-in-out; /* Adjust duration and easing as needed */
+}
+
+/* CSS for the default state of the bullet */
+.nav-pills-custom .nav-link {
+    position: relative;
+}
+
+.nav-pills-custom .nav-link.active .bullet-custom {
+    background-color: #007bff; /* Change color to primary when active */
+    bottom: 0; /* Position at the bottom */
+    height: 4px; /* Adjust height */
+    width: 100%; /* Full width */
+    border-radius: 4px; /* Rounded corners */
+}
+    /* Event badge colors */
+    .bg-purple {
+        background-color: #ffffff !important; /* Purple for events not today */
+    }
+
+    .bg-warning {
+        background-color: #ffc107 !important; /* Yellow for events today */
+    }
+
+    /* Event content styling */
+    .event-content {
+        display: flex;
+        align-items: center;
+        background-color: #f8f9fa; /* Light background for events */
+        border: 1px solid #dee2e6; /* Border color */
+        border-radius: 8px; /* Rounded corners */
+        padding: 10px; /* Padding inside the event box */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        margin-bottom: 8px; /* Space between events */
+    }
+
+    .event-content i {
+        margin-right: 10px; /* Space between icon and text */
+        color: white; /* White icon color */
+        background-color: #007bff; /* Match the primary badge color */
+        border-radius: 50%; /* Circular icon background */
+        padding: 8px; /* Padding inside the icon circle */
+        font-size: 16px; /* Icon size */
+    }
+
+    .event-content span {
+        font-size: 14px; /* Font size */
+        color: #495057; /* Darker text color */
+        font-weight: bold; /* Bold text */
+    }
+/* Container for the calendar events */
+.fc-daygrid-day-events {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 10px; /* Space between columns */
+}
+
+/* Style for each event */
+.fc-event {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer; /* Show pointer cursor on hover */
+    border-radius: 4px;
+    padding: 5px;
+}
+.fc-event-hidden {
+    display: none !important;
+}
+/* Keyframes for scale-up animation on hover */
+@keyframes scaleUp {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+/* Keyframes for color change animation on hover */
+@keyframes colorChange {
+    from { background-color: rgba(255, 255, 0, 0.5); }
+    to { background-color: rgba(255, 165, 0, 0.5); }
+}
+
+/* Hover effect */
+.fc-event:hover {
+    animation: scaleUp 0.3s ease forwards, colorChange 0.3s ease forwards;
+}
+/* Hide events initially */
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.card-header {
+    background-color: #17a2b8;
+    color: white;
+}
+
+#spinner-detail i,
+#spinner-student i,
+#spinner-kelas i,
+#spinner-rombel i,
+#spinner-mata-pelajaran i {
+    font-size: 2rem;
+    color: #17a2b8;
+}
+
+
+
+.icon-animate {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.equal-height {
+    height: 100%;
+}
+
+.card {
+    width: 100%;
+}

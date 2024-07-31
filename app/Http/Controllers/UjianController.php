@@ -2,143 +2,209 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Ujian\MulaiUjianRequest;
+use App\Models\HasilUjian;
 use App\Models\PaketSoal;
+use App\Models\Siswa;
 use App\Models\Soal;
 use App\Models\Ujian;
-use App\Models\UjianHasil;
-use App\Models\UjianSiswa;
+use App\Models\UjianHistory;
+use App\Models\UjianHistoryDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class UjianController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $ujianSiswa = UjianSiswa::with('ujian')->where([
-            'siswa_id' => auth()->id(),
-            'status' => 0
-        ])->where('selesai', '>=', now())->first();
+        return view('ujians.index');
+    }
 
-        if ($ujianSiswa == null) {
-            return redirect()->route('daftar-ujian')->withErrors(['Tidak ada ujian Aktif']);
+    public function start($ujian_id, $nis, $paketSoal_id)
+    {
+        try {
+            // Retrieve the Ujian, Siswa, and PaketSoal models
+            $ujian = Ujian::where('id',$ujian_id)->first();
+            $siswa = Siswa::where('id', $nis)->firstOrFail();
+
+            $paketSoal = PaketSoal::findOrFail($paketSoal_id);
+            // Create an entry in ujian_histories
+            $ujianHistory = UjianHistory::create([
+                'ujian_id' => $ujian->id,
+                'siswa_id' => $siswa->id,
+                'paket_soal_id' => $paketSoal->id,
+                'jumlah_benar' => 0,
+                'jumlah_salah' => 0,
+                'total_nilai' => 0.00,
+            ]);
+
+            // Iterate over questions in PaketSoal and create ujian_history_details
+            // foreach ($paketSoal->soal as $soal) {
+            //     UjianHistoryDetail::create([
+            //         'ujian_history_id' => $ujianHistory->id,
+            //         'soal_id' => $soal->id,
+            //         'jawaban_siswa' => null, // Initialize with null or default value
+            //         'jawaban_benar' => $soal->jawaban_benar, // Assuming 'jawaban_benar' is a field in the 'soal' table
+            //     ]);
+            // }
+
+
+            // Redirect or return a response as needed
+            return redirect()->route('ujian.show', ['ujian' => $ujian->id]);
+        } catch (Exception $e) {
+            dd($e->getMessage());
+            // Log the exception
+
+            // Redirect back with an error message
+            return redirect()->back()->with('error', 'An error occurred while starting the ujian. Please try again.');
+        }
+    }
+
+    public function data()
+    {
+        $ujians = Ujian::with('paketSoal', 'rombel', 'mataPelajaran', 'kelas')->get();
+        return DataTables::of($ujians)
+            ->addIndexColumn() // This will add DT_RowIndex
+            ->addColumn('action', function ($row) {
+                $editBtn = '<button class="btn btn-primary btn-sm editUjian" data-id="' . $row->id . '">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>';
+                $deleteBtn = '<button class="btn btn-danger btn-sm deleteUjian" data-id="' . $row->id . '">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>';
+                return $editBtn . ' ' . $deleteBtn;
+            })
+
+            ->make(true);
+    }
+
+    public function edit($id)
+{
+    $ujian = Ujian::with('paketSoal', 'rombel', 'mataPelajaran', 'kelas')->findOrFail($id);
+    return response()->json($ujian);
+}
+
+
+
+
+    public function store(Request $request)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'nama' => 'required|max:255',
+            'paket_soal_id' => 'required|exists:paket_soal,id',
+            'rombel_id' => 'required',
+            'waktu_mulai' => 'required|date',
+            'durasi' => 'required|integer',
+            'poin_benar' => 'required|integer',
+            'poin_salah' => 'required|integer',
+            'poin_tidak_jawab' => 'required|integer',
+            'keterangan' => 'nullable|string',
+            'kelas' => 'required',
+            'tampilkan_nilai' => 'nullable|boolean',
+            'tampilkan_hasil' => 'nullable|boolean',
+            'gunakan_token' => 'nullable|boolean',
+            'mata_pelajaran_id' => 'required'
+        ]);
+
+        // Store the data in the database
+        $ujian = Ujian::updateOrCreate(
+            ['id' => $request->id], // This will update existing record or create a new one if ID doesn't exist
+            $validatedData
+        );
+
+        // Return a success response
+        return response()->json(['success' => true, 'data' => $ujian]);
+    }
+
+    public function end(Request $request){
+        $ujianId = $request->input('ujian_id');
+        $answeredQuestions = $request->input('answeredQuestions');
+
+        // Logika untuk menghitung hasil ujian
+        $hasilUjian = $this->calculateExamResult($ujianId, $answeredQuestions);
+        // Simpan hasil ujian ke database
+        $hasilUjian->save();
+
+        return response()->json([
+            'success' => true,
+            'hasil_ujian_id' => $hasilUjian->id
+        ]);
+    }
+
+    public function showHasilUjian($id) {
+        $hasilUjian = HasilUjian::with('ujian')->find($id);
+        return view('ujians.hasil-ujian', ['hasilUjian' => $hasilUjian]);
+    }
+
+    private function calculateExamResult($ujianId, $answeredQuestions) {
+        $ujian = Ujian::find($ujianId);
+        $totalQuestions = $ujian->paketSoal->soals->count();
+        $correctAnswers = 0;
+
+        foreach ($answeredQuestions as $questionId => $answer) {
+
+            $soal = Soal::find($questionId+1);
+
+             // Konversi jawaban pengguna dan jawaban benar menjadi huruf kecil
+             $userAnswer = strtolower($answer);
+             $correctAnswer = strtolower($soal->jawaban_benar);
+
+             if ($correctAnswer === $userAnswer) {
+                 $correctAnswers++;
+             }
+
+             DB::table('ujian_histories_details')->insert([
+                'ujian_history_id' => $ujianId,
+                'soal_id' => $soal->id,
+                'jawaban_siswa' => $userAnswer,
+                'jawaban_benar' => $correctAnswer,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
 
-        // dd($ujianSiswa);
+        $score = ($correctAnswers / $totalQuestions) * 100;
 
-        return view('ujian', compact('ujianSiswa'));
+        $hasilUjian = new HasilUjian();
+        $hasilUjian->ujian_id = $ujianId;
+        $hasilUjian->jumlah_benar = $correctAnswers;
+        $hasilUjian->jumlah_salah = $totalQuestions - $correctAnswers;
+        $hasilUjian->nilai = $score;
+
+        return $hasilUjian;
     }
 
-    public function mulai(MulaiUjianRequest $request)
+    public function show(Request $request)
     {
-        $ujian = Ujian::find($request->ujian_id);
-
-        $ujianSiswa = new UjianSiswa;
-        $ujianSiswa->ujian_id = $ujian->id;
-        $ujianSiswa->siswa_id = auth()->id();
-        $ujianSiswa->mulai = now();
-        $ujianSiswa->selesai = now()->addMinutes($ujian->durasi);
-        $ujianSiswa->user_agent = $request->userAgent();
-        $ujianSiswa->save();
-
-        // random soal
-        $soal = Soal::where('paket_soal_id', $ujian->paket_soal_id)->inRandomOrder()->get();
-        foreach ($soal as $key => $value) {
-            $hasil = new UjianHasil;
-            $hasil->ujian_siswa_id = $ujianSiswa->id;
-            $hasil->soal_id = $value['id'];
-            $hasil->status = 0;
-            $hasil->save();
-        }
-
-        // dd($ujianSiswa);
-
-        return redirect()->route('ujian');
+        $ujian = Ujian::with(['paketSoal.soals'])->where('id',$request->ujian)->first();
+        return view('ujians.show', compact('ujian'));
     }
 
-    public function soal(Request $request)
+    public function update(Request $request, $id)
     {
-        // $ujianSiswa = UjianSiswa::with('ujian.paketSoal')->findOrFail($request->ujian_siswa_id);
-        // $soal = Soal::where('paket_soal_id', $ujianSiswa->ujian->paketSoal->id)->with('hasil')->paginate(1);
+        $data = $request->validate([
+            'paket_soal_id' => 'required|exists:paket_soal,id',
+            'rombel_id' => 'required|exists:rombels,id',
+            'nama' => 'required|string|max:255',
+            'keterangan' => 'nullable|string',
+            'waktu_mulai' => 'required|date',
+            'durasi' => 'required|integer',
+            'tampil_hasil' => 'nullable|integer',
+            'detail_hasil' => 'nullable|integer',
+            'token' => 'nullable|string|max:255',
+        ]);
 
-        $soal = UjianHasil::with('soal.pilihan')->where('ujian_siswa_id', $request->ujian_siswa_id)->paginate(1);
+        $ujian = Ujian::find($id);
+        $ujian->update($data);
 
-        return response()->json($soal);
+        return response()->json(['success' => 'Ujian updated successfully.']);
     }
 
-    public function daftarSoal(Request $request)
+    public function destroy($id)
     {
-        $soal = UjianHasil::where('ujian_siswa_id', $request->ujian_siswa_id)->get();
-
-        return response()->json($soal);
-    }
-
-    // ragu ragu
-    public function raguRagu(Request $request)
-    {
-        $soal = UjianHasil::findOrFail($request->id);
-        $soal->ragu = $request->ragu;
-        $soal->save();
-
-        return response()->json($soal);
-    }
-
-    // simpan jawaban
-    public function simpanJawaban(Request $request)
-    {
-        $soal = UjianHasil::with('soal.pilihanBenar')->findOrFail($request->id);
-        $soal->jawaban = $request->jawaban;
-
-        if ($soal->soal->jenis == 'pilihan_ganda') {
-            if ($soal->soal->pilihanBenar->id == $soal->jawaban) {
-                $soal->status = 1;
-            } else {
-                $soal->status = 0;
-            }
-        } else {
-            if (strtolower($soal->soal->pilihanBenar->jawaban) == $soal->jawaban) {
-                $soal->status = 1;
-            } else {
-                $soal->status = 0;
-            }
-        }
-
-        $soal->save();
-
-        $this->_hitungNilai($soal->ujian_siswa_id);
-
-        return response()->json(true);
-    }
-
-    // selesai ujian
-    public function selesai(Request $request)
-    {
-        $ujian = UjianSiswa::findOrFail($request->ujian_siswa_id);
-        $ujian->status = 1;
-        $ujian->save();
-
-        $this->_hitungNilai($ujian->id);
-
-        return response()->json(true);
-    }
-
-    private function _hitungNilai($ujianSiswaId)
-    {
-        $ujianSiswa = UjianSiswa::with('ujianHasil')->findOrFail($ujianSiswaId);
-        $jumlahSoal = count($ujianSiswa->ujianHasil);
-
-        $benar = 0;
-        foreach ($ujianSiswa->ujianHasil as $key => $value) {
-            if ($value['status'] == 1) {
-                $benar++;
-            }
-        }
-
-        $nilai = ($benar / $jumlahSoal) *  100;
-
-        $ujianSiswa->nilai = $nilai;
-        $ujianSiswa->save();
-
-        return $nilai;
+        Ujian::destroy($id);
+        return response()->json(['success' => 'Ujian deleted successfully.']);
     }
 }

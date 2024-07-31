@@ -1,0 +1,12 @@
+[
+    {
+        "question": "Berapa hasil dari 5 + 7?",
+        "options": ["10", "11", "12", "13"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa hasil dari 9 x 8?",
+        "options": ["72", "64", "81", "90"],
+        "correct_option": "a"
+    }
+]

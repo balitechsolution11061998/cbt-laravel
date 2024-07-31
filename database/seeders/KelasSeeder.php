@@ -2,31 +2,23 @@
 
 namespace Database\Seeders;
 
-use App\Models\Kelas;
 use Illuminate\Database\Seeder;
+use App\Models\Kelas;
 
 class KelasSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        $kelas = [
-            'X',
-            'XI',
-            'XII'
-        ];
+        $classes = [];
 
-        foreach ($kelas as $key => $value) {
-            $count = Kelas::where('nama', $value)->count();
-            if ($count < 1) {
-                $k = new Kelas;
-                $k->nama = $value;
-                $k->save();
-            }
+        // Kelas 10-12
+        for ($i = 10; $i <= 10; $i++) {
+            $classes[] = [
+                'name' => "Kelas $i",
+                'description' => "Kelas $i",
+            ];
         }
+
+        Kelas::insert($classes);
     }
 }

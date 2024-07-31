@@ -2,40 +2,39 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use App\Models\Kelas;
 use App\Models\Rombel;
-use Illuminate\Database\Seeder;
 
 class RombelSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        $arrRombel = [
-            'IPA',
-            'IPS',
-            'Bahasa'
-        ];
+        $kelas = Kelas::all();
+        $rombels = [];
 
-        $kelas = Kelas::get();
+        foreach ($kelas as $kls) {
+            if (preg_match('/^Kelas (\d+)$/', $kls->name, $matches)) {
+                $grade = (int)$matches[1];
 
-        foreach ($kelas as $key => $k) {
-            foreach ($arrRombel as $key => $value) {
-                $count = Rombel::where([
-                    'kelas_id' => $k->id,
-                    'nama' => $value
-                ])->count();
-                if ($count < 1) {
-                    $rombel = new Rombel;
-                    $rombel->kelas_id = $k->id;
-                    $rombel->nama = $value;
-                    $rombel->save();
+                // Add Rombel entries for Bahasa, IPA, and IPS
+                if ($grade >= 10 && $grade <= 10) {
+                    $rombels[] = [
+                        'kelas_id' => $kls->id,
+                        'nama_rombel' => "Bahasa $grade"
+                    ];
+                    // $rombels[] = [
+                    //     'kelas_id' => $kls->id,
+                    //     'nama_rombel' => "IPA $grade"
+                    // ];
+                    // $rombels[] = [
+                    //     'kelas_id' => $kls->id,
+                    //     'nama_rombel' => "IPS $grade"
+                    // ];
                 }
             }
         }
+
+        Rombel::insert($rombels);
     }
 }

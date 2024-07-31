@@ -1,0 +1,782 @@
+[
+    {
+        "question": "Apa ibu kota Indonesia?",
+        "options": ["Jakarta", "Bandung", "Surabaya", "Medan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa presiden pertama Indonesia?",
+        "options": ["Soekarno", "Suharto", "Jokowi", "Habibie"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Berapa jumlah provinsi di Indonesia?",
+        "options": ["33", "34", "35", "36"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama pulau terbesar di Indonesia?",
+        "options": ["Jawa", "Sumatera", "Kalimantan", "Sulawesi"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa lambang negara Indonesia?",
+        "options": ["Harimau", "Garuda", "Naga", "Burung Merpati"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Siapa penulis novel 'Laskar Pelangi'?",
+        "options": ["Andrea Hirata", "Ahmad Tohari", "Pramoedya Ananta Toer", "Tere Liye"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Kapan Indonesia merdeka?",
+        "options": ["1942", "1945", "1949", "1950"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa mata uang Indonesia?",
+        "options": ["Rupiah", "Ringgit", "Dolar", "Yen"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Berapa jumlah pulau di Indonesia?",
+        "options": ["17,504", "13,466", "18,110", "16,056"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa presiden Indonesia saat ini?",
+        "options": ["Suharto", "Megawati", "SBY", "Jokowi"],
+        "correct_option": "d"
+    },
+    {
+        "question": "Apa bahasa resmi Indonesia?",
+        "options": ["Bahasa Melayu", "Bahasa Jawa", "Bahasa Indonesia", "Bahasa Sunda"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama gunung tertinggi di Indonesia?",
+        "options": ["Gunung Rinjani", "Gunung Semeru", "Gunung Kerinci", "Puncak Jaya"],
+        "correct_option": "d"
+    },
+    {
+        "question": "Siapa penulis lagu 'Indonesia Raya'?",
+        "options": ["Wage Rudolf Supratman", "Ismail Marzuki", "Gombloh", "Iwan Fals"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama candi terbesar di Indonesia?",
+        "options": ["Candi Borobudur", "Candi Prambanan", "Candi Mendut", "Candi Sewu"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama sungai terpanjang di Indonesia?",
+        "options": ["Sungai Kapuas", "Sungai Mahakam", "Sungai Musi", "Sungai Barito"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama bandara internasional di Jakarta?",
+        "options": ["Bandara Ngurah Rai", "Bandara Juanda", "Bandara Soekarno-Hatta", "Bandara Adisutjipto"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Siapa pencipta tari kecak?",
+        "options": ["I Wayan Limbak", "Sudirman Armin", "Romo Purbocaroko", "Bagong Kussudiardja"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibu kota provinsi Jawa Timur?",
+        "options": ["Surabaya", "Malang", "Kediri", "Madiun"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama suku terbesar di Sumatera Utara?",
+        "options": ["Batak", "Minangkabau", "Sunda", "Dayak"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama makanan khas Padang?",
+        "options": ["Rendang", "Soto", "Gudeg", "Pempek"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Berapa jumlah pemain dalam satu tim sepak bola?",
+        "options": ["9", "10", "11", "12"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Kalimantan Barat?",
+        "options": ["Pontianak", "Samarinda", "Balikpapan", "Banjarmasin"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Bumi Manusia'?",
+        "options": ["Pramoedya Ananta Toer", "Ahmad Tohari", "Andrea Hirata", "Dee Lestari"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama danau terbesar di Indonesia?",
+        "options": ["Danau Toba", "Danau Sentarum", "Danau Maninjau", "Danau Poso"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama tarian khas Bali?",
+        "options": ["Tari Jaipong", "Tari Kecak", "Tari Piring", "Tari Serimpi"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Berapa jumlah sila dalam Pancasila?",
+        "options": ["3", "4", "5", "6"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama bunga nasional Indonesia?",
+        "options": ["Mawar", "Melati", "Anggrek", "Kenanga"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama alat musik tradisional dari Jawa Barat?",
+        "options": ["Angklung", "Gamelan", "Kolintang", "Sasando"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama kerajaan Hindu tertua di Indonesia?",
+        "options": ["Majapahit", "Sriwijaya", "Kutai", "Singasari"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Berapa jumlah pilar dalam Demokrasi Pancasila?",
+        "options": ["3", "4", "5", "6"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama bandara internasional di Bali?",
+        "options": ["Bandara Soekarno-Hatta", "Bandara Juanda", "Bandara Ngurah Rai", "Bandara Sultan Hasanuddin"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Riau?",
+        "options": ["Pekanbaru", "Batam", "Padang", "Palembang"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibu kota provinsi Sulawesi Selatan?",
+        "options": ["Makassar", "Manado", "Palu", "Kendari"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama rumah adat dari Sumatera Barat?",
+        "options": ["Joglo", "Tongkonan", "Gadang", "Limas"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Siapa penulis novel 'Sang Pemimpi'?",
+        "options": ["Andrea Hirata", "Pramoedya Ananta Toer", "Ahmad Tohari", "Tere Liye"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama gunung berapi aktif di Pulau Lombok?",
+        "options": ["Gunung Bromo", "Gunung Agung", "Gunung Rinjani", "Gunung Merapi"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama tarian tradisional dari Aceh?",
+        "options": ["Tari Saman", "Tari Piring", "Tari Kecak", "Tari Jaipong"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Jawa Tengah?",
+        "options": ["Semarang", "Surakarta", "Yogyakarta", "Bandung"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama alat musik tradisional dari Sunda?",
+        "options": ["Gamelan", "Angklung", "Sasando", "Kolintang"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Siapa yang dikenal sebagai bapak pendidikan Indonesia?",
+        "options": ["Ki Hajar Dewantara", "RA Kartini", "Soekarno", "Mohammad Hatta"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama danau terbesar di Kalimantan?",
+        "options": ["Danau Toba", "Danau Sentarum", "Danau Poso", "Danau Maninjau"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama bandara internasional di Yogyakarta?",
+        "options": ["Bandara Ngurah Rai", "Bandara Adisutjipto", "Bandara Soekarno-Hatta", "Bandara Sultan Hasanuddin"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama sungai yang membelah kota Surabaya?",
+        "options": ["Sungai Mahakam", "Sungai Brantas", "Sungai Kapuas", "Sungai Musi"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama hewan endemik dari Papua?",
+        "options": ["Komodo", "Orangutan", "Cendrawasih", "Harimau Sumatera"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Siapa penulis buku 'Negeri 5 Menara'?",
+        "options": ["Andrea Hirata", "Ahmad Fuadi", "Pramoedya Ananta Toer", "Tere Liye"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama pulau kecil yang terkenal dengan kebudayaan megalitiknya?",
+        "options": ["Sumba", "Bali", "Flores", "Sulawesi"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Berapa jumlah provinsi di Sumatera?",
+        "options": ["7", "8", "9", "10"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Papua?",
+        "options": ["Jayapura", "Sorong", "Timika", "Merauke"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama lagu kebangsaan Indonesia?",
+        "options": ["Indonesia Pusaka", "Garuda Pancasila", "Indonesia Raya", "Satu Nusa Satu Bangsa"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama ibu kota provinsi Maluku?",
+        "options": ["Ambon", "Ternate", "Tidore", "Manado"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Banten?",
+        "options": ["Tangerang", "Cilegon", "Serang", "Pandeglang"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Siapa penulis lagu 'Tanah Airku'?",
+        "options": ["Ibu Sud", "Wage Rudolf Supratman", "Ismail Marzuki", "Gombloh"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama candi Hindu terbesar di Indonesia?",
+        "options": ["Candi Borobudur", "Candi Mendut", "Candi Prambanan", "Candi Sewu"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Sumatera Selatan?",
+        "options": ["Palembang", "Jambi", "Pekanbaru", "Bengkulu"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Nusa Tenggara Timur?",
+        "options": ["Kupang", "Maumere", "Ende", "Larantuka"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Kalimantan Timur?",
+        "options": ["Balikpapan", "Samarinda", "Banjarmasin", "Pontianak"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama alat musik tradisional dari Sulawesi Selatan?",
+        "options": ["Sasando", "Kolintang", "Gamelan", "Angklung"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Jambi?",
+        "options": ["Jambi", "Palembang", "Pekanbaru", "Bengkulu"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa presiden Indonesia ke-6?",
+        "options": ["Megawati", "SBY", "Jokowi", "Habibie"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Lampung?",
+        "options": ["Bandar Lampung", "Metro", "Kota Agung", "Pringsewu"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Kalimantan Utara?",
+        "options": ["Tarakan", "Tanjung Selor", "Nunukan", "Bulungan"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama alat musik tradisional dari Bali?",
+        "options": ["Gamelan", "Angklung", "Kolintang", "Sasando"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibu kota provinsi Jawa Timur?",
+        "options": ["Surabaya", "Malang", "Jember", "Batu"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama alat musik tradisional dari Jawa Tengah?",
+        "options": ["Gamelan", "Kendang", "Saron", "Rebab"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa yang menulis buku 'Bumi Manusia'?",
+        "options": ["Pramoedya Ananta Toer", "Ahmad Tohari", "Tere Liye", "Andrea Hirata"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama gunung tertinggi di Indonesia?",
+        "options": ["Gunung Merapi", "Gunung Bromo", "Gunung Rinjani", "Gunung Jayawijaya"],
+        "correct_option": "d"
+    },
+    {
+        "question": "Apa nama candi Buddha yang terletak di Magelang?",
+        "options": ["Candi Borobudur", "Candi Prambanan", "Candi Mendut", "Candi Sewu"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama tari tradisional yang berasal dari Bali?",
+        "options": ["Tari Kecak", "Tari Piring", "Tari Saman", "Tari Jaipong"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis 'Laskar Pelangi'?",
+        "options": ["Andrea Hirata", "Ahmad Fuadi", "Tere Liye", "Pramoedya Ananta Toer"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama bandara internasional di Jakarta?",
+        "options": ["Bandara Soekarno-Hatta", "Bandara Ngurah Rai", "Bandara Adisutjipto", "Bandara Sultan Hasanuddin"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama danau terbesar di Indonesia?",
+        "options": ["Danau Toba", "Danau Sentarum", "Danau Poso", "Danau Maninjau"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama kota yang dikenal dengan sebutan 'Kota Seribu Warung Kopi'?",
+        "options": ["Bandung", "Jakarta", "Yogyakarta", "Semarang"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama tarian tradisional dari Sumatera Barat?",
+        "options": ["Tari Piring", "Tari Kecak", "Tari Saman", "Tari Jaipong"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama alat musik tradisional dari Papua?",
+        "options": ["Sasando", "Tifa", "Gamelan", "Angklung"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama sungai yang membelah kota Palembang?",
+        "options": ["Sungai Musi", "Sungai Brantas", "Sungai Kapuas", "Sungai Mahakam"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama rumah adat dari Kalimantan?",
+        "options": ["Rumah Betang", "Rumah Gadang", "Rumah Joglo", "Rumah Limas"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Nusa Tenggara Barat?",
+        "options": ["Mataram", "Kupang", "Bima", "Lombok"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama makanan khas dari Surabaya?",
+        "options": ["Soto Ayam", "Rendang", "Rawon", "Gudeg"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Siapa penulis buku 'Garis Waktu'?",
+        "options": ["Fiersa Besari", "Tere Liye", "Andrea Hirata", "Pidi Baiq"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama alat musik tradisional dari Nusa Tenggara Timur?",
+        "options": ["Sasando", "Gamelan", "Angklung", "Kolintang"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama pulau terbesar di Indonesia?",
+        "options": ["Sumatera", "Kalimantan", "Papua", "Sulawesi"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama kebun raya yang terletak di Bogor?",
+        "options": ["Kebun Raya Bogor", "Kebun Raya Bali", "Kebun Raya Cibodas", "Kebun Raya Purwodadi"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa presiden Indonesia ke-4?",
+        "options": ["B.J. Habibie", "Abdurrahman Wahid", "Megawati Sukarnoputri", "Susilo Bambang Yudhoyono"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibu kota provinsi Bengkulu?",
+        "options": ["Bengkulu", "Palembang", "Jambi", "Lampung"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama makanan khas dari Padang?",
+        "options": ["Soto Betawi", "Sate Ayam", "Rendang", "Gado-Gado"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama festival budaya yang diadakan setiap tahun di Bali?",
+        "options": ["Festival Kuta", "Festival Ubud", "Festival Sanur", "Festival Gianyar"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Maluku Utara?",
+        "options": ["Ternate", "Ambon", "Manado", "Sorong"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama alat musik tiup tradisional dari Bali?",
+        "options": ["Suling", "Sasando", "Gamelan", "Tifa"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama candi Hindu yang terletak di Yogyakarta?",
+        "options": ["Candi Borobudur", "Candi Prambanan", "Candi Mendut", "Candi Sewu"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama pulau yang terkenal dengan komodo?",
+        "options": ["Flores", "Sumba", "Komodo", "Lombok"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama danau yang terletak di Sumatera?",
+        "options": ["Danau Toba", "Danau Maninjau", "Danau Poso", "Danau Sentarum"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama kota yang dikenal dengan sebutan 'Kota Pelajar'?",
+        "options": ["Jakarta", "Surabaya", "Yogyakarta", "Bandung"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama gunung yang terletak di Bali?",
+        "options": ["Gunung Merapi", "Gunung Rinjani", "Gunung Batur", "Gunung Bromo"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama makanan khas dari Jakarta?",
+        "options": ["Soto Betawi", "Rendang", "Nasi Goreng", "Gudeg"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibu kota provinsi Gorontalo?",
+        "options": ["Gorontalo", "Manado", "Palu", "Makassar"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama alat musik tradisional dari Kalimantan?",
+        "options": ["Sape", "Sasando", "Gamelan", "Angklung"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis buku 'Buku Harian Nayla'?",
+        "options": ["Dina S. Sulaeman", "Pidi Baiq", "Tere Liye", "Fiersa Besari"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Banten?",
+        "options": ["Serang", "Tangerang", "Cilegon", "Pandeglang"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama candi yang terletak di Jawa Tengah?",
+        "options": ["Candi Borobudur", "Candi Prambanan", "Candi Mendut", "Candi Ratu Boko"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama taman nasional yang terletak di Kalimantan?",
+        "options": ["Taman Nasional Bromo Tengger Semeru", "Taman Nasional Komodo", "Taman Nasional Danau Sentarum", "Taman Nasional Ujung Kulon"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama tradisi unik yang dilakukan masyarakat di Bali pada saat Nyepi?",
+        "options": ["Omed-Omedan", "Melasti", "Ngaben", "Tawur Kesanga"],
+        "correct_option": "d"
+    },
+    {
+        "question": "Siapa penulis buku 'Tenggelamnya Kapal Van der Wijck'?",
+        "options": ["Hamka", "Pramoedya Ananta Toer", "Tere Liye", "Andrea Hirata"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama makanan khas dari Bandung?",
+        "options": ["Batagor", "Gudeg", "Sate Padang", "Rawon"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Sulawesi Tengah?",
+        "options": ["Palu", "Makassar", "Manado", "Gorontalo"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama taman nasional yang terletak di Sumatera?",
+        "options": ["Taman Nasional Bukit Duabelas", "Taman Nasional Ujung Kulon", "Taman Nasional Kerinci Seblat", "Taman Nasional Baluran"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa nama tarian tradisional dari Jawa Barat?",
+        "options": ["Tari Saman", "Tari Jaipong", "Tari Kecak", "Tari Piring"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa nama alat musik tradisional dari Sumatera?",
+        "options": ["Gamelan", "Sasando", "Kolintang", "Harmonika"],
+        "correct_option": "d"
+    },
+    {
+        "question": "Apa nama ibukota provinsi Papua Barat?",
+        "options": ["Manokwari", "Sorong", "Jayapura", "Kaimana"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama alat musik tradisional dari Jawa Timur?",
+        "options": ["Gamelan", "Kendang", "Saron", "Rebab"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama danau yang terletak di Sumatera Barat?",
+        "options": ["Danau Maninjau", "Danau Poso", "Danau Sentarum", "Danau Toba"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama ibu kota Provinsi Jawa Barat?",
+        "options": ["Bandung", "Jakarta", "Surabaya", "Semarang"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Laskar Pelangi'?",
+        "options": ["Andrea Hirata", "Pramoedya Ananta Toer", "Tere Liye", "Dewi Lestari"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan simile dalam sastra?",
+        "options": ["Perbandingan langsung", "Pengulangan bunyi", "Penggunaan lambang", "Penggambaran secara langsung"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Bumi Manusia'?",
+        "options": ["Pramoedya Ananta Toer", "Ahmad Tohari", "Tere Liye", "Andrea Hirata"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'buah bibir'?",
+        "options": ["Pembicaraan banyak orang", "Hal yang disukai", "Makanan lezat", "Tanaman buah-buahan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis cerpen 'Robohnya Surau Kami'?",
+        "options": ["A.A. Navis", "Ahmad Tohari", "Pramoedya Ananta Toer", "Andrea Hirata"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa nama buku puisi karya Chairil Anwar?",
+        "options": ["Aku", "Sajak Putih", "Hujan Bulan Juni", "Deru Campur Debu"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tema utama dari novel 'Laskar Pelangi'?",
+        "options": ["Pendidikan", "Persahabatan", "Cinta", "Keluarga"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan personifikasi dalam sastra?",
+        "options": ["Penggambaran manusia pada benda mati", "Perbandingan langsung", "Pengulangan bunyi", "Penggunaan lambang"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'angkat topi'?",
+        "options": ["Menghormati", "Merendahkan", "Meninggalkan", "Mendukung"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Ayat-Ayat Cinta'?",
+        "options": ["Habiburrahman El Shirazy", "Tere Liye", "Andrea Hirata", "Pramoedya Ananta Toer"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan metafora dalam sastra?",
+        "options": ["Perbandingan tidak langsung", "Perbandingan langsung", "Pengulangan bunyi", "Penggunaan lambang"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tema utama dari novel 'Bumi Manusia'?",
+        "options": ["Perjuangan", "Pendidikan", "Cinta", "Persahabatan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'besar hati'?",
+        "options": ["Bangga", "Sedih", "Marah", "Kecewa"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Negeri 5 Menara'?",
+        "options": ["Ahmad Fuadi", "Andrea Hirata", "Tere Liye", "Habiburrahman El Shirazy"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan hiperbola dalam sastra?",
+        "options": ["Pelebihan makna", "Pengulangan bunyi", "Perbandingan langsung", "Penggunaan lambang"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tema utama dari novel 'Perahu Kertas'?",
+        "options": ["Cinta", "Pendidikan", "Persahabatan", "Keluarga"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'tangan dingin'?",
+        "options": ["Orang yang berhasil", "Orang yang malas", "Orang yang jahat", "Orang yang bijaksana"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Ronggeng Dukuh Paruk'?",
+        "options": ["Ahmad Tohari", "Andrea Hirata", "Pramoedya Ananta Toer", "Tere Liye"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan aliterasi dalam sastra?",
+        "options": ["Pengulangan bunyi", "Perbandingan langsung", "Penggunaan lambang", "Pelebihan makna"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tema utama dari novel 'Supernova'?",
+        "options": ["Fiksi ilmiah", "Pendidikan", "Cinta", "Persahabatan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'jalan buntu'?",
+        "options": ["Tidak ada solusi", "Jalan yang bagus", "Peluang besar", "Keberhasilan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Dilan: Dia Adalah Dilanku Tahun 1990'?",
+        "options": ["Pidi Baiq", "Tere Liye", "Andrea Hirata", "Pramoedya Ananta Toer"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan ironi dalam sastra?",
+        "options": ["Kontradiksi yang mengejutkan", "Perbandingan langsung", "Penggunaan lambang", "Pelebihan makna"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tema utama dari novel 'Hujan'?",
+        "options": ["Fiksi ilmiah", "Pendidikan", "Cinta", "Persahabatan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'buah tangan'?",
+        "options": ["Oleh-oleh", "Hadiah", "Tangan yang kuat", "Pekerjaan berat"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Pulang'?",
+        "options": ["Leila S. Chudori", "Andrea Hirata", "Pramoedya Ananta Toer", "Tere Liye"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan litotes dalam sastra?",
+        "options": ["Perkataan yang merendahkan diri", "Perbandingan langsung", "Penggunaan lambang", "Pelebihan makna"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tema utama dari novel '9 Summers 10 Autumns'?",
+        "options": ["Perjuangan hidup", "Pendidikan", "Cinta", "Persahabatan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'besar mulut'?",
+        "options": ["Suka membual", "Pandai berbicara", "Orang yang jujur", "Orang yang pendiam"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Cantik Itu Luka'?",
+        "options": ["Eka Kurniawan", "Andrea Hirata", "Pramoedya Ananta Toer", "Tere Liye"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan eufemisme dalam sastra?",
+        "options": ["Penghalusan kata", "Perbandingan langsung", "Penggunaan lambang", "Pelebihan makna"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tema utama dari novel 'Aroma Karsa'?",
+        "options": ["Petualangan", "Pendidikan", "Cinta", "Persahabatan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'gulung tikar'?",
+        "options": ["Bangkrut", "Sukses besar", "Bekerja keras", "Beristirahat"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Entrok'?",
+        "options": ["Okky Madasari", "Andrea Hirata", "Pramoedya Ananta Toer", "Tere Liye"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan alegori dalam sastra?",
+        "options": ["Cerita simbolis", "Perbandingan langsung", "Penggunaan lambang", "Pelebihan makna"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tema utama dari novel 'Orang-Orang Biasa'?",
+        "options": ["Kehidupan sehari-hari", "Pendidikan", "Cinta", "Persahabatan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'keringat dingin'?",
+        "options": ["Rasa takut", "Kerja keras", "Penyakit serius", "Kelelahan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Sang Pemimpi'?",
+        "options": ["Andrea Hirata", "Pramoedya Ananta Toer", "Tere Liye", "Habiburrahman El Shirazy"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan satire dalam sastra?",
+        "options": ["Sindiran", "Perbandingan langsung", "Penggunaan lambang", "Pelebihan makna"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tema utama dari novel 'Partikel'?",
+        "options": ["Fiksi ilmiah", "Pendidikan", "Cinta", "Persahabatan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'meja hijau'?",
+        "options": ["Pengadilan", "Restoran", "Pekerjaan", "Sekolah"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Siapa penulis novel 'Hafalan Shalat Delisa'?",
+        "options": ["Tere Liye", "Andrea Hirata", "Pramoedya Ananta Toer", "Habiburrahman El Shirazy"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan sinisme dalam sastra?",
+        "options": ["Kecaman tajam", "Perbandingan langsung", "Penggunaan lambang", "Pelebihan makna"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tema utama dari novel 'Selamat Tinggal'?",
+        "options": ["Perpisahan", "Pendidikan", "Cinta", "Persahabatan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'cuci tangan'?",
+        "options": ["Lepas tanggung jawab", "Kebersihan", "Pekerjaan selesai", "Bersiap-siap"],
+        "correct_option": "a"
+    }
+]
