@@ -72,20 +72,8 @@
                                         <input type="submit" class="submit" value="Sign In">
                                     </div>
                                 </form>
-                                <div class="sign-up-txt">
-                                    Don't have an account? <a href="javascript:;" class="sign-up-click">Sign Up</a>
-                                </div>
-                                <div class="forgot-txt">
-                                    <a href="javascript:;" class="forgot-password-click">Forgot Password</a>
-                                </div>
-                                <div class="login-with">
-                                    <h3>Login with social</h3>
-                                    <ul class="social-login-btn">
-                                        <li class="facebook-btn"><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                        <li class="twitter-btn"><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                        <li class="google-btn"><a href="#"><img src="images/google.svg"></a></li>
-                                    </ul>
-                                </div>
+
+
                             </div>
                             <!-- login slide end -->
                             <!-- signup slide start -->
