@@ -5,12 +5,12 @@
 		<!--begin::Copyright-->
 		<div class="text-gray-900 order-2 order-md-1">
 			<span class="text-muted fw-semibold me-1">{{ date('Y') }}&copy;</span>
-			<a href="{{ route('home') }}" target="_blank" class="text-gray-800 text-hover-primary">Application</a>
+			<a href="{{ route('home') }}" target="_blank" class="text-gray-800 text-hover-primary">MA al_furqan</a>
 		</div>
 		<!--end::Copyright-->
 		<!--begin::Menu-->
 		<div class="text-gray-900 order-1 order-md-1">
-			<span class="text-muted fw-semibold me-1">Created by Team Bayu Sulaksana</span>
+			<span class="text-muted fw-semibold me-1">MA al_furqan</span>
 		</div>
 		{{-- <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
 			<li class="menu-item">
