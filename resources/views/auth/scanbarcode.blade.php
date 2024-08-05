@@ -99,7 +99,7 @@
             function showToast(message, type = 'info') {
                 Toastify({
                     text: message,
-                    duration: 3000, // 3 seconds
+                    duration: 3000,
                     close: true,
                     gravity: "top",
                     position: "right",
@@ -110,6 +110,39 @@
             function resetForm() {
                 document.getElementById('file-input').value = '';
                 document.getElementById('result').innerText = 'Upload a QR code image to scan.';
+            }
+
+            function loginWithQRCode(qrCodeData) {
+                // Get CSRF token
+                var csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+                var csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
+
+                // AJAX request to login the user
+                fetch('/login-with-qr', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({ qr_code_data: qrCodeData })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showToast('Login successful!', 'success');
+                        setTimeout(() => {
+                            window.location.href = `/users/profile?id=${encodeURIComponent(data.id)}`;
+                        }, 3000); // 3 seconds delay
+                    } else {
+                        showToast(data.message, 'error');
+                        resetForm();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast('An error occurred. Please try again.', 'error');
+                    resetForm();
+                });
             }
 
             function scanQRCodeFromFile(file) {
@@ -129,40 +162,7 @@
                         if (decoded) {
                             var qrCodeData = decoded.data;
                             document.getElementById('result').innerText = `Scanned QR Code: ${qrCodeData}`;
-
-                            // Get CSRF token
-                            var csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
-                            var csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
-
-                            // AJAX request to login the user
-                            fetch('/login-with-qr', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': csrfToken
-                                },
-                                body: JSON.stringify({
-                                    qr_code_data: qrCodeData
-                                })
-                            })
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.success) {
-                                        showToast('Login successful!', 'success');
-                                        setTimeout(() => {
-                                            // Redirect to the profile page with the hashed ID
-                                            window.location.href = `/users/profile?id=${encodeURIComponent(data.id)}`;
-                                        }, 3000); // 3 seconds delay
-                                    } else {
-                                        showToast(data.message, 'error');
-                                        resetForm();
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    showToast('An error occurred. Please try again.', 'error');
-                                    resetForm();
-                                });
+                            loginWithQRCode(qrCodeData);
                         } else {
                             showToast('No QR code found.', 'error');
                             resetForm();
@@ -180,11 +180,12 @@
                 }
             });
 
-            // Optionally start the camera QR code scanner
+            // Start the camera QR code scanner
             var html5QrCode = new Html5Qrcode("scanner");
 
             function onScanSuccess(decodedText, decodedResult) {
                 document.getElementById('result').innerText = `Scanned QR Code: ${decodedText}`;
+                loginWithQRCode(decodedText);
             }
 
             function onScanError(error) {
