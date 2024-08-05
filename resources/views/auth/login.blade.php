@@ -176,8 +176,7 @@ body{
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render={{ env('GOOGLE_RECAPTCHA_KEY') }}"></script>
-    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LezFiAqAAAAAAIQqHIoGA8el3_Z-0gV64CGb_Ly"></script>    <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/toastify-js.js') }}"></script>
     <script>
         $(document).ready(function() {
