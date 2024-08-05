@@ -5,15 +5,15 @@ return [
     'KT_MENU_MODE' => 'auto', /** 'manual' or 'auto' */
 
     'KT_MENUS' => [
-          [
+        [
             'label'          => 'Dashboard',
             'type'           => 'item',
-            'permission'     => ['dashboard-show'],
+            'permission'     => ['dashboardcbt-show'],
             'permissionType' => 'gate',
-            'icon'           => 'ki',
-            'iconName'       => 'ki-element-11',
-            'iconPath'       => 4,
-            'route'          => 'home',
+            'icon'           => 'fas',
+            'iconName'       => 'fa-chart-line', // Font Awesome icon for reports
+            'iconPath'       => 7,
+            'route'          => 'home.cbt',
         ],
 
         [
