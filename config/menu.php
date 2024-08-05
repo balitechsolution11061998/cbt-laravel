@@ -21,47 +21,6 @@ return [
             'type' => 'heading'
         ],
         [
-            'label'          => 'Items',
-            'type'           => 'item',
-            'permission'     => ['items-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'ki',
-            'iconName'       => 'ki-element-11',
-            'iconPath'       => 7,
-            'route'          => 'items.index',
-        ],
-
-        [
-            'label'          => 'Price Change',
-            'type'           => 'item',
-            'permission'     => ['cost_change-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'ki',
-            'iconName'       => 'ki-element-11',
-            'iconPath'       => 6,
-            'route'          => 'price-change.index',
-        ],
-        [
-            'label'          => 'PO',
-            'type'           => 'item',
-            'permission'     => ['po-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'ki',
-            'iconName'       => 'ki-element-11',
-            'iconPath'       => 5,
-            'route'          => 'po.index',
-        ],
-        [
-            'label'          => 'Monitoring Presensi',
-            'type'           => 'item',
-            'permission'     => ['monitoring-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'ki',
-            'iconName'       => 'ki-element-11',
-            'iconPath'       => 5,
-            'route'          => 'po.index',
-        ],
-        [
             'label'          => 'Paket Soal',
             'type'           => 'item',
             'permission'     => ['paketsoal-show'],
@@ -103,10 +62,7 @@ return [
             'iconPath'       => '',
 
         ],
-        [
-            'label' => 'User',
-            'type' => 'heading'
-        ],
+
         [
 
             'label'          => 'User',
@@ -147,60 +103,6 @@ return [
                 ],
 
             ]
-        ],
-        [
-            'label' => 'Master Data',
-            'type' => 'heading'
-        ],
-        [
-            'label'          => 'Settings',
-            'type'           => 'item',
-            'permission'     => ['settings-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'ki',
-            'iconName'       => 'ki-wrench',
-            'iconPath'       => 7,
-            'route'          => 'settings.priceChange.index',
-        ],
-        [
-            'label'          => 'Jam Kerja',
-            'type'           => 'item',
-            'permission'     => ['jamkerja-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'fas', // Combine icon type and name
-            'iconName'       => 'fa-clock', // Just the icon name
-            'iconPath'       => 7,
-            'route'          => 'jam_kerja.index',
-        ],
-        [
-            'label'          => 'Department',
-            'type'           => 'item',
-            'permission'     => ['department-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'fas',
-            'iconName'       => 'fa-warehouse',
-            'iconPath'       => 7,
-            'route'          => 'departments.index',
-        ],
-        [
-            'label'          => 'Kantor Cabang',
-            'type'           => 'item',
-            'permission'     => ['kantorcabang-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'fas',
-            'iconName'       => 'fa-building',
-            'iconPath'       => 7,
-            'route'          => 'kantor_cabang.index',
-        ],
-        [
-            'label'          => 'Cuti',
-            'type'           => 'item',
-            'permission'     => ['cuti-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'fas',
-            'iconName'       => 'fa-clipboard-check',
-            'iconPath'       => 7,
-            'route'          => 'cuti.index',
         ],
         [
             'label'          => 'Kelas',
