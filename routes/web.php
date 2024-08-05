@@ -30,36 +30,10 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
 
 // Route::group(['middleware' => ['verifiedmiddleware','twostep','verified','auth','log.user.access']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::prefix('home')->name('home.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/countDataPo', 'HomeController@countDataPo')->name('countDataPo');
-        Route::get('/countDataPoPerDays', 'HomeController@countDataPoPerDays')->name('countDataPoPerDays');
-        Route::get('/countDataRcv', 'HomeController@countDataRcv')->name('countDataRcv');
-        Route::get('/countDataRcvPerDays', 'HomeController@countDataRcvPerDays')->name('countDataRcvPerDays');
-    });
-
-    Route::prefix('po')->name('po.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/', 'OrdHeadController@index')->name('index');
-        Route::get('/data', 'OrdHeadController@data')->name('data');
-        Route::get('/download', 'OrdHeadController@download')->name('download');
-        Route::get('/count', 'OrdHeadController@count')->name('count');
-        Route::get('/delivery', 'OrdHeadController@delivery')->name('delivery');
-
-    });
 
 
-    Route::prefix('price-change')->name('price-change.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/', 'PriceChangeController@index')->name('index');
-        Route::get('/data', 'PriceChangeController@data')->name('data');
-        Route::get('/download', 'PriceChangeController@download')->name('download');
-        Route::post('/upload', 'PriceChangeController@upload')->name('upload');
-        Route::get('/{id}/show', 'PriceChangeController@show')->name('show');
-        Route::post('/store', 'PriceChangeController@store')->name('store');
-        Route::get('/count', 'PriceChangeController@count')->name('count');
-        Route::post('/approve', 'PriceChangeController@approve')->name('approve');
-        Route::post('/reject', 'PriceChangeController@reject')->name('reject');
 
 
-    });
 
     Route::prefix('permissions')->name('permissions.')->namespace('App\Http\Controllers')->group(function () {
         Route::get('/', 'PermissionsController@index')->name('index');
@@ -102,41 +76,7 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
 
     });
 
-    Route::prefix('departments')->name('departments.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/index', 'DepartmentController@index')->name('index');
-        Route::get('/data', 'DepartmentController@data')->name('data');
-        Route::get('/getData', 'DepartmentController@getData')->name('getData');
-        Route::get('/count', 'DepartmentController@count');
-        Route::post('/store', 'DepartmentController@store')->name('store');
-        Route::get('/{id}/edit', 'DepartmentController@edit')->name('edit');
-        Route::delete('/{id}/delete', 'DepartmentController@delete')->name('delete');
 
-    });
-
-    Route::prefix('kantor_cabang')->name('kantor_cabang.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/index', 'KantorCabangController@index')->name('index');
-        Route::get('/data', 'KantorCabangController@data')->name('data');
-        Route::get('/getData', 'DepartmentController@getData')->name('getData');
-        Route::post('/store', 'KantorCabangController@store')->name('store');
-        Route::get('/{id}/edit', 'KantorCabangController@edit')->name('edit');
-        Route::delete('/{id}/delete', 'KantorCabangController@delete')->name('delete');
-    });
-
-    Route::prefix('cuti')->name('cuti.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/index', 'CutiController@index')->name('index');
-        Route::get('/data', 'CutiController@data')->name('data');
-        Route::get('/count', 'CutiController@count')->name('count');
-        Route::post('/store', 'CutiController@store')->name('store');
-        Route::get('/{id}/edit', 'CutiController@edit')->name('edit');
-        Route::delete('/{id}/delete', 'CutiController@delete')->name('delete');
-    });
-
-    Route::prefix('items')->name('items.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/', 'ItemsController@index')->name('index');
-        Route::get('/data', 'ItemsController@data')->name('data');
-        Route::get('/getDataItemSupplierBySupplier', 'ItemsController@getDataItemSupplierBySupplier')->name('getDataItemSupplierBySupplier');
-
-    });
 
     Route::prefix('provinsi')->name('provinsi.')->namespace('App\Http\Controllers')->group(function () {
         Route::get('/data', 'ProvinsiController@data')->name('data');
@@ -158,17 +98,6 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
         Route::get('/data', 'JabatanController@data')->name('data');
     });
 
-    Route::prefix('cabang')->name('cabang.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/data', 'CabangController@data')->name('data');
-        Route::get('/count', 'CabangController@count')->name('count');
-    });
-
-    Route::prefix('settings')->name('settings.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/price-change/index', 'SettingsController@priceChange')->name('priceChange.index');
-        Route::get('/price-change/data', 'SettingsController@approvalPriceChangeData')->name('priceChange.data');
-        Route::post('/price-change/store', 'SettingsController@priceChangeStore')->name('priceChangeStore');
-
-    });
 
 
     Route::prefix('paket-soal')->name('paket-soal.')->namespace('App\Http\Controllers')->group(function () {
@@ -182,15 +111,6 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
 
     });
 
-
-    Route::prefix('jam_kerja')->name('jam_kerja.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/index', 'JamKerjaController@index')->name('index');
-        Route::get('/data', 'JamKerjaController@data')->name('data');
-        Route::post('/store', 'JamKerjaController@store')->name('store');
-        Route::get('/edit/{id}', 'JamKerjaController@edit')->name('edit');
-        Route::delete('/delete/{id}', 'JamKerjaController@delete')->name('edit');
-
-    });
 
     Route::prefix('kelas')->name('kelas.')->namespace('App\Http\Controllers')->group(function () {
         Route::get('/index', 'KelasController@index')->name('index');
