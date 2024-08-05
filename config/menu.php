@@ -13,7 +13,7 @@ return [
             'icon'           => 'fas',
             'iconName'       => 'fa-chart-line', // Font Awesome icon for reports
             'iconPath'       => 7,
-            'route'          => 'home.cbt',
+            'route'          => 'home',
         ],
 
         [

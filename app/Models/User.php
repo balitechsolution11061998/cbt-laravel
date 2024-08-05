@@ -90,7 +90,7 @@ class User extends Authenticatable implements LaratrustUser,JWTSubject
         return $this->hasOne(Province::class,'id','kode_cabang');
     }
     public function siswa(){
-        return $this->hasOne(Siswa::class,'nis','username');
+        return $this->hasOne(Siswa::class,'nis','nik');
     }
     public function getActivitylogOptions(): LogOptions
     {

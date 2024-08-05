@@ -138,6 +138,28 @@ class UjianController extends Controller
         return view('ujians.hasil-ujian', ['hasilUjian' => $hasilUjian]);
     }
 
+    public function fetchHistory()
+    {
+        $histories = DB::table('ujian_histories')
+            ->join('siswas', 'ujian_histories.siswa_id', '=', 'siswas.id')
+            ->join('rombels', 'siswas.rombel_id', '=', 'rombels.id')
+            ->join('kelas', 'rombels.kelas_id', '=', 'kelas.id')
+            ->select(
+                'siswas.nama as siswa_name', // Add student's name
+                'rombels.nama_rombel as rombel_name',
+                'kelas.name as kelas_name',
+                'ujian_histories.jumlah_benar',
+                'ujian_histories.jumlah_salah',
+                'ujian_histories.total_nilai'
+            )
+            ->get();
+
+        return response()->json($histories);
+    }
+
+
+
+
     private function calculateExamResult($ujianId, $answeredQuestions) {
         $ujian = Ujian::find($ujianId);
         $totalQuestions = $ujian->paketSoal->soals->count();

@@ -105,16 +105,28 @@ class SiswaController extends Controller
 
     public function data()
     {
-        return datatables()->of(Siswa::with('rombel')->get())
+        return datatables()->of(Siswa::with('rombel', 'users')->get())
             ->addIndexColumn()
-            ->addColumn('action', function($row){
+            ->addColumn('action', function($row) {
+                $userId = $row->users->id;
+                $studentName = addslashes($row->users->name);
+                $studentClass = addslashes($row->rombel->nama_rombel);
+                $nis = $row->nis; // Assuming 'nis' is a column in the 'Siswa' model
+                $gender = addslashes($row->jenis_kelamin); // Assuming 'jenis_kelamin' is a column in the 'Siswa' model
+
                 $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm editSiswa" data-id="'.$row->id.'"><i class="fas fa-edit"></i></a>';
                 $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm deleteSiswa" data-id="'.$row->id.'"><i class="fas fa-trash-alt"></i></a>';
+                $btn .= ' <a href="javascript:void(0)" class="qr-code btn btn-success btn-sm" onclick="createQRCode('.$userId.', \''.$studentName.'\', \''.$studentClass.'\', \''.$nis.'\', \''.$gender.'\')"><i class="fas fa-qrcode"></i></a>';
+
                 return $btn;
             })
             ->rawColumns(['action'])
             ->make(true);
     }
+
+
+
+
 
     public function import(Request $request)
     {

@@ -1884,3 +1884,232 @@ nav ul li a.active {
 .card {
     width: 100%;
 }
+/* Custom SweetAlert2 modal styles */
+.swal2-custom-modal-white {
+    background-color: white !important;
+    color: black !important;
+}
+
+.swal2-custom-title-black {
+    color: black !important;
+}
+
+.swal2-custom-title-black {
+    color: black;
+}
+/* Style for the search input placeholder */
+.search-marker {
+    border: 1px solid #ced4da; /* Custom border style */
+    border-radius: .25rem; /* Rounded corners */
+    padding: .375rem .75rem; /* Padding */
+}
+.menu {
+    padding: 0;
+    border-radius: 0.375rem; /* Bootstrap rounded-md */
+}
+
+/* Style individual notification items */
+.list-group-item {
+    border: none; /* Remove borders */
+    padding: 0.75rem 1.25rem; /* Add padding */
+    margin: 0; /* Remove margin */
+}
+
+/* Hover effect for notification items */
+.list-group-item:hover {
+    background-color: #f8f9fa; /* Light gray background on hover */
+}
+
+/* Style badges */
+.badge {
+    font-size: 0.75rem; /* Smaller font size */
+    font-weight: 400; /* Light font weight */
+}
+
+/* Style for no notifications message */
+.text-center {
+    padding: 1rem; /* Padding around the message */
+    color: #6c757d; /* Text color for no notifications */
+}
+.btn-group-toggle .btn {
+    position: relative;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    border: 1px solid #007bff; /* Default border color */
+    color: #007bff; /* Default text color */
+    display: flex;
+    align-items: center;
+}
+
+.btn-group-toggle .btn input[type="checkbox"] {
+    display: none;
+}
+
+.btn-group-toggle .btn.active,
+.btn-group-toggle .btn.active:hover {
+    background-color: #007bff; /* Background color for active state */
+    color: #fff; /* Text color for active state */
+    border-color: #007bff; /* Border color for active state */
+}
+
+.btn-group-toggle .btn:hover {
+    background-color: #0056b3; /* Background color for hover state */
+    color: #fff; /* Text color for hover state */
+}
+
+.btn-group-toggle .btn::before {
+    content: '\f00c'; /* FontAwesome check icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 10px; /* Space between the left edge and the check icon */
+    font-size: 14px;
+    color: #007bff; /* Color of the check icon */
+    margin-right: 10px; /* Space between the check icon and text */
+}
+
+.btn-group-toggle .btn span {
+    margin-left: 30px; /* Additional space from the check icon to the text */
+}
+.small-text {
+    font-size: 0.875rem; /* Small text size */
+}
+   /* Style for PO Content */
+   #po-content {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.data-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.data-value {
+    color: #333;
+}
+
+.small-text {
+    font-size: 0.875rem; /* Small text size */
+    color: #666; /* Slightly lighter color for less emphasis */
+}
+
+.highlight-cost {
+    color: #e74c3c; /* Red for cost */
+}
+
+.highlight-quantity {
+    color: #3498db; /* Blue for quantity */
+}
+
+.content-container {
+    padding: 20px;
+    border-radius: 8px;
+}
+.bg-light {
+    background-color: #f8f9fa;
+}
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+}
+.chart-number {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.icon-lg {
+    font-size: 40px;
+}
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+.card {
+    border-radius: 15px;
+}
+.shadow-lg {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.icon-animate {
+    transition: transform 0.3s ease;
+}
+.icon-animate:hover {
+    transform: scale(1.1);
+}
+.badge-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+/* Custom styling for the toggle switch */
+.form-check.form-switch .form-check-input {
+    width: 60px;
+    height: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-check.form-switch .form-check-input:checked {
+    background-color: #198754; /* Bootstrap success color */
+}
+
+.form-check.form-switch .form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.form-check.form-switch .form-check-label {
+    margin-left: 10px;
+    color: #495057;
+    font-size: 16px;
+}
+/* Ensure the chart container takes up the full width of its parent */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Make sure the chart canvas fills its container */
+#chartCanvas {
+    width: 100% !important; /* Full width */
+    height: auto !important; /* Height will adjust to maintain aspect ratio */
+}
+.dropdown-menu-average-query {
+    min-width: 200px; /* Set a minimum width */
+    width: auto; /* Auto width to accommodate content */
+}
+    /* Align dropdown menu items to the right */
+    .dropdown-menu-average-query .dropdown-item {
+        text-align: center; /* Align the text to the right */
+    }
+
+    .dropdown-menu-average-query .form-check {
+        justify-content: flex-end; /* Align the checkbox to the right */
+        display: flex;
+        align-items: center;
+    }
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-30px);
+        }
+        60% {
+          transform: translateY(-15px);
+        }
+      }
+      .highlight {
+        background-color: #ffeb3b; /* Yellow background */
+        color: #000; /* Black text color */
+        font-weight: bold;
+        border-radius: 3px;
+        padding: 0 4px;
+    }

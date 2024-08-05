@@ -126,6 +126,67 @@ $('#importForm').on('submit', function (e) {
 });
 });
 
+
+function createQRCode(userId, studentName, studentClass, nis, gender) {
+    console.log(userId, studentName, studentClass, nis, gender); // For debugging
+
+    Swal.fire({
+        title: 'Generating QR Code...',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    $.ajax({
+        url: `/users/${userId}/generate-qr-code`,
+        method: 'GET',
+        success: function(response) {
+            Swal.close(); // Close the SweetAlert2 loading modal
+
+            // Show the QR code in a custom modal with student data
+            Swal.fire({
+                title: `QR Code for ${studentName}`,
+                html: `
+                    <div style="text-align: center; color: black;">
+                        <p style="color: black;"><strong>Name:</strong> ${studentName}</p>
+                        <p style="color: black;"><strong>Class:</strong> ${studentClass}</p>
+                        <p style="color: black;"><strong>NIS:</strong> ${nis}</p>
+                        <p style="color: black;"><strong>Gender:</strong> ${gender}</p>
+                        <img src="${response.qr_code_url}" alt="QR Code" style="max-width: 80%; height: auto;">
+                        <br>
+                        <a href="/users/${userId}/download-qr-code-pdf" class="btn btn-primary" style="margin-top: 20px;">
+                            Download QR Code with Data (PDF)
+                        </a>
+                    </div>
+                `,
+                showCloseButton: true,
+                confirmButtonText: 'Close',
+                customClass: {
+                    popup: 'swal2-custom-modal-white', // Custom class for white background
+                    title: 'swal2-custom-title-black'  // Custom class for black title text
+                },
+                didOpen: () => {
+                    // Set the height of the modal container
+                    document.querySelector('.swal2-popup').style.height = '100vh';
+                }
+            });
+        },
+        error: function(error) {
+            Swal.close(); // Close the SweetAlert2 loading modal
+
+            Swal.fire({
+                title: 'Error',
+                text: 'Failed to generate QR code.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            });
+        }
+    });
+}
+
+
+
 function createSiswa(data = null) {
     $('#mdlFormTitle').text(data ? 'Edit Siswa' : 'Create New Siswa');
     $('#mdlFormContent').html(getSiswaForm(data));

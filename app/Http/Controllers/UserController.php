@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Response;
 use QrCode;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\HashHelper;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -237,97 +238,33 @@ class UserController extends Controller
     }
 
 
-    public function storeByDate(Request $request)
+
+
+
+
+    public function downloadQRCodePDF($userId)
     {
-        // Log the incoming request data
+        // Fetch user and related student data
+        $user = User::with('siswa')->find($userId);
 
-        // Extract the data from the request
-        $nik = $request->input('nik');
-        $tanggal = $request->input('date'); // Make sure the form input name is 'date'
-        $kode_jam_kerja = $request->input('shift');
-
-        $data = [
-            'nik' => $nik,
-            'tanggal' => $tanggal,
-            'kode_jam_kerja' => $kode_jam_kerja,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
-
-        try {
-            // Check if the record already exists
-            $existingRecord = DB::table('konfigurasi_jam_kerjaByDate')
-                ->where('nik', $nik)
-                ->where('tanggal', $tanggal)
-                ->first();
-
-            if ($existingRecord) {
-                // Update the existing record
-                DB::table('konfigurasi_jam_kerjaByDate')
-                    ->where('nik', $nik)
-                    ->where('tanggal', $tanggal)
-                    ->update([
-                        'kode_jam_kerja' => $kode_jam_kerja,
-                        'updated_at' => now(),
-                    ]);
-
-
-                return response()->json(['success' => true, 'message' => 'Data successfully updated.']);
-            } else {
-                // Insert a new record
-                DB::table('konfigurasi_jam_kerjaByDate')->insert($data);
-
-
-                return response()->json(['success' => true, 'message' => 'Data successfully inserted.']);
-            }
-        } catch (\Exception $e) {
-            // Log the error
-
-            return response()->json(['success' => false, 'message' => 'Error inserting or updating data: ' . $e->getMessage()]);
+        if (!$user) {
+            return abort(404, 'User not found');
         }
+
+        $student = $user->siswa;
+        // Generate QR code as a base64 image
+        $qrCode = \QrCode::format('png')->size(200)->generate($user->qr_code);
+
+        // Pass data to the PDF view
+        $pdf = Pdf::loadView('pdf.qr_code_with_data', [
+            'user' => $user,
+            'student' => $student,
+            'qrCode' => $qrCode,
+        ]);
+
+        // Return the generated PDF for download
+        return $pdf->download("qr-code-{$userId}.pdf");
     }
-
-
-    public function konfigurasiStore(Request $request)
-    {
-
-        try {
-            // Retrieve the data from the request
-            $hari = $request->input('hari');
-            $nik = $request->input('nik');
-            $name = $request->input('name');
-
-            // Map index to day names
-            $days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
-
-            // Prepare data for insertion or update
-            $data = [];
-            foreach ($hari as $index => $jam) {
-                $data[] = [
-                    'nik' => $nik,
-                    'hari' => $days[$index], // Get the day name based on the index
-                    'kode_jam_kerja' => $jam, // The corresponding jam kerja
-                ];
-            }
-            // Insert or update data
-            foreach ($data as $item) {
-                \DB::table('konfigurasi_jam_kerja')->updateOrInsert(
-                    ['nik' => $item['nik'], 'hari' => $item['hari']],
-                    ['kode_jam_kerja' => $item['kode_jam_kerja']]
-                );
-            }
-
-            // Respond back to the client
-            return response()->json(['success' => true, 'message' => 'Data has been saved successfully']);
-        } catch (\Exception $e) {
-            // Log the exception message for debugging
-            \Log::error('Error in konfigurasiStore: ' . $e->getMessage());
-
-            // Respond with an error message
-            return response()->json(['success' => false, 'message' => 'An error occurred while processing your request.'], 500);
-        }
-    }
-
 
 
 

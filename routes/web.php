@@ -23,7 +23,6 @@ Route::get('/scanbarcode', function(){
     return view('auth.scanbarcode');
 });
 Route::get('/', [LoginController::class, 'index'])->name('formlogin');
-Route::get('/formlogins', [LoginController::class, 'index1'])->name('formlogins');
 Route::post('/formlogin/check_login', [LoginController::class, 'check_login'])->name('formlogin.check_login');
 Route::post('/login-with-qr', [LoginController::class, 'loginWithQrCode']);
 
@@ -31,8 +30,6 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
 
 // Route::group(['middleware' => ['verifiedmiddleware','twostep','verified','auth','log.user.access']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/performance-data', [PerformanceController::class, 'getPerformanceData']);
-
     Route::prefix('home')->name('home.')->namespace('App\Http\Controllers')->group(function () {
         Route::get('/countDataPo', 'HomeController@countDataPo')->name('countDataPo');
         Route::get('/countDataPoPerDays', 'HomeController@countDataPoPerDays')->name('countDataPoPerDays');
@@ -97,11 +94,10 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
         Route::get('/{id}/dataEdit', 'UserController@dataEdit')->name('dataEdit');
         Route::delete('/delete/{id}','UserController@delete')->name('delete');
         Route::post('/send-account-details', 'UserController@sendAccountDetails');
-        Route::get('/konfigurasi/{nik}/setjamkerja', 'UserController@setjamkerja');
-        Route::post('/konfigurasi/store', 'UserController@konfigurasiStore');
-        Route::post('/konfigurasi/storeByDate', 'UserController@storeByDate');
+
         Route::get('/{userId}/generate-qr-code', 'UserController@generateQRCode');
         Route::get('/profile', 'UserController@profile')->name('dataEdit');
+        Route::get('/{userId}/download-qr-code-pdf', 'UserController@downloadQRCodePDF');
 
 
     });
@@ -261,6 +257,7 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
         Route::get('/show', 'UjianController@show')->name('show');
         Route::post('/end', 'UjianController@end')->name('end');
         Route::get('/hasil-ujian/{id}', 'UjianController@showHasilUjian')->name('hasil-ujian');
+        Route::get('/fetchHistory', 'UjianController@fetchHistory')->name('fetchHistory');
     });
 
 });

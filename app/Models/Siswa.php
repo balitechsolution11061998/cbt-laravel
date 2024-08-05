@@ -14,4 +14,9 @@ class Siswa extends Model
     {
         return $this->belongsTo(Rombel::class);
     }
+
+    public function users()
+    {
+        return $this->hasOne(User::class, 'nik', 'nis');
+    }
 }
