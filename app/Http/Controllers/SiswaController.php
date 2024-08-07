@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\SiswaImport;
 use App\Models\Kelas;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class SiswaController extends Controller
 {
@@ -34,7 +35,7 @@ class SiswaController extends Controller
             'password' => 'nullable|string|min:8', // Password can be updated, should be hashed before saving
         ]);
 
-        \DB::transaction(function () use ($request, $data) {
+        DB::transaction(function () use ($request, $data) {
             // Create or update the Siswa record
             $siswa = Siswa::updateOrCreate(
                 ['id' => $request->siswa_id],
@@ -49,7 +50,7 @@ class SiswaController extends Controller
             // Create or update the User record
             $userData = [
                 'username' => $data['nis'],
-                'email' => $data['email'],
+                'email' => $data['nama']."@gmail.com",
                 'name' => $data['nama'],
                 'password' => $data['password'] ? bcrypt($data['password']) : null,
             ];
@@ -108,21 +109,27 @@ class SiswaController extends Controller
         return datatables()->of(Siswa::with('rombel', 'users')->get())
             ->addIndexColumn()
             ->addColumn('action', function($row) {
-                $userId = $row->users->id;
-                $studentName = addslashes($row->users->name);
-                $studentClass = addslashes($row->rombel->nama_rombel);
+                // Check if the users relationship exists
+                $userId = $row->users->id ?? null;
+                $studentName = addslashes($row->users->name ?? '');
+                $studentClass = addslashes($row->rombel->nama_rombel ?? '');
                 $nis = $row->nis; // Assuming 'nis' is a column in the 'Siswa' model
-                $gender = addslashes($row->jenis_kelamin); // Assuming 'jenis_kelamin' is a column in the 'Siswa' model
+                $gender = addslashes($row->jenis_kelamin ?? ''); // Assuming 'jenis_kelamin' is a column in the 'Siswa' model
 
                 $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm editSiswa" data-id="'.$row->id.'"><i class="fas fa-edit"></i></a>';
                 $btn .= ' <a href="javascript:void(0)" class="delete btn btn-danger btn-sm deleteSiswa" data-id="'.$row->id.'"><i class="fas fa-trash-alt"></i></a>';
-                $btn .= ' <a href="javascript:void(0)" class="qr-code btn btn-success btn-sm" onclick="createQRCode('.$userId.', \''.$studentName.'\', \''.$studentClass.'\', \''.$nis.'\', \''.$gender.'\')"><i class="fas fa-qrcode"></i></a>';
+
+                // Only create the QR code button if $userId is not null
+                if ($userId) {
+                    $btn .= ' <a href="javascript:void(0)" class="qr-code btn btn-success btn-sm" onclick="createQRCode('.$userId.', \''.$studentName.'\', \''.$studentClass.'\', \''.$nis.'\', \''.$gender.'\')"><i class="fas fa-qrcode"></i></a>';
+                }
 
                 return $btn;
             })
             ->rawColumns(['action'])
             ->make(true);
     }
+
 
 
 
