@@ -52,6 +52,7 @@ class SiswaController extends Controller
                 'username' => $data['nis'],
                 'email' => $data['nama']."@gmail.com",
                 'name' => $data['nama'],
+                'nik' => $data['nis'],
                 'password' => $data['password'] ? bcrypt($data['password']) : null,
             ];
 
