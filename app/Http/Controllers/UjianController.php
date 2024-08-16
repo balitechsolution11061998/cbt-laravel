@@ -90,19 +90,17 @@ class UjianController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         // Validate the request data
         $validatedData = $request->validate([
             'nama' => 'required|max:255',
             'paket_soal_id' => 'required|exists:paket_soal,id',
-            'kelas' => 'required',
+            'kelas_id' => 'required',
             'waktu_mulai' => 'required|date',
             'durasi' => 'required|integer',
             'poin_benar' => 'required|integer',
             'poin_salah' => 'required|integer',
             'poin_tidak_jawab' => 'required|integer',
             'keterangan' => 'nullable|string',
-            'kelas' => 'required',
             'tampilkan_nilai' => 'nullable|boolean',
             'tampilkan_hasil' => 'nullable|boolean',
             'gunakan_token' => 'nullable|boolean',
@@ -207,7 +205,7 @@ class UjianController extends Controller
     {
         $data = $request->validate([
             'paket_soal_id' => 'required|exists:paket_soal,id',
-            'kelas' => 'required|exists:kelas,id',
+            'kelas_id' => 'required|exists:kelas,id',
             'nama' => 'required|string|max:255',
             'keterangan' => 'nullable|string',
             'waktu_mulai' => 'required|date',

@@ -19,7 +19,6 @@ class Ujian extends Model
         'poin_salah',
         'poin_tidak_jawab',
         'keterangan',
-        'kelas',
         'tampilkan_nilai',
         'tampilkan_hasil',
         'gunakan_token',

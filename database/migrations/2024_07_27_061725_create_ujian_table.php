@@ -23,7 +23,6 @@ return new class extends Migration
                 $table->integer('poin_salah');
                 $table->integer('poin_tidak_jawab');
                 $table->text('keterangan')->nullable();
-                $table->json('kelas');
                 $table->boolean('tampilkan_nilai')->default(false);
                 $table->boolean('tampilkan_hasil')->default(false);
                 $table->boolean('gunakan_token')->default(false);

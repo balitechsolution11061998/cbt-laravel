@@ -34,7 +34,6 @@ class UjianSeeder extends Seeder
                 'poin_salah' => $faker->numberBetween(0, 5),
                 'poin_tidak_jawab' => $faker->numberBetween(0, 5),
                 'keterangan' => $faker->sentence,
-                'kelas' => json_encode(['Kelas ' . $faker->randomElement(['A', 'B', 'C', 'D'])]),
                 'tampilkan_nilai' => $faker->boolean,
                 'tampilkan_hasil' => $faker->boolean,
                 'gunakan_token' => $faker->boolean,
