@@ -99,7 +99,7 @@ function createPaketSoal(data = null) {
                 </div>
             </div>
              <div class="form-group">
-                <label for="kode_paket" class="col-sm-2 control-label">Kode Paket</label>
+                <label for="kode_paket" class="col-sm-2 control-label">Paket Soal</label>
                 <div class="col-sm-12">
                     <input type="text" class="form-control" id="kode_paket" name="kode_paket" placeholder="Enter Kode Paket" value="${data ? data.kode_paket : ''}" required>
                 </div>
