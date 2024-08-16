@@ -102,18 +102,17 @@
                         <div class="info-item"><strong>Name:</strong> {{ $user->name }}</div>
                         <div class="info-item"><strong>Email:</strong> {{ $user->email }}</div>
                         <div class="info-item"><strong>NIS:</strong> {{ $user->siswa->nis }}</div>
-                        <div class="info-item"><strong>Kelas:</strong> {{ $user->siswa->rombel->kelas->name ?? 'N/A' }}</div>
-                        <div class="info-item"><strong>Rombongan Belajar:</strong> {{ $user->siswa->rombel->nama_rombel ?? 'N/A' }}</div>
+                        <div class="info-item"><strong>Kelas:</strong> {{ $user->siswa->kelas->name ?? 'N/A' }}</div>
                         <div class="info-item"><strong>Ujian:</strong>
-                            @if($user->siswa->rombel->ujian->isNotEmpty())
+                            @if($user->siswa->kelas->ujian->isNotEmpty())
                                 <ul>
-                                    @foreach($user->siswa->rombel->ujian as $ujian)
+                                    @foreach($user->siswa->kelas->ujian as $ujian)
                                         <li>
                                             {{ $ujian->nama }} - {{ \Carbon\Carbon::parse($ujian->waktu_mulai)->format('d M Y H:i') }}
                                             <br>
-                                            <strong>Kode Paket:</strong> {{ $ujian->paketSoal->kode_paket }}
+                                            <strong>Paket Soal:</strong> {{ $ujian->paketSoal->kode_paket }}
                                             <br>
-                                            <strong>Nama Paket Soal:</strong> {{ $ujian->paketSoal->kode_paket }}
+                                            <strong>Mata Pelajaran:</strong> {{ $ujian->mataPelajaran->nama }}
                                         </li>
                                     @endforeach
                                 </ul>
@@ -189,7 +188,7 @@
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
                 events: [
-                    @foreach($user->siswa->rombel->ujian as $ujian)
+                    @foreach($user->siswa->kelas->ujian as $ujian)
                     {
                         title: '{{ $ujian->nama }}',
                         start: '{{ $ujian->waktu_mulai }}',
@@ -234,7 +233,7 @@
 
             // Check if there's an exam today
             function checkForTodayExam() {
-                @foreach($user->siswa->rombel->ujian as $ujian)
+                @foreach($user->siswa->kelas->ujian as $ujian)
                     if (new Date('{{ $ujian->waktu_mulai }}').toDateString() === new Date().toDateString()) {
                         showNotification('Ujian Hari Ini', '{{ $ujian->nama }} - {{ $ujian->paketSoal->kode_paket }}');
                     }
@@ -279,7 +278,7 @@
                     // Redirect to the exam page
                     var nis = '{{ $user->siswa->id }}'; // Get the student's NIS
                     var ujianId = '{{ $currentUjian->first()->id }}'; // Assuming $currentUjian is not empty
-                    var paketSoalId = '{{ $user->siswa->rombel->ujian[0]->paketSoal->id }}'; // Assuming $currentUjian is not empty
+                    var paketSoalId = '{{ $user->siswa->kelas->ujian[0]->paketSoal->id }}'; // Assuming $currentUjian is not empty
                     var url = '{{ url("ujian/start") }}/' + ujianId + '/' + nis+'/'+paketSoalId;
                     window.location.href = url;
                 }

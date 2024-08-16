@@ -19,4 +19,6 @@ class Siswa extends Model
     {
         return $this->hasOne(User::class, 'username', 'nis');
     }
+
+
 }

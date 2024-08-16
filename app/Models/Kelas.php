@@ -13,4 +13,10 @@ class Kelas extends Model
         'id',
         'name',
         'description',
-    ];}
+    ];
+
+    public function ujian()
+    {
+        return $this->hasMany(Ujian::class);
+    }
+}
