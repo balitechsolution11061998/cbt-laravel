@@ -63,7 +63,7 @@ class UjianController extends Controller
 
     public function data()
     {
-        $ujians = Ujian::with('paketSoal', 'rombel', 'mataPelajaran', 'kelas')->get();
+        $ujians = Ujian::with('paketSoal', 'mataPelajaran', 'kelas')->get();
         return DataTables::of($ujians)
             ->addIndexColumn() // This will add DT_RowIndex
             ->addColumn('action', function ($row) {
@@ -81,7 +81,7 @@ class UjianController extends Controller
 
     public function edit($id)
 {
-    $ujian = Ujian::with('paketSoal', 'rombel', 'mataPelajaran', 'kelas')->findOrFail($id);
+    $ujian = Ujian::with('paketSoal', 'mataPelajaran', 'kelas')->findOrFail($id);
     return response()->json($ujian);
 }
 
@@ -90,11 +90,12 @@ class UjianController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         // Validate the request data
         $validatedData = $request->validate([
             'nama' => 'required|max:255',
             'paket_soal_id' => 'required|exists:paket_soal,id',
-            'rombel_id' => 'required',
+            'kelas' => 'required',
             'waktu_mulai' => 'required|date',
             'durasi' => 'required|integer',
             'poin_benar' => 'required|integer',
@@ -206,7 +207,7 @@ class UjianController extends Controller
     {
         $data = $request->validate([
             'paket_soal_id' => 'required|exists:paket_soal,id',
-            'kelas_id' => 'required|exists:kelas,id',
+            'kelas' => 'required|exists:kelas,id',
             'nama' => 'required|string|max:255',
             'keterangan' => 'nullable|string',
             'waktu_mulai' => 'required|date',

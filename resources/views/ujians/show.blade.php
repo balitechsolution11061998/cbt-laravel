@@ -135,7 +135,7 @@
                     <div class="info-item"><strong>Tanggal Mulai:</strong>
                         {{ \Carbon\Carbon::parse($ujian->waktu_mulai)->format('d M Y H:i') }}</div>
                     <div class="info-item"><strong>Durasi:</strong> {{ $ujian->durasi }} menit</div>
-                    <div class="info-item"><strong>Paket Soal:</strong> {{ $ujian->paketSoal->nama_paket_soal }}</div>
+                    <div class="info-item"><strong>Paket Soal:</strong> {{ $ujian->paketSoal->kode_paket }}</div>
                     <div class="info-item"><strong>Kode Paket:</strong> {{ $ujian->paketSoal->kode_paket }}</div>
                 </div>
             </div>

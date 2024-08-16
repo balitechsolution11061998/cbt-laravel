@@ -113,7 +113,7 @@
                                             <br>
                                             <strong>Kode Paket:</strong> {{ $ujian->paketSoal->kode_paket }}
                                             <br>
-                                            <strong>Nama Paket Soal:</strong> {{ $ujian->paketSoal->nama_paket_soal }}
+                                            <strong>Nama Paket Soal:</strong> {{ $ujian->paketSoal->kode_paket }}
                                         </li>
                                     @endforeach
                                 </ul>
@@ -130,7 +130,7 @@
                                             <br>
                                             <strong>Kode Paket:</strong> {{ $ujian->paketSoal->kode_paket }}
                                             <br>
-                                            <strong>Nama Paket Soal:</strong> {{ $ujian->paketSoal->nama_paket_soal }}
+                                            <strong>Nama Paket Soal:</strong> {{ $ujian->paketSoal->kode_paket }}
                                             <br>
                                             <strong>Durasi:</strong> <span id="countdown-{{ $ujian->id }}"></span>
                                         </li>
@@ -193,7 +193,7 @@
                     {
                         title: '{{ $ujian->nama }}',
                         start: '{{ $ujian->waktu_mulai }}',
-                        description: '{{ $ujian->paketSoal->kode_paket }} - {{ $ujian->paketSoal->nama_paket_soal }}'
+                        description: '{{ $ujian->paketSoal->kode_paket }} - {{ $ujian->paketSoal->kode_paket }}'
                     },
                     @endforeach
                 ],
@@ -236,7 +236,7 @@
             function checkForTodayExam() {
                 @foreach($user->siswa->rombel->ujian as $ujian)
                     if (new Date('{{ $ujian->waktu_mulai }}').toDateString() === new Date().toDateString()) {
-                        showNotification('Ujian Hari Ini', '{{ $ujian->nama }} - {{ $ujian->paketSoal->nama_paket_soal }}');
+                        showNotification('Ujian Hari Ini', '{{ $ujian->nama }} - {{ $ujian->paketSoal->kode_paket }}');
                     }
                 @endforeach
             }

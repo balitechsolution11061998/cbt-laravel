@@ -41,7 +41,7 @@ class Ujian extends Model
 
     public function kelas()
     {
-        return $this->belongsTo(Kelas::class, 'kelas');
+        return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
     public function hasilUjian()

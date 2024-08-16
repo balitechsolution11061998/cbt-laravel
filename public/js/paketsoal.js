@@ -235,7 +235,7 @@ function createPaketSoal(data = null) {
                 required: true,
                 maxlength: 255
             },
-            nama_paket_soal: {
+            kode_paket: {
                 required: true,
                 maxlength: 255
             }
@@ -252,8 +252,8 @@ function createPaketSoal(data = null) {
                 required: "Please enter the Kode Paket",
                 maxlength: "Kode Paket cannot be more than 255 characters"
             },
-            nama_paket_soal: {
-                required: "Please enter the Nama Paket Soal",
+            kode_paket: {
+                required: "Please enter the Paket Soal",
                 maxlength: "Nama Paket Soal cannot be more than 255 characters"
             }
         },

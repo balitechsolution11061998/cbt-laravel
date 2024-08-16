@@ -24,7 +24,7 @@ class SiswaController extends Controller
         // Validate the request data for Siswa
         $data = $request->validate([
             'siswa_id' => 'nullable|exists:siswa,id', // Validate ID for update, if provided
-            'kelas_id' => 'required|exists:kelas,id',
+            'kelas' => 'required|exists:kelas,id',
             'nama' => 'required|string|max:255',
             'nis' => 'required|string|max:255',
             'jenis_kelamin' => 'required|in:L,P',
@@ -39,7 +39,7 @@ class SiswaController extends Controller
             $siswa = Siswa::updateOrCreate(
                 ['id' => $request->siswa_id],
                 [
-                    'rombel_id' => $data['rombel_id'],
+                    'kelas_id' => $data['kelas'],
                     'nama' => $data['nama'],
                     'nis' => $data['nis'],
                     'jenis_kelamin' => $data['jenis_kelamin'],
@@ -90,7 +90,7 @@ class SiswaController extends Controller
         $male = Siswa::where('jenis_kelamin', 'L')->count();
         $female = Siswa::where('jenis_kelamin', 'P')->count();
 
-        $students = Siswa::with('rombel.kelas')->get();
+        $students = Siswa::with('kelas')->get();
 
         // Group students by rombel and kelas and count the number of students in each group
         $rombelKelasCounts = $students->groupBy(function($student) {

@@ -41,8 +41,8 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Paket Soal ID</th>
-                        <th>Rombel ID</th>
+                        <th>Paket Soal</th>
+                        <th>Kelas</th>
                         <th>Keterangan</th>
                         <th>Waktu Mulai</th>
                         <th>Durasi</th>

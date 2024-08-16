@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Siswa extends Model
 {
     use HasFactory;
-    protected $fillable = ['rombel_id', 'nama', 'nis', 'jenis_kelamin'];
+    protected $fillable = ['kelas_id', 'nama', 'nis', 'jenis_kelamin'];
 
-    public function rombel()
+    public function kelas()
     {
-        return $this->belongsTo(Rombel::class);
+        return $this->belongsTo(Kelas::class);
     }
 
     public function users()

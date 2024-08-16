@@ -11,13 +11,38 @@ $(function () {
             serverSide: true,
             ajax: "/ujian/data",
             columns: [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-                {data: 'paket_soal.nama_paket_soal', name: 'paket_soal.nama_paket_soal'},
-                {data: 'rombel.nama_rombel', name: 'rombel.nama_rombel'},
-                {data: 'nama', name: 'nama'},
-                {data: 'waktu_mulai', name: 'waktu_mulai'},
-                {data: 'durasi', name: 'durasi'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
+                {
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'paket_soal.kode_paket',
+                    name: 'paket_soal.kode_paket'
+                },
+                {
+                    data: 'kelas.name',
+                    name: 'kelas.name'
+                },
+                {
+                    data: 'nama',
+                    name: 'nama'
+                },
+                {
+                    data: 'waktu_mulai',
+                    name: 'waktu_mulai'
+                },
+                {
+                    data: 'durasi',
+                    name: 'durasi'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
             ],
             drawCallback: function(settings) {
                 $('[data-bs-toggle="tooltip"]').tooltip();
@@ -147,7 +172,7 @@ $(function () {
                 paket_soal_id: {
                     required: true
                 },
-                rombel_id: {
+                kelas_id: {
                     required: true
                 },
                 waktu_mulai: {
@@ -178,8 +203,8 @@ $(function () {
                 paket_soal_id: {
                     required: "Please select a Paket Soal"
                 },
-                rombel_id: {
-                    required: "Please select a Rombel"
+                kelas_id: {
+                    required: "Please select a Kelas"
                 },
                 waktu_mulai: {
                     required: "Please enter a start time",
@@ -221,24 +246,14 @@ $(function () {
             var select = $('#paket_soal_id');
             select.empty(); // Clear existing options
             options.forEach(function(option) {
-                select.append(new Option(option.nama_paket_soal, option.id));
+                select.append(new Option(option.kode_paket, option.id));
             });
             if (data) {
                 select.val(data.paket_soal_id);
             }
         });
 
-        // Populate Rombel options dynamically
-        $.get('/rombel/options', function(options) {
-            var select = $('#rombel_id');
-            select.empty(); // Clear existing options
-            options.forEach(function(option) {
-                select.append(new Option(option.nama_rombel, option.id));
-            });
-            if (data) {
-                select.val(data.rombel_id);
-            }
-        });
+
 
         // Populate Mata Pelajaran options dynamically
         $.get('/mata-pelajaran/options', function(options) {
@@ -254,7 +269,7 @@ $(function () {
 
         // Populate Kelas options dynamically
         $.get('/kelas/options', function(options) {
-            var select = $('#kelas');
+            var select = $('#kelas_id');
             select.empty(); // Clear existing options
             options.forEach(function(option) {
                 select.append(new Option(option.name, option.id));
@@ -325,16 +340,7 @@ $(function () {
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="rombel_id" class="col-sm-12 control-label form-label">Rombel</label>
-                            <div class="col-sm-12">
-                                <select class="form-control" id="rombel_id" name="rombel_id" required>
-                                    <!-- Options will be populated dynamically -->
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="row">
@@ -371,7 +377,7 @@ $(function () {
                         <div class="form-group">
                             <label for="kelas" class="col-sm-12 control-label form-label">Kelas</label>
                             <div class="col-sm-12">
-                                <select class="form-control" id="kelas" name="kelas" required>
+                                <select class="form-control" id="kelas_id" name="kelas_id" required>
                                     <!-- Options will be populated dynamically -->
                                 </select>
                             </div>
