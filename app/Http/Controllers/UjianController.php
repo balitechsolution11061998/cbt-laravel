@@ -141,7 +141,7 @@ class UjianController extends Controller
     {
         $histories = DB::table('ujian_histories')
             ->join('siswas', 'ujian_histories.siswa_id', '=', 'siswas.id')
-            ->join('kelas', 'romsiswasbels.kelas_id', '=', 'kelas.id')
+            ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
             ->select(
                 'siswas.nama as siswa_name', // Add student's name
                 'kelas.name as kelas_name',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class KelasController extends Controller
 {
@@ -47,7 +48,11 @@ class KelasController extends Controller
     {
         $validatedData = $request->validate([
             'id' => 'nullable|integer',
-            'name' => 'required|max:255',
+            'name' => [
+                'required',
+                'max:255',
+                Rule::unique('kelas')->ignore($request->id),
+            ],
         ]);
 
         $kelas = Kelas::updateOrCreate(
@@ -57,6 +62,7 @@ class KelasController extends Controller
 
         return response()->json(['success' => 'Kelas saved successfully.']);
     }
+
 
     public function edit($id)
     {
