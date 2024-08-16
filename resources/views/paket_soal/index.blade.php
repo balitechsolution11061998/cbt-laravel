@@ -53,7 +53,6 @@
                         <th class="min-w-125px">Kelas</th>
                         <th class="min-w-125px">Mata Pelajaran</th>
                         <th class="min-w-125px">Paket</th>
-                        <th class="min-w-125px">Nama Paket Soal</th>
                         <th class="min-w-125px">Keterangan</th>
                         <th class="text-end min-w-100px">Actions</th>
                     </tr>
