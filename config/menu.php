@@ -114,16 +114,7 @@ return [
             'iconPath'       => 7,
             'route'          => 'kelas.index',
         ],
-        [
-            'label'          => 'Rombongan Belajar',
-            'type'           => 'item',
-            'permission'     => ['rombel-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'fas',
-            'iconName'       => 'fa-users',
-            'iconPath'       => 7,
-            'route'          => 'rombel.index',
-        ],
+
 
         [
             'label'          => 'Mata Pelajaran',
