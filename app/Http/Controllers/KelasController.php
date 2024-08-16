@@ -48,12 +48,11 @@ class KelasController extends Controller
         $validatedData = $request->validate([
             'id' => 'nullable|integer',
             'name' => 'required|max:255',
-            'description' => 'required|max:500',
         ]);
 
         $kelas = Kelas::updateOrCreate(
             ['id' => $request->id],
-            ['name' => $request->name, 'description' => $request->description]
+            ['name' => $request->name]
         );
 
         return response()->json(['success' => 'Kelas saved successfully.']);

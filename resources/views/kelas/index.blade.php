@@ -42,7 +42,6 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Description</th>
                         <th width="150px">Action</th>
                     </tr>
                     </thead>

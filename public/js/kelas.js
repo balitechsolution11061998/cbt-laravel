@@ -13,7 +13,6 @@ $(function () {
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false}, // Ensure this column is correctly configured
             {data: 'name', name: 'name'},
-            {data: 'description', name: 'description'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ],
         drawCallback: function(settings) {
@@ -94,12 +93,6 @@ function createKelas(data = null) {
                     <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="${data ? data.name : ''}" required="">
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Description</label>
-                <div class="col-sm-12">
-                    <textarea id="description" name="description" required="" placeholder="Enter Description" class="form-control">${data ? data.description : ''}</textarea>
-                </div>
-            </div>
             <div class="col-sm-offset-2 col-sm-10 mt-3">
                 <button type="submit" class="btn btn-primary" id="saveBtn" value="${data ? 'edit' : 'create'}">Save changes</button>
             </div>
@@ -170,20 +163,14 @@ function createKelas(data = null) {
                 required: true,
                 maxlength: 255
             },
-            description: {
-                required: true,
-                maxlength: 500
-            }
+
         },
         messages: {
             name: {
                 required: "Please enter a name",
                 maxlength: "Name cannot be more than 255 characters"
             },
-            description: {
-                required: "Please enter a description",
-                maxlength: "Description cannot be more than 500 characters"
-            }
+
         },
         errorClass: 'is-invalid',
         validClass: 'is-valid',
