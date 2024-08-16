@@ -92,33 +92,29 @@ function createPaketSoal(data = null) {
         <form id="paketSoalForm" name="paketSoalForm" class="form-horizontal">
             <input type="hidden" name="id" id="id" value="${data ? data.id : ''}">
             <div class="form-group">
-                <label for="kode_kelas" class="col-sm-2 control-label">Kode Kelas</label>
+                <label for="kode_kelas" class="col-sm-2 control-label">Kelas</label>
                 <div class="col-sm-12">
                     <select class="form-control" id="kode_kelas" name="kode_kelas" required>
                         <option value="">Select Kode Kelas</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="kode_mata_pelajaran" class="col-sm-2 control-label">Kode Mata Pelajaran</label>
-                <div class="col-sm-12">
-                    <select class="form-control" id="kode_mata_pelajaran" name="kode_mata_pelajaran" required>
-                        <option value="">Select Kode Mata Pelajaran</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
+             <div class="form-group">
                 <label for="kode_paket" class="col-sm-2 control-label">Kode Paket</label>
                 <div class="col-sm-12">
                     <input type="text" class="form-control" id="kode_paket" name="kode_paket" placeholder="Enter Kode Paket" value="${data ? data.kode_paket : ''}" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="nama_paket_soal" class="col-sm-2 control-label">Nama Paket Soal</label>
+                <label for="kode_mata_pelajaran" class="col-sm-2 control-label">Mata Pelajaran</label>
                 <div class="col-sm-12">
-                    <input type="text" class="form-control" id="nama_paket_soal" name="nama_paket_soal" placeholder="Enter Nama Paket Soal" value="${data ? data.nama_paket_soal : ''}" required>
+                    <select class="form-control" id="kode_mata_pelajaran" name="kode_mata_pelajaran" required>
+                        <option value="">Select Kode Mata Pelajaran</option>
+                    </select>
                 </div>
             </div>
+
+
             <div class="form-group">
                 <label for="keterangan" class="col-sm-2 control-label">Keterangan</label>
                 <div class="col-sm-12">

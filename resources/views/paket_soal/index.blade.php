@@ -50,9 +50,9 @@
                                 <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#paket_soal_table .form-check-input" value="1" />
                             </div>
                         </th>
-                        <th class="min-w-125px">Kode Kelas</th>
-                        <th class="min-w-125px">Kode Mata Pelajaran</th>
-                        <th class="min-w-125px">Kode Paket</th>
+                        <th class="min-w-125px">Kelas</th>
+                        <th class="min-w-125px">Mata Pelajaran</th>
+                        <th class="min-w-125px">Paket</th>
                         <th class="min-w-125px">Nama Paket Soal</th>
                         <th class="min-w-125px">Keterangan</th>
                         <th class="text-end min-w-100px">Actions</th>
