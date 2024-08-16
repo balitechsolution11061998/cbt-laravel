@@ -54,8 +54,6 @@ class SoalSeeder extends Seeder
                     'pertanyaan_b' => $question['options'][1], // Option B
                     'pertanyaan_c' => $question['options'][2], // Option C
                     'pertanyaan_d' => $question['options'][3], // Option D
-                    'media' => $faker->imageUrl(), // Placeholder image URL
-                    'ulang_media' => $faker->imageUrl(), // Placeholder image URL
                     'jawaban_benar' => $question['correct_option'], // The correct answer
                 ]);
 
@@ -64,7 +62,6 @@ class SoalSeeder extends Seeder
                     SoalPilihan::create([
                         'soal_id' => $soal->id,
                         'jawaban' => $option,
-                        'media' => $faker->imageUrl(), // Placeholder image URL
                     ]);
                 }
             }

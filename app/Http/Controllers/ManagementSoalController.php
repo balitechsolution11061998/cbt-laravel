@@ -28,8 +28,6 @@ class ManagementSoalController extends Controller
             'pertanyaan_b' => 'nullable|string',
             'pertanyaan_c' => 'nullable|string',
             'pertanyaan_d' => 'nullable|string',
-            'media' => 'nullable|string',
-            'ulang_media' => 'nullable|string',
             'jawaban_benar' => 'nullable|string', // For storing the correct answer for pilihan_ganda
             'pilihan' => 'nullable|array', // For pilihan_ganda, ensure it's an array if provided
             'pilihan.*.jawaban' => 'required_with:pilihan|string', // Ensure jawaban is a string if pilihan is provided
@@ -50,8 +48,6 @@ class ManagementSoalController extends Controller
                     'pertanyaan_b' => $request->pilihan_ganda_b,
                     'pertanyaan_c' => $request->pilihan_ganda_c,
                     'pertanyaan_d' => $request->pilihan_ganda_d,
-                    'media' => $request->media,
-                    'ulang_media' => $request->ulang_media,
                     'jawaban_benar' => $request->jawaban_benar,
                 ]
             );
@@ -66,7 +62,6 @@ class ManagementSoalController extends Controller
                 SoalPilihan::create([
                     'soal_id' => $soal->id,
                     'jawaban' => $request->jawaban_benar,
-                    'media' => $request->media ?? null,
                 ]);
             }
         });

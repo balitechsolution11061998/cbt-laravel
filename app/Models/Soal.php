@@ -17,8 +17,6 @@ class Soal extends Model
         'pertanyaan_b',
         'pertanyaan_c',
         'pertanyaan_d',
-        'media',
-        'ulang_media',
         'jawaban_benar',
     ];
     public function paketSoal()

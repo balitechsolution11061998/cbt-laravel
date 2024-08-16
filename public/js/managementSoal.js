@@ -16,8 +16,6 @@ $(function () {
             {data: 'paket_soal', name: 'paket_soal'}, // Use the name of the relationship attribute
             {data: 'jenis', name: 'jenis'},
             {data: 'pertanyaan', name: 'pertanyaan'},
-            {data: 'media', name: 'media'},
-            {data: 'ulang_media', name: 'ulang_media'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ],
         drawCallback: function(settings) {
@@ -116,18 +114,6 @@ function createSoal(data = null) {
                 <label for="pertanyaan" class="col-sm-2 control-label">Pertanyaan</label>
                 <div class="col-sm-12">
                     <textarea class="form-control" id="pertanyaan" name="pertanyaan" placeholder="Enter Pertanyaan">${data ? data.pertanyaan : ''}</textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="media" class="col-sm-2 control-label">Media</label>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="media" name="media" placeholder="Enter Media" value="${data ? data.media : ''}">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="ulang_media" class="col-sm-2 control-label">Ulang Media</label>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="ulang_media" name="ulang_media" placeholder="Enter Ulang Media" value="${data ? data.ulang_media : ''}">
                 </div>
             </div>
             <div id="pilihan_ganda_section" class="form-group" style="display: ${data && data.jenis === 'pilihan_ganda' ? 'block' : 'none'};">

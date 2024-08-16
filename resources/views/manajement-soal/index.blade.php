@@ -53,8 +53,6 @@
                         <th class="min-w-125px">Paket Soal</th>
                         <th class="min-w-125px">Jenis</th>
                         <th class="min-w-125px">Soal</th>
-                        <th class="min-w-125px">Media</th>
-                        <th class="min-w-125px">Ulang Media</th>
                         <th class="text-end min-w-100px">Actions</th>
                     </tr>
                 </thead>

@@ -20,8 +20,6 @@ return new class extends Migration
             $table->text('pertanyaan_b')->nullable(); // No `after` clause needed
             $table->text('pertanyaan_c')->nullable(); // No `after` clause needed
             $table->text('pertanyaan_d')->nullable(); // No `after` clause needed
-            $table->text('media')->nullable();
-            $table->text('ulang_media')->nullable();
             $table->string('jawaban_benar')->nullable();
             $table->timestamps();
         });
@@ -30,7 +28,6 @@ return new class extends Migration
             $table->id(); // Primary key and auto-increment column
             $table->unsignedBigInteger('soal_id');
             $table->text('jawaban');
-            $table->text('media')->nullable(); // Allow null if not required for every choice
             $table->timestamps();
 
             // Add foreign key constraint

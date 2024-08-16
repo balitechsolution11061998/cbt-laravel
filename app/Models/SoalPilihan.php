@@ -13,7 +13,6 @@ class SoalPilihan extends Model
     protected $fillable = [
         'soal_id',
         'jawaban',
-        'media',
         'status',
     ];
 
