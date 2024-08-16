@@ -9,18 +9,15 @@ $(document).ready(function () {
 
 
     function fetchKelasData() {
-        document.getElementById('spinner-kelas').style.display = 'block';
 
         fetch('/kelas/getKelasData')
             .then(response => response.json())
             .then(data => {
-                document.getElementById('spinner-kelas').style.display = 'none';
 
                 document.getElementById('kelas-content').textContent = data.total_kelas;
             })
             .catch(error => {
                 console.error('Error fetching class data:', error);
-                document.getElementById('spinner-kelas').style.display = 'none';
             });
     }
 
@@ -61,12 +58,9 @@ function fetchHistoryUjian() {
 
 
 function fetchStudentData() {
-    document.getElementById('spinner-student').style.display = 'block';
-
     fetch('/siswa/getStudentData')
         .then(response => response.json())
         .then(data => {
-            document.getElementById('spinner-student').style.display = 'none';
 
             // Assuming data is an array of student objects
             let maleCount = 0;
@@ -94,29 +88,42 @@ function fetchStudentData() {
                 }
             });
 
-            // Update the counts in the UI
-            document.getElementById('student-content').textContent = `${totalCount}`;
-            document.getElementById('male-count').textContent = `Laki-laki: ${maleCount}`;
-            document.getElementById('female-count').textContent = `Perempuan: ${femaleCount}`;
+            // Safely update the counts in the UI
+            let studentContentElement = document.getElementById('student-content');
+            if (studentContentElement) {
+                studentContentElement.textContent = `${totalCount}`;
+            }
+
+            let maleCountElement = document.getElementById('male-count');
+            if (maleCountElement) {
+                maleCountElement.textContent = `Laki-laki: ${maleCount}`;
+            }
+
+            let femaleCountElement = document.getElementById('female-count');
+            if (femaleCountElement) {
+                femaleCountElement.textContent = `Perempuan: ${femaleCount}`;
+            }
 
             // Handle the Rombel and Kelas counts
             let rombelTableBody = document.getElementById('rombel-table-body');
 
-            // Clear existing rows
-            rombelTableBody.innerHTML = '';
+            if (rombelTableBody) {
+                // Clear existing rows
+                rombelTableBody.innerHTML = '';
 
-            // Populate the table with counts per Kelas
-            for (let [kelasName, count] of Object.entries(rombelKelasCounts)) {
-                let row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${kelasName}</td>
-                    <td>${count}</td>
-                `;
-                rombelTableBody.appendChild(row);
+                // Populate the table with counts per Kelas
+                for (let [kelasName, count] of Object.entries(rombelKelasCounts)) {
+                    let row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${kelasName}</td>
+                        <td>${count}</td>
+                    `;
+                    rombelTableBody.appendChild(row);
+                }
             }
         })
         .catch(error => {
             console.error('Error fetching student data:', error);
-            document.getElementById('spinner-student').style.display = 'none';
         });
 }
+
