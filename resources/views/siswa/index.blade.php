@@ -33,9 +33,9 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Rombel</th>
-                        <th>Nama</th>
                         <th>NIS</th>
+                        <th>Nama</th>
+                        <th>Kelas</th>
                         <th>Jenis Kelamin</th>
                         <th>Action</th>
                     </tr>

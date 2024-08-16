@@ -11,9 +11,10 @@ $(function () {
         ajax: "/siswa/data",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-            {data: 'rombel.nama_rombel', name: 'rombel.nama_rombel'},
-            {data: 'nama', name: 'nama'},
             {data: 'nis', name: 'nis'},
+            {data: 'nama', name: 'nama'},
+            {data: 'kelas.name', name: 'kelas.name'},
+
             {data: 'jenis_kelamin', name: 'jenis_kelamin'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ],
@@ -304,14 +305,14 @@ function createSiswa(data = null) {
     });
 
     // Populate Rombel options dynamically
-    $.get('/rombel/options', function(options) {
-        var select = $('#rombel_id');
+    $.get('/kelas/options', function(options) {
+        var select = $('#kelas_id');
         select.empty(); // Clear existing options
         options.forEach(function(option) {
-            select.append(new Option(option.nama_rombel, option.id));
+            select.append(new Option(option.name, option.id));
         });
         if (data) {
-            select.val(data.rombel_id);
+            select.val(data.kelas_id);
         }
     });
 }
@@ -322,11 +323,9 @@ function getSiswaForm(data) {
         <form id="siswaForm" name="siswaForm" class="form-horizontal">
             <input type="hidden" name="id" id="id" value="${data ? data.id : ''}">
             <div class="form-group">
-                <label for="rombel_id" class="col-sm-2 control-label">Rombel</label>
+                <label for="nis" class="col-sm-2 control-label">NIS</label>
                 <div class="col-sm-12">
-                    <select class="form-control" id="rombel_id" name="rombel_id" required="">
-                        <!-- Options will be populated dynamically -->
-                    </select>
+                    <input type="text" class="form-control" id="nis" name="nis" placeholder="Enter NIS" value="${data ? data.nis : ''}" required="">
                 </div>
             </div>
             <div class="form-group">
@@ -335,10 +334,13 @@ function getSiswaForm(data) {
                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Enter Nama" value="${data ? data.nama : ''}" required="">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="nis" class="col-sm-2 control-label">NIS</label>
+
+               <div class="form-group">
+                <label for="kelas_id" class="col-sm-2 control-label">Kelas</label>
                 <div class="col-sm-12">
-                    <input type="text" class="form-control" id="nis" name="nis" placeholder="Enter NIS" value="${data ? data.nis : ''}" required="">
+                    <select class="form-control" id="kelas_id" name="kelas_id" required="">
+                        <!-- Options will be populated dynamically -->
+                    </select>
                 </div>
             </div>
             <div class="form-group">
@@ -353,13 +355,13 @@ function getSiswaForm(data) {
             <div class="form-group">
                 <label for="email" class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-12">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" value="${data ? data.email : ''}" required="">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" value="${data ? data.users.email : ''}" required="">
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-sm-2 control-label">Password</label>
                 <div class="col-sm-12">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" ${data ? '' : 'required'}>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" ${data.users.password_show ? '' : 'required'}>
                 </div>
             </div>
             <div class="col-sm-offset-2 col-sm-10 mt-3">

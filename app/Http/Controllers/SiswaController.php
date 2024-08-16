@@ -23,8 +23,8 @@ class SiswaController extends Controller
     {
         // Validate the request data for Siswa
         $data = $request->validate([
-            'siswa_id' => 'nullable|exists:siswa,id', // Validate ID for update, if provided
-            'kelas' => 'required|exists:kelas,id',
+            'id' => 'nullable|exists:siswas,id', // Validate ID for update, if provided
+            'kelas_id' => 'required|exists:kelas,id',
             'nama' => 'required|string|max:255',
             'nis' => 'required|string|max:255',
             'jenis_kelamin' => 'required|in:L,P',
@@ -37,9 +37,9 @@ class SiswaController extends Controller
         \DB::transaction(function () use ($request, $data) {
             // Create or update the Siswa record
             $siswa = Siswa::updateOrCreate(
-                ['id' => $request->siswa_id],
+                ['id' => $request->id],
                 [
-                    'kelas_id' => $data['kelas'],
+                    'kelas_id' => $data['kelas_id'],
                     'nama' => $data['nama'],
                     'nis' => $data['nis'],
                     'jenis_kelamin' => $data['jenis_kelamin'],
@@ -74,7 +74,7 @@ class SiswaController extends Controller
 
     public function edit($id)
     {
-        $siswa = Siswa::findOrFail($id);
+        $siswa = Siswa::with('users')->where('id',$id)->first();
         return response()->json($siswa);
     }
 
@@ -110,13 +110,13 @@ class SiswaController extends Controller
 
     public function data()
     {
-        return datatables()->of(Siswa::with('rombel', 'users')->get())
+        return datatables()->of(Siswa::with('kelas', 'users')->get())
             ->addIndexColumn()
             ->addColumn('action', function($row) {
                 // Check if the users relationship exists
                 $userId = $row->users->id ?? null;
                 $studentName = addslashes($row->users->name ?? '');
-                $studentClass = addslashes($row->rombel->nama_rombel ?? '');
+                $studentClass = addslashes($row->kelas->name ?? '');
                 $nis = $row->nis; // Assuming 'nis' is a column in the 'Siswa' model
                 $gender = addslashes($row->jenis_kelamin ?? ''); // Assuming 'jenis_kelamin' is a column in the 'Siswa' model
 
