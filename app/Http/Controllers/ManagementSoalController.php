@@ -101,7 +101,7 @@ class ManagementSoalController extends Controller
         return DataTables::of($soals)
             ->addIndexColumn()
             ->addColumn('paket_soal', function ($soal) {
-                return $soal->paketSoal ? $soal->paketSoal->nama_paket_soal : 'N/A'; // Adjust 'nama_paket_soal' to the correct column name
+                return $soal->paketSoal ? $soal->paketSoal->kode_paket : 'N/A'; // Adjust 'kode_paket' to the correct column name
             })
             ->addColumn('action', function ($soal) {
                 return '<button class="btn btn-primary btn-sm" onclick="editSoal(' . $soal->id . ')"><i class="fas fa-edit"></i> Edit</button>

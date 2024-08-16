@@ -24,7 +24,7 @@ class SiswaController extends Controller
         // Validate the request data for Siswa
         $data = $request->validate([
             'siswa_id' => 'nullable|exists:siswa,id', // Validate ID for update, if provided
-            'rombel_id' => 'required|exists:rombels,id',
+            'kelas_id' => 'required|exists:kelas,id',
             'nama' => 'required|string|max:255',
             'nis' => 'required|string|max:255',
             'jenis_kelamin' => 'required|in:L,P',

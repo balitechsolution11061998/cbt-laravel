@@ -16,7 +16,7 @@ return new class extends Migration
                 $table->id();
                 $table->string('nama');
                 $table->unsignedBigInteger('paket_soal_id');
-                $table->unsignedBigInteger('rombel_id');
+                $table->unsignedBigInteger('kelas_id');
                 $table->dateTime('waktu_mulai');
                 $table->integer('durasi');
                 $table->integer('poin_benar');

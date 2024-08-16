@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Kelas;
 use Illuminate\Database\Seeder;
 use App\Models\Ujian;
 use App\Models\PaketSoal;
@@ -17,7 +18,7 @@ class UjianSeeder extends Seeder
 
         // Fetch existing PaketSoal, Rombel, and MataPelajaran records
         $paketSoalIds = PaketSoal::pluck('id')->toArray();
-        $rombelIds = Rombel::pluck('id')->toArray();
+        $kelasId = Kelas::pluck('id')->toArray();
         $mataPelajaranIds = MataPelajaran::pluck('id')->toArray();
 
         $ujianData = [];
@@ -26,7 +27,7 @@ class UjianSeeder extends Seeder
             $ujianData[] = [
                 'nama' => 'Ujian ' . $i,
                 'paket_soal_id' => $faker->randomElement($paketSoalIds),
-                'rombel_id' => $faker->randomElement($rombelIds),
+                'kelas_id' => $faker->randomElement($kelasId),
                 'waktu_mulai' => $faker->dateTimeBetween('now'),
                 'durasi' => $faker->numberBetween(30, 120), // in minutes
                 'poin_benar' => $faker->numberBetween(1, 10),

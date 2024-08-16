@@ -14,22 +14,16 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username');
+            $table->string('nik')->nullable()->index(); // Adding index
             $table->string('name');
             $table->string('email');
-            $table->char('status')->nullable();
             $table->string('photo')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->unsignedBigInteger('kode_dept')->nullable();
-            $table->unsignedBigInteger('kode_cabang')->nullable();
-            $table->unsignedBigInteger('kode_jabatan')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('password_show')->nullable();
             $table->string('password')->nullable();
-            $table->string('nik')->nullable();
-            $table->date('join_date')->nullable();
-            $table->integer('region')->nullable();
+            $table->char('status')->nullable();
             $table->text('alamat')->nullable();
-            $table->text('about_us')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

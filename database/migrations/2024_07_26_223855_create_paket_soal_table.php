@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('kode_kelas');
             $table->string('kode_mata_pelajaran');
             $table->string('kode_paket');
-            $table->string('nama_paket_soal');
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

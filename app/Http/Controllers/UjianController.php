@@ -142,11 +142,9 @@ class UjianController extends Controller
     {
         $histories = DB::table('ujian_histories')
             ->join('siswas', 'ujian_histories.siswa_id', '=', 'siswas.id')
-            ->join('rombels', 'siswas.rombel_id', '=', 'rombels.id')
-            ->join('kelas', 'rombels.kelas_id', '=', 'kelas.id')
+            ->join('kelas', 'romsiswasbels.kelas_id', '=', 'kelas.id')
             ->select(
                 'siswas.nama as siswa_name', // Add student's name
-                'rombels.nama_rombel as rombel_name',
                 'kelas.name as kelas_name',
                 'ujian_histories.jumlah_benar',
                 'ujian_histories.jumlah_salah',
@@ -208,7 +206,7 @@ class UjianController extends Controller
     {
         $data = $request->validate([
             'paket_soal_id' => 'required|exists:paket_soal,id',
-            'rombel_id' => 'required|exists:rombels,id',
+            'kelas_id' => 'required|exists:kelas,id',
             'nama' => 'required|string|max:255',
             'keterangan' => 'nullable|string',
             'waktu_mulai' => 'required|date',

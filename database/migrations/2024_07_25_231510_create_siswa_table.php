@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rombel_id')->constrained()->onDelete('cascade');
+            $table->foreignId('kelas_id')->constrained()->onDelete('cascade');
             $table->string('nama');
             $table->string('nis')->unique();
             $table->enum('jenis_kelamin', ['L', 'P']);

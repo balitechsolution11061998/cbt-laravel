@@ -37,7 +37,7 @@ class PaketSoalController extends Controller
     public function dataoptions()
     {
         // Fetch all classes
-        $paketSoal = PaketSoal::select('id', 'nama_paket_soal')->get();
+        $paketSoal = PaketSoal::select('id','kode_paket')->get();
 
         // Return the classes as JSON
         return response()->json($paketSoal);
@@ -59,7 +59,6 @@ class PaketSoalController extends Controller
         'kode_kelas' => 'required|exists:kelas,id',
         'kode_mata_pelajaran' => 'required|max:255',
         'kode_paket' => 'required|max:255',
-        'nama_paket_soal' => 'required|max:255',
         'keterangan' => 'nullable|string',
     ]);
 

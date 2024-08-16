@@ -44,7 +44,6 @@ class PaketSoalSeeder extends Seeder
                     'kode_kelas' => $kelasId,
                     'kode_mata_pelajaran' => $bahasaIndonesiaId,
                     'kode_paket' => 'PAKET' . $kelasId . '-' . $i,
-                    'nama_paket_soal' => 'Paket Soal Bahasa Indonesia ' . $kelasId . '-' . $i,
                     'keterangan' => $description, // Continuous description
                     'created_at' => now(),
                     'updated_at' => now(),

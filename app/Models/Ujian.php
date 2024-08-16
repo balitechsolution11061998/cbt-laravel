@@ -12,7 +12,7 @@ class Ujian extends Model
     protected $fillable = [
         'nama',
         'paket_soal_id',
-        'rombel_id',
+        'kelas_id',
         'waktu_mulai',
         'durasi',
         'poin_benar',
@@ -31,10 +31,6 @@ class Ujian extends Model
         return $this->belongsTo(PaketSoal::class, 'paket_soal_id');
     }
 
-    public function rombel()
-    {
-        return $this->belongsTo(Rombel::class, 'rombel_id');
-    }
 
     public function mataPelajaran()
     {

@@ -181,7 +181,7 @@ function createSoal(data = null) {
         success: function(response) {
             const paketSoalSelect = $('#paket_soal_id');
             response.forEach(paketSoal => {
-                paketSoalSelect.append(new Option(paketSoal.nama_paket_soal, paketSoal.id));
+                paketSoalSelect.append(new Option(paketSoal.kode_paket, paketSoal.id));
             });
 
             if (data) {

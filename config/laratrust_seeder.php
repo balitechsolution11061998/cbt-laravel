@@ -12,29 +12,7 @@ return [
     'truncate_tables' => true,
 
     'roles_structure' => [
-        'superadministrator' => [
-            'dashboard' => 's',
-            'users' => 's',
-            'permissions' => 's,c',
-            'items' => 's',
-            'cost_change' => 'a,s',
-            'po' => 's',
-            'monitoring' => 's',
-            'roles' => 's',
-            'settings' => 's',
-            'jamkerja' => 's',
-            'department' => 's',
-            'kantorcabang' => 's',
-            'cuti' => 's',
-            'soal' => 's',
-            'paketsoal' => 's',
-            'manajementsoal' => 's',
-            'siswa' => 's',
-            'kelas' => 's',
-            'rombel' => 's',
-            'matapelajaran' => 's',
-            'ujian' => 's',
-        ],
+
         'admin_cbt' => [
             'dashboard' => 's',
             'users' => 's',

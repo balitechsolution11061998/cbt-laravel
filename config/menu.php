@@ -8,7 +8,7 @@ return [
         [
             'label'          => 'Dashboard',
             'type'           => 'item',
-            'permission'     => ['dashboardcbt-show'],
+            'permission'     => ['dashboard-show'],
             'permissionType' => 'gate',
             'icon'           => 'fas',
             'iconName'       => 'fa-chart-line', // Font Awesome icon for reports
