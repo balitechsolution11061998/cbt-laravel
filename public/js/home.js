@@ -1,7 +1,6 @@
 $(document).ready(function () {
     fetchStudentData();
     fetchKelasData();
-    fetchRombelData();
     // fetchMataPelajaranData();
     fetchHistoryUjian();
 });
@@ -25,23 +24,6 @@ $(document).ready(function () {
             });
     }
 
-    function fetchRombelData() {
-        document.getElementById('spinner-rombel').style.display = 'block';
-
-        fetch('/rombel/getRombelData')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('spinner-rombel').style.display = 'none';
-
-                document.getElementById('rombel-content').textContent = data.rombelCounts;
-
-
-            })
-            .catch(error => {
-                console.error('Error fetching rombel data:', error);
-                document.getElementById('spinner-rombel').style.display = 'none';
-            });
-    }
 
 
 
@@ -86,9 +68,36 @@ function fetchStudentData() {
         .then(data => {
             document.getElementById('spinner-student').style.display = 'none';
 
-            document.getElementById('student-content').textContent = data.total;
-            document.getElementById('male-count').textContent = `Laki-laki: ${data.male}`;
-            document.getElementById('female-count').textContent = `Perempuan: ${data.female}`;
+            // Assuming data is an array of student objects
+            let maleCount = 0;
+            let femaleCount = 0;
+            let totalCount = data.students.length; // Get total number of students
+
+            // Initialize an object to hold the counts for each Rombel (Kelas)
+            let rombelKelasCounts = {};
+
+            data.students.forEach(student => {
+                // Count male and female students
+                if (student.jenis_kelamin === 'L') {
+                    maleCount++;
+                } else if (student.jenis_kelamin === 'P') {
+                    femaleCount++;
+                }
+
+                // Count students by their kelas name
+                let kelasName = student.kelas ? student.kelas.name : 'Unknown';
+
+                if (rombelKelasCounts[kelasName]) {
+                    rombelKelasCounts[kelasName]++;
+                } else {
+                    rombelKelasCounts[kelasName] = 1;
+                }
+            });
+
+            // Update the counts in the UI
+            document.getElementById('student-content').textContent = `${totalCount}`;
+            document.getElementById('male-count').textContent = `Laki-laki: ${maleCount}`;
+            document.getElementById('female-count').textContent = `Perempuan: ${femaleCount}`;
 
             // Handle the Rombel and Kelas counts
             let rombelTableBody = document.getElementById('rombel-table-body');
@@ -96,10 +105,11 @@ function fetchStudentData() {
             // Clear existing rows
             rombelTableBody.innerHTML = '';
 
-            for (let [rombelKelas, count] of Object.entries(data.rombelKelasCounts)) {
+            // Populate the table with counts per Kelas
+            for (let [kelasName, count] of Object.entries(rombelKelasCounts)) {
                 let row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${rombelKelas}</td>
+                    <td>${kelasName}</td>
                     <td>${count}</td>
                 `;
                 rombelTableBody.appendChild(row);

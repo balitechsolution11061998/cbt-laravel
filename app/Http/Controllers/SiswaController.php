@@ -92,18 +92,12 @@ class SiswaController extends Controller
 
         $students = Siswa::with('kelas')->get();
 
-        // Group students by rombel and kelas and count the number of students in each group
-        $rombelKelasCounts = $students->groupBy(function($student) {
-            return $student->rombel->nama_rombel . ' - ' . $student->rombel->kelas->name;
-        })->map(function ($group) {
-            return $group->count();
-        });
 
         return response()->json([
             'total' => $total,
             'male' => $male,
             'female' => $female,
-            'rombelKelasCounts' => $rombelKelasCounts,
+            'students' => $students,
         ]);
     }
 

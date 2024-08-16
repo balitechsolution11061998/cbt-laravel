@@ -15,7 +15,7 @@
                 @can('siswa-show')
                 <div class="container mt-5">
                     <div class="row">
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-4 mb-4">
                             <div class="card equal-height">
                                 <h2 class="section-title"><i class="fas fa-user-graduate"></i> Jumlah Siswa</h2>
                                 <div id="spinner-student" style="display: none;">
@@ -36,7 +36,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-4 mb-4">
                             <div class="card equal-height">
                                 <h2 class="section-title"><i class="fas fa-chalkboard"></i> Jumlah Kelas</h2>
                                 <div id="spinner-kelas" style="display: none;">
@@ -51,23 +51,7 @@
                                 </a>
                             </div>
                         </div>
-
-                        <div class="col-md-3 mb-4">
-                            <div class="card equal-height">
-                                <h2 class="section-title"><i class="fas fa-chalkboard"></i> Rombongan Belajar</h2>
-                                <div id="spinner-rombel" style="display: none;">
-                                    <i class="fas fa-spinner fa-spin"></i>
-                                </div>
-                                <div class="chart-container text-center">
-                                    <i class="fas fa-chalkboard icon-animate" style="font-size: 48px; color: #007bff;"></i>
-                                    <span class="chart-number custom-font" id="rombel-content">0</span>
-                                </div>
-                                <a href="/classes" class="btn btn-sm btn-primary mt-3">
-                                    <i class="fas fa-chalkboard"></i> View Rombel
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-4 mb-4">
                             <div class="card equal-height">
                                 <h2 class="section-title"><i class="fas fa-book"></i> Mata Pelajaran</h2>
                                 <div id="spinner-mata-pelajaran" style="display: none;">
@@ -97,7 +81,7 @@
             <div id="additional-details" class="col-md-6 mt-4">
                 <div class="card shadow-sm border-light">
                     <div class="card-header">
-                        <h2 class="section-title mb-0"><i class="fas fa-info-circle"></i> Detail Per Rombel</h2>
+                        <h2 class="section-title mb-0"><i class="fas fa-info-circle"></i> Detail Per Kelas</h2>
                     </div>
                     <div class="card-body">
                         <div id="spinner-detail" class="text-center mb-3" style="display: none;">
@@ -107,7 +91,7 @@
                             <table class="table align-middle table-row-dashed fs-6 gy-5">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>Rombel - Kelas</th>
+                                        <th>Kelas</th>
                                         <th>Jumlah Siswa</th>
                                     </tr>
                                 </thead>
