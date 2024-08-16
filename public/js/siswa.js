@@ -335,7 +335,7 @@ function getSiswaForm(data) {
                 </div>
             </div>
 
-               <div class="form-group">
+            <div class="form-group">
                 <label for="kelas_id" class="col-sm-2 control-label">Kelas</label>
                 <div class="col-sm-12">
                     <select class="form-control" id="kelas_id" name="kelas_id" required="">
@@ -355,13 +355,13 @@ function getSiswaForm(data) {
             <div class="form-group">
                 <label for="email" class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-12">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" value="${data ? data.users.email : ''}" required="">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" value="${data && data.users ? data.users.email : ''}" required="">
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-sm-2 control-label">Password</label>
                 <div class="col-sm-12">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" ${data.users.password_show ? '' : 'required'}>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" ${data && data.users && data.users.password_show ? '' : 'required'}>
                 </div>
             </div>
             <div class="col-sm-offset-2 col-sm-10 mt-3">
@@ -370,4 +370,5 @@ function getSiswaForm(data) {
         </form>
     `;
 }
+
 
