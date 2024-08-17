@@ -316,7 +316,7 @@ function getUjianForm(data) {
                     <div class="form-group">
                         <label for="paket_soal_id" class="col-sm-12 control-label form-label">Paket Soal</label>
                         <div class="col-sm-12">
-                            <select class="form-control" id="paket_soal_id" name="paket_soal_id" required ${data ? 'disabled' : ''}>
+                            <select class="form-control" id="paket_soal_id" name="paket_soal_id" required ${data ? 'disabled' : ''} onchange="changePaketSoal()">
                                 <!-- Options will be populated dynamically -->
                             </select>
                         </div>
