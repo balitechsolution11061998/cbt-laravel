@@ -310,8 +310,8 @@ class UserController extends Controller
         $currentUjian = null;
         $now = now(); // Get current datetime
 
-        if ($user && $user->siswa && $user->siswa->rombel) {
-            $currentUjian = $user->siswa->rombel->ujian->filter(function($ujian) use ($now) {
+        if ($user && $user->siswa && $user->siswa->kelas) {
+            $currentUjian = $user->siswa->kelas->ujian->filter(function($ujian) use ($now) {
                 $ujianStartTime = \Carbon\Carbon::parse($ujian->waktu_mulai);
                 $ujianEndTime = $ujianStartTime->copy()->addMinutes($ujian->durasi); // Assuming 'durasi' is the exam duration in minutes
 
