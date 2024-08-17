@@ -280,124 +280,156 @@ $(function () {
         });
     }
 
-    // Function to get Ujian form HTML
-    function getUjianForm(data) {
-        return `
-            <form id="ujianForm" name="ujianForm" class="form-horizontal">
-                <input type="hidden" name="id" id="id" value="${data ? data.id : ''}">
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="nama" class="col-sm-12 control-label form-label">Nama Ujian</label>
-                            <div class="col-sm-12">
-                                <input type="text" name="nama" id="nama" class="form-control" placeholder="Enter Nama Ujian" value="${data ? data.nama : ''}" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="paket_soal_id" class="col-sm-12 control-label form-label">Paket Soal</label>
-                            <div class="col-sm-12">
-                                <select class="form-control" id="paket_soal_id" name="paket_soal_id" required>
-                                    <!-- Options will be populated dynamically -->
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="waktu_mulai" class="col-sm-12 control-label form-label">Waktu Mulai</label>
-                            <div class="col-sm-12">
-                                <input type="datetime-local" class="form-control" id="waktu_mulai" name="waktu_mulai" placeholder="Enter Waktu Mulai" value="${data ? data.waktu_mulai : ''}" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="mata_pelajaran_id" class="col-sm-12 control-label form-label">Mata Pelajaran</label>
-                            <div class="col-sm-12">
-                                <select class="form-control" id="mata_pelajaran_id" name="mata_pelajaran_id" required>
-                                    <!-- Options will be populated dynamically -->
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="durasi" class="col-sm-12 control-label form-label">Durasi</label>
-                            <div class="col-sm-12">
-                                <input type="number" class="form-control" id="durasi" name="durasi" placeholder="Enter Durasi" value="${data ? data.durasi : ''}" required>
-                            </div>
-                        </div>
-                    </div>
 
 
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="poin_benar" class="col-sm-12 control-label form-label">Poin Benar</label>
-                            <div class="col-sm-12">
-                                <input type="number" class="form-control" id="poin_benar" name="poin_benar" placeholder="Enter Poin Benar" value="${data ? data.poin_benar : ''}" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="poin_salah" class="col-sm-12 control-label form-label">Poin Salah</label>
-                            <div class="col-sm-12">
-                                <input type="number" class="form-control" id="poin_salah" name="poin_salah" placeholder="Enter Poin Salah" value="${data ? data.poin_salah : ''}" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="poin_tidak_jawab" class="col-sm-12 control-label form-label">Poin Tidak Jawab</label>
-                            <div class="col-sm-12">
-                                <input type="number" class="form-control" id="poin_tidak_jawab" name="poin_tidak_jawab" placeholder="Enter Poin Tidak Jawab" value="${data ? data.poin_tidak_jawab : ''}" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="kelas" class="col-sm-12 control-label form-label">Kelas</label>
-                            <div class="col-sm-12">
-                                <select class="form-control" id="kelas_id" name="kelas_id" required>
-                                    <!-- Options will be populated dynamically -->
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Save
-                        </button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="fas fa-times"></i> Cancel
-                        </button>
-                    </div>
-                </div>
-
-            </form>
-        `;
-    }
 
 });
+// Function to get Ujian form HTML
+function getUjianForm(data) {
+    return `
+        <form id="ujianForm" name="ujianForm" class="form-horizontal">
+            <input type="hidden" name="id" id="id" value="${data ? data.id : ''}">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nama" class="col-sm-12 control-label form-label">Nama Ujian</label>
+                        <div class="col-sm-12">
+                            <input type="text" name="nama" id="nama" class="form-control" placeholder="Enter Nama Ujian" value="${data ? data.nama : ''}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="paket_soal_id" class="col-sm-12 control-label form-label">Paket Soal</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" id="paket_soal_id" name="paket_soal_id" required onchange="changePaketSoal()">
+                                <!-- Options will be populated dynamically -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="waktu_mulai" class="col-sm-12 control-label form-label">Waktu Mulai</label>
+                        <div class="col-sm-12">
+                            <input type="datetime-local" class="form-control" id="waktu_mulai" name="waktu_mulai" placeholder="Enter Waktu Mulai" value="${data ? data.waktu_mulai : ''}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="mata_pelajaran_id" class="col-sm-12 control-label form-label">Mata Pelajaran</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" id="mata_pelajaran_id" name="mata_pelajaran_id" required>
+                                <!-- Options will be populated dynamically -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="durasi" class="col-sm-12 control-label form-label">Durasi</label>
+                        <div class="col-sm-12">
+                            <input type="number" class="form-control" id="durasi" name="durasi" placeholder="Enter Durasi" value="${data ? data.durasi : ''}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="poin_benar" class="col-sm-12 control-label form-label">Poin Benar</label>
+                        <div class="col-sm-12">
+                            <input type="number" class="form-control" id="poin_benar" name="poin_benar" placeholder="Enter Poin Benar" value="${data ? data.poin_benar : ''}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="poin_salah" class="col-sm-12 control-label form-label">Poin Salah</label>
+                        <div class="col-sm-12">
+                            <input type="number" class="form-control" id="poin_salah" name="poin_salah" placeholder="Enter Poin Salah" value="${data ? data.poin_salah : ''}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="poin_tidak_jawab" class="col-sm-12 control-label form-label">Poin Tidak Jawab</label>
+                        <div class="col-sm-12">
+                            <input type="number" class="form-control" id="poin_tidak_jawab" name="poin_tidak_jawab" placeholder="Enter Poin Tidak Jawab" value="${data ? data.poin_tidak_jawab : ''}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="kelas_id" class="col-sm-12 control-label form-label">Kelas</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" id="kelas_id" name="kelas_id" required>
+                                <!-- Options will be populated dynamically -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    `;
+}
+
+// Function to change Paket Soal
+function changePaketSoal() {
+    const paketSoalId = document.getElementById('paket_soal_id').value;
+
+    // Replace this with your actual API call or data fetch logic
+    fetch(`/paket-soal/${paketSoalId}/edit`)
+        .then(response => response.json())
+        .then(data => {
+            // Assuming your API returns an object with `kode_mata_pelajaran` and `kelas_id`
+            const mataPelajaranSelect = document.getElementById('mata_pelajaran_id');
+            const kelasSelect = document.getElementById('kelas_id');
+
+            // Set the selected value for Mata Pelajaran
+            if (data.kode_mata_pelajaran && mataPelajaranSelect.querySelector(`option[value="${data.kode_mata_pelajaran}"]`)) {
+                mataPelajaranSelect.value = data.kode_mata_pelajaran;
+            } else {
+                console.warn('Mata Pelajaran ID not found in options:', data.kode_mata_pelajaran);
+            }
+
+            // Set the selected value for Kelas
+            if (data.kode_kelas && kelasSelect.querySelector(`option[value="${data.kode_kelas}"]`)) {
+                kelasSelect.value = data.kode_kelas;
+            } else {
+                console.warn('Kelas ID not found in options:', data.kode_kelas);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching Paket Soal details:', error);
+        });
+}
+

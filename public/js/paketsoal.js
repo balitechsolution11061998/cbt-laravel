@@ -153,7 +153,7 @@ function createPaketSoal(data = null) {
         success: function(response) {
             const kodeMataPelajaranSelect = $('#kode_mata_pelajaran');
             response.forEach(mataPelajaran => {
-                kodeMataPelajaranSelect.append(new Option(mataPelajaran.nama, mataPelajaran.kode));
+                kodeMataPelajaranSelect.append(new Option(mataPelajaran.nama, mataPelajaran.id));
             });
 
             if (data) {
