@@ -14,7 +14,7 @@ $(function () {
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
             {data: 'kelas', name: 'kelas'}, // Column for Kelas
-            {data: 'kode_mata_pelajaran', name: 'kode_mata_pelajaran'}, // Column for Mata Pelajaran
+            {data: 'mata_pelajaran', name: 'mata_pelajaran'}, // Column for Mata Pelajaran
             {data: 'kode_paket', name: 'kode_paket'},
             {data: 'keterangan', name: 'keterangan'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
