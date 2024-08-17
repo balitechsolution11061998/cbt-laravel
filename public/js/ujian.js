@@ -406,17 +406,24 @@ function getUjianForm(data) {
 function changePaketSoal() {
     const paketSoalId = document.getElementById('paket_soal_id').value;
 
+    // Get the dropdown elements
+    const mataPelajaranSelect = document.getElementById('mata_pelajaran_id');
+    const kelasSelect = document.getElementById('kelas_id');
+
+    // Disable the dropdowns initially
+    mataPelajaranSelect.disabled = true;
+    kelasSelect.disabled = true;
+
     // Replace this with your actual API call or data fetch logic
     fetch(`/paket-soal/${paketSoalId}/edit`)
         .then(response => response.json())
         .then(data => {
-            // Assuming your API returns an object with `kode_mata_pelajaran` and `kelas_id`
-            const mataPelajaranSelect = document.getElementById('mata_pelajaran_id');
-            const kelasSelect = document.getElementById('kelas_id');
+            let isUpdated = false; // Flag to check if values are updated
 
             // Set the selected value for Mata Pelajaran
             if (data.kode_mata_pelajaran && mataPelajaranSelect.querySelector(`option[value="${data.kode_mata_pelajaran}"]`)) {
                 mataPelajaranSelect.value = data.kode_mata_pelajaran;
+                isUpdated = true; // Mark as updated
             } else {
                 console.warn('Mata Pelajaran ID not found in options:', data.kode_mata_pelajaran);
             }
@@ -424,12 +431,26 @@ function changePaketSoal() {
             // Set the selected value for Kelas
             if (data.kode_kelas && kelasSelect.querySelector(`option[value="${data.kode_kelas}"]`)) {
                 kelasSelect.value = data.kode_kelas;
+                isUpdated = true; // Mark as updated
             } else {
                 console.warn('Kelas ID not found in options:', data.kode_kelas);
+            }
+
+            // If data was updated, keep the dropdowns disabled
+            if (isUpdated) {
+                mataPelajaranSelect.disabled = true;
+                kelasSelect.disabled = true;
+            } else {
+                // Re-enable the dropdowns if no data was updated
+                mataPelajaranSelect.disabled = false;
+                kelasSelect.disabled = false;
             }
         })
         .catch(error => {
             console.error('Error fetching Paket Soal details:', error);
+            // Re-enable the dropdowns if there's an error
+            mataPelajaranSelect.disabled = false;
+            kelasSelect.disabled = false;
         });
 }
 
