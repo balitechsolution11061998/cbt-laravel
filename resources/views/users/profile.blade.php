@@ -101,8 +101,14 @@
                         </div>
                         <div class="info-item"><strong>Name:</strong> {{ $user->name }}</div>
                         <div class="info-item"><strong>Email:</strong> {{ $user->email }}</div>
-                        <div class="info-item"><strong>NIS:</strong> {{ $user->siswa->nis }}</div>
-                        <div class="info-item"><strong>Kelas:</strong> {{ $user->siswa->kelas->name ?? 'N/A' }}</div>
+                        <div class="info-item">
+                            <strong>NIS:</strong> {{ $user->siswa ? $user->siswa->nis : 'N/A' }}
+                        </div>
+
+                        <div class="info-item">
+                            <strong>Kelas:</strong> {{ $user->siswa && $user->siswa->kelas ? $user->siswa->kelas->name : 'N/A' }}
+                        </div>
+
                         <div class="info-item"><strong>Ujian:</strong>
                             @if($user->siswa->kelas->ujian->isNotEmpty())
                                 <ul>
