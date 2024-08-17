@@ -108,7 +108,6 @@
                         <div class="info-item">
                             <strong>Kelas:</strong> {{ $user->siswa && $user->siswa->kelas ? $user->siswa->kelas->name : 'N/A' }}
                         </div>
-
                         <div class="info-item"><strong>Ujian:</strong>
                             @if($user->siswa->kelas->ujian->isNotEmpty())
                                 <ul>
