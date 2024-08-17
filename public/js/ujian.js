@@ -297,6 +297,7 @@ $(function () {
 });
 // Function to get Ujian form HTML
 function getUjianForm(data) {
+    console.log(data);
     return `
         <form id="ujianForm" name="ujianForm" class="form-horizontal">
             <input type="hidden" name="id" id="id" value="${data ? data.id : ''}">
@@ -315,7 +316,7 @@ function getUjianForm(data) {
                     <div class="form-group">
                         <label for="paket_soal_id" class="col-sm-12 control-label form-label">Paket Soal</label>
                         <div class="col-sm-12">
-                            <select class="form-control" id="paket_soal_id" name="paket_soal_id" required onchange="changePaketSoal()">
+                            <select class="form-control" id="paket_soal_id" name="paket_soal_id" required ${data ? 'disabled' : ''}>
                                 <!-- Options will be populated dynamically -->
                             </select>
                         </div>
@@ -337,7 +338,7 @@ function getUjianForm(data) {
                     <div class="form-group">
                         <label for="mata_pelajaran_id" class="col-sm-12 control-label form-label">Mata Pelajaran</label>
                         <div class="col-sm-12">
-                            <select class="form-control" id="mata_pelajaran_id" name="mata_pelajaran_id" required>
+                            <select class="form-control" id="mata_pelajaran_id" name="mata_pelajaran_id" required ${data ? 'disabled' : ''}>
                                 <!-- Options will be populated dynamically -->
                             </select>
                         </div>
@@ -390,7 +391,7 @@ function getUjianForm(data) {
                     <div class="form-group">
                         <label for="kelas_id" class="col-sm-12 control-label form-label">Kelas</label>
                         <div class="col-sm-12">
-                            <select class="form-control" id="kelas_id" name="kelas_id" required>
+                            <select class="form-control" id="kelas_id" name="kelas_id" required ${data ? 'disabled' : ''}>
                                 <!-- Options will be populated dynamically -->
                             </select>
                         </div>
@@ -412,6 +413,7 @@ function getUjianForm(data) {
         </form>
     `;
 }
+
 
 // Function to change Paket Soal
 function changePaketSoal() {
