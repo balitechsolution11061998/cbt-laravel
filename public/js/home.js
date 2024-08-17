@@ -39,7 +39,7 @@ function fetchHistoryUjian() {
                 tableBody.append(`
                     <tr>
                         <td>${row.siswa_name}</td>
-                        <td>${row.rombel_name} - ${row.kelas_name}</td>
+                        <td>${row.kelas_name}</td>
                         <td>${row.jumlah_benar}</td>
                         <td>${row.jumlah_salah}</td>
                         <td>${row.total_nilai}</td>

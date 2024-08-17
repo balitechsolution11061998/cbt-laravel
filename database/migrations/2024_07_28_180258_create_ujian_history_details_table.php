@@ -19,9 +19,6 @@ return new class extends Migration
             $table->text('jawaban_siswa');
             $table->text('jawaban_benar');
             $table->timestamps();
-
-            $table->foreign('ujian_history_id')->references('id')->on('ujian_histories')->onDelete('cascade');
-            $table->foreign('soal_id')->references('id')->on('soal')->onDelete('cascade');
         });
     }
 

@@ -117,7 +117,7 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Siswa Name</th>
-                                        <th>Rombel - Kelas</th>
+                                        <th>Kelas</th>
                                         <th>Jumlah Benar</th>
                                         <th>Jumlah Salah</th>
                                         <th>Total Nilai</th>

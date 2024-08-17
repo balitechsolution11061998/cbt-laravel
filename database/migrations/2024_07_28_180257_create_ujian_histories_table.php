@@ -20,10 +20,6 @@ return new class extends Migration
             $table->integer('jumlah_salah');
             $table->decimal('total_nilai', 5, 2);
             $table->timestamps();
-
-            $table->foreign('ujian_id')->references('id')->on('ujian')->onDelete('cascade');
-            $table->foreign('siswa_id')->references('id')->on('siswas')->onDelete('cascade');
-            $table->foreign('paket_soal_id')->references('id')->on('paket_soal')->onDelete('cascade');
         });
     }
 
