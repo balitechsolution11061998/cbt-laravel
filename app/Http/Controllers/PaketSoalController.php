@@ -45,9 +45,24 @@ class PaketSoalController extends Controller
 
     public function store(Request $request)
     {
-        PaketSoal::updateOrCreate(['id' => $request->id], $request->all());
+        // Define validation rules
+        $rules = [
+            'kode_kelas' => 'required|integer',
+            'kode_paket' => 'required|unique:paket_soal,kode_paket,' . $request->id,
+            'kode_mata_pelajaran' => 'required|integer',
+            'keterangan' => 'nullable|string|max:255',
+        ];
+
+        // Validate the request
+        $validatedData = $request->validate($rules);
+
+        // Perform the update or create operation
+        PaketSoal::updateOrCreate(['id' => $request->id], $validatedData);
+
+        // Return a success response
         return response()->json(['success' => 'Paket Soal saved successfully.']);
     }
+
 
     public function update(Request $request, $id)
 {

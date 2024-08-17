@@ -11,7 +11,6 @@ $(function () {
         ajax: "/mata-pelajaran/data",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-            {data: 'kode', name: 'kode'},
             {data: 'nama', name: 'nama'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ],
@@ -92,12 +91,7 @@ $(function () {
         return `
             <form id="mataPelajaranForm" name="mataPelajaranForm" class="form-horizontal">
                 <input type="hidden" name="id" value="${data.id || ''}">
-                <div class="form-group">
-                    <label for="kode" class="col-sm-2 control-label">Kode</label>
-                    <div class="col-sm-12">
-                        <input type="text" class="form-control" id="kode" name="kode" placeholder="Enter Kode" value="${data.kode || ''}" required>
-                    </div>
-                </div>
+
                 <div class="form-group">
                     <label for="nama" class="col-sm-2 control-label">Nama Mata Pelajaran</label>
                     <div class="col-sm-12">

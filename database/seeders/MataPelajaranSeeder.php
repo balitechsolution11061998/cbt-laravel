@@ -10,7 +10,7 @@ class MataPelajaranSeeder extends Seeder
     public function run()
     {
         $subjects = [
-            ['kode' => 'BI-001', 'nama' => 'Bahasa Indonesia'],
+            ['nama' => 'Bahasa Indonesia'],
         ];
 
         MataPelajaran::insert($subjects);

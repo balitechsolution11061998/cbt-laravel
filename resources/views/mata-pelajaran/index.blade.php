@@ -41,7 +41,6 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Kode</th>
                         <th>Nama Mata Pelajaran</th>
                         <th width="150px">Action</th>
                     </tr>

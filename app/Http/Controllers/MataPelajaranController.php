@@ -42,8 +42,7 @@ class MataPelajaranController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode' => 'required|unique:mata_pelajaran',
-            'nama' => 'required',
+            'nama' => 'required|unique:mata_pelajaran',
         ]);
 
         MataPelajaran::create($request->all());
@@ -69,8 +68,7 @@ class MataPelajaranController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'kode' => 'required|unique:mata_pelajaran,kode,' . $id,
-            'nama' => 'required',
+            'nama' => 'required|unique:mata_pelajaran,nama,' . $id,
         ]);
 
         $mataPelajaran = MataPelajaran::find($id);
