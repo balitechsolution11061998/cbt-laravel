@@ -129,7 +129,18 @@ $(function () {
                         });
 
                         $.ajax({
-                            data: $(form).serialize(),
+                            data: {
+                                'id':$("#id").val(),
+                                'nama':$("#nama").val(),
+                                'paket_soal_id':$("#paket_soal_id").val(),
+                                'waktu_mulai':$("#waktu_mulai").val(),
+                                'mata_pelajaran_id':$("#mata_pelajaran_id").val(),
+                                'durasi':$("#durasi").val(),
+                                'poin_benar':$("#poin_benar").val(),
+                                'poin_salah':$("#poin_salah").val(),
+                                'poin_tidak_jawab':$("#poin_tidak_jawab").val(),
+                                'kelas_id':$("#kelas_id").val(),
+                            },
                             url: "/ujian/store",
                             type: "POST",
                             dataType: 'json',
