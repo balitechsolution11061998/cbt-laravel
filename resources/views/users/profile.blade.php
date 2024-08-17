@@ -134,8 +134,9 @@
                                             <br>
                                             <strong>Kode Paket:</strong> {{ $ujian->paketSoal->kode_paket }}
                                             <br>
-                                            <strong>Nama Paket Soal:</strong> {{ $ujian->paketSoal->kode_paket }}
-                                            <br>
+                                            {{-- <strong>Nama Paket Soal:</strong> {{ $ujian->paketSoal->kode_paket }} --}}
+                                            {{-- <br> --}}
+
                                             <strong>Durasi:</strong> <span id="countdown-{{ $ujian->id }}"></span>
                                         </li>
                                     @endforeach
@@ -249,22 +250,28 @@
             // Countdown function
             @foreach($currentUjian as $ujian)
             console.log(new Date("{{ $ujian->waktu_mulai }}").getTime());
-            var countDownDate{{ $ujian->id }} = new Date("{{ $ujian->waktu_mulai }}").getTime();
-            var x{{ $ujian->id }} = setInterval(function() {
-                var now = new Date().getTime();
-                var distance = Math.abs(countDownDate{{ $ujian->id }} - now);
+           // Get exam details
+           var startTime = new Date("{{ $ujian->waktu_mulai }}").getTime();
+                var durationMinutes = {{ $ujian->durasi }};
+                var endTime = startTime + durationMinutes * 60 * 1000;
 
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                var countdownElement = document.getElementById("countdown-{{ $ujian->id }}");
 
-                document.getElementById("countdown-{{ $ujian->id }}").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+                var countdownInterval = setInterval(function() {
+                    var now = new Date().getTime();
+                    var distance = endTime - now;
 
-                if (distance < 0) {
-                    clearInterval(x{{ $ujian->id }});
-                    document.getElementById("countdown-{{ $ujian->id }}").innerHTML = "EXPIRED";
-                }
-            }, 1000);
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    if (distance > 0) {
+                        countdownElement.innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+                    } else {
+                        clearInterval(countdownInterval);
+                        countdownElement.innerHTML = "EXPIRED";
+                    }
+                }, 1000);
             @endforeach
             @endif
         });

@@ -117,20 +117,7 @@ class UjianController extends Controller
         return response()->json(['success' => true, 'data' => $ujian]);
     }
 
-    public function end(Request $request){
-        $ujianId = $request->input('ujian_id');
-        $answeredQuestions = $request->input('answeredQuestions');
 
-        // Logika untuk menghitung hasil ujian
-        $hasilUjian = $this->calculateExamResult($ujianId, $answeredQuestions);
-        // Simpan hasil ujian ke database
-        $hasilUjian->save();
-
-        return response()->json([
-            'success' => true,
-            'hasil_ujian_id' => $hasilUjian->id
-        ]);
-    }
 
     public function showHasilUjian($id) {
         $hasilUjian = HasilUjian::with('ujian')->find($id);
@@ -154,27 +141,44 @@ class UjianController extends Controller
         return response()->json($histories);
     }
 
+    public function end(Request $request){
+        $ujianId = $request->input('ujian_id');
+        $answeredQuestions = $request->input('answeredQuestions');
+
+        // Logika untuk menghitung hasil ujian
+        $hasilUjian = $this->calculateExamResult($ujianId, $answeredQuestions);
+        // Simpan hasil ujian ke database
+        $hasilUjian->save();
+
+        return response()->json([
+            'success' => true,
+            'hasil_ujian_id' => $hasilUjian->id
+        ]);
+    }
 
 
-
-    private function calculateExamResult($ujianId, $answeredQuestions) {
-        $ujian = Ujian::find($ujianId);
+    private function calculateExamResult($ujianId, $answeredQuestions)
+    {
+        $ujian = Ujian::findOrFail($ujianId);
         $totalQuestions = $ujian->paketSoal->soals->count();
         $correctAnswers = 0;
 
         foreach ($answeredQuestions as $questionId => $answer) {
+            $soal = Soal::find($questionId + 1);
 
-            $soal = Soal::find($questionId+1);
+            // Ensure the question exists
+            if (!$soal) continue;
 
-             // Konversi jawaban pengguna dan jawaban benar menjadi huruf kecil
-             $userAnswer = strtolower($answer);
-             $correctAnswer = strtolower($soal->jawaban_benar);
+            // Convert answers to lowercase
+            $userAnswer = strtolower($answer);
+            $correctAnswer = strtolower($soal->jawaban_benar);
 
-             if ($correctAnswer === $userAnswer) {
-                 $correctAnswers++;
-             }
+            if ($correctAnswer === $userAnswer) {
+                $correctAnswers++;
+            }
 
-             DB::table('ujian_histories_details')->insert([
+            // Store each answer in the database
+            DB::table('ujian_histories_details')->insert([
                 'ujian_history_id' => $ujianId,
                 'soal_id' => $soal->id,
                 'jawaban_siswa' => $userAnswer,
@@ -186,6 +190,7 @@ class UjianController extends Controller
 
         $score = ($correctAnswers / $totalQuestions) * 100;
 
+        // Create the exam result record
         $hasilUjian = new HasilUjian();
         $hasilUjian->ujian_id = $ujianId;
         $hasilUjian->jumlah_benar = $correctAnswers;
@@ -194,7 +199,6 @@ class UjianController extends Controller
 
         return $hasilUjian;
     }
-
     public function show(Request $request)
     {
         $ujian = Ujian::with(['paketSoal.soals'])->where('id',$request->ujian)->first();
