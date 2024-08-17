@@ -88,34 +88,44 @@ class UjianController extends Controller
 
 
 
-    public function store(Request $request)
-    {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'nama' => 'required|max:255',
-            'paket_soal_id' => 'required|exists:paket_soal,id',
-            'kelas_id' => 'required',
-            'waktu_mulai' => 'required|date',
-            'durasi' => 'required|integer',
-            'poin_benar' => 'required|integer',
-            'poin_salah' => 'required|integer',
-            'poin_tidak_jawab' => 'required|integer',
-            'keterangan' => 'nullable|string',
-            'tampilkan_nilai' => 'nullable|boolean',
-            'tampilkan_hasil' => 'nullable|boolean',
-            'gunakan_token' => 'nullable|boolean',
-            'mata_pelajaran_id' => 'required'
-        ]);
+public function store(Request $request)
+{
+    // Validate the request data
+    $validatedData = $request->validate([
+        'nama' => 'required|max:255',
+        'paket_soal_id' => 'required|exists:paket_soal,id',
+        'kelas_id' => 'required',
+        'waktu_mulai' => 'required|date',
+        'durasi' => 'required|integer',
+        'poin_benar' => 'required|integer',
+        'poin_salah' => 'required|integer',
+        'poin_tidak_jawab' => 'required|integer',
+        'keterangan' => 'nullable|string',
+        'tampilkan_nilai' => 'nullable|boolean',
+        'tampilkan_hasil' => 'nullable|boolean',
+        'gunakan_token' => 'nullable|boolean',
+        'mata_pelajaran_id' => 'required',
+    ]);
 
-        // Store the data in the database
-        $ujian = Ujian::updateOrCreate(
-            ['id' => $request->id], // This will update existing record or create a new one if ID doesn't exist
-            $validatedData
-        );
+    // Check if the combination of paket_soal_id already exists in the Ujian table
+    $existingUjian = Ujian::where('paket_soal_id', $request->paket_soal_id)
+                          ->where('kelas_id', $request->kelas_id)
+                          ->first();
 
-        // Return a success response
-        return response()->json(['success' => true, 'data' => $ujian]);
+    if ($existingUjian) {
+        return response()->json(['success' => false, 'message' => 'The selected paket soal is already associated with an ujian in this class.'], 422);
     }
+
+    // Store the data in the database
+    $ujian = Ujian::updateOrCreate(
+        ['id' => $request->id], // This will update the existing record or create a new one if ID doesn't exist
+        $validatedData
+    );
+
+    // Return a success response
+    return response()->json(['success' => true, 'data' => $ujian]);
+}
+
 
 
 
