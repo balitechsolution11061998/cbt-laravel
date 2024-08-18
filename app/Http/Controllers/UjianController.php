@@ -230,6 +230,7 @@ public function store(Request $request)
 
     private function calculateExamResult($ujianId, $answeredQuestions, $siswa_id)
     {
+        dd($ujianId, $answeredQuestions, $siswa_id);
         $ujian = Ujian::findOrFail($ujianId);
         $totalQuestions = $ujian->paketSoal->soals->count();
         $correctAnswers = 0;
@@ -260,7 +261,6 @@ public function store(Request $request)
             // Convert answers to lowercase for a case-insensitive comparison
             $userAnswer = strtolower(trim($userAnswer));
             $correctAnswer = strtolower(trim($soal->jawaban_benar));
-
             // Check if the user's answer is correct, not answered, or wrong
             if (empty($userAnswer)) {
                 $status = 'not answered'; // The user did not provide an answer
