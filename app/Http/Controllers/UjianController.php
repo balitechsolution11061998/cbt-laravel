@@ -230,7 +230,6 @@ public function store(Request $request)
 
     private function calculateExamResult($ujianId, $answeredQuestions, $siswa_id)
     {
-        dd($ujianId, $answeredQuestions, $siswa_id);
         $ujian = Ujian::findOrFail($ujianId);
         $totalQuestions = $ujian->paketSoal->soals->count();
         $correctAnswers = 0;
@@ -250,7 +249,7 @@ public function store(Request $request)
 
         // Fetch all questions for the given paket_soal_id
         $questions = Soal::where('paket_soal_id', $ujian->paket_soal_id)->get();
-
+        dd($questions);
         foreach ($answeredQuestions as $questionId => $userAnswer) {
             // Find the specific question by its ID in the fetched questions
             $soal = $questions->find($questionId);
