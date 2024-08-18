@@ -240,7 +240,7 @@ public function store(Request $request)
             ->join('siswas', 'siswas.nis', '=', 'users.username')
             ->select('siswas.id as siswa_id')
             ->first();
-
+        dd($siswa_id,$siswa);
         if (!$siswa) {
             throw new \Exception('Siswa not found',$siswa_id);
         }
