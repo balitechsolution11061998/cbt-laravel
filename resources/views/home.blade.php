@@ -116,8 +116,10 @@
                             <table class="table align-middle table-row-dashed fs-6 gy-5">
                                 <thead class="thead-dark">
                                     <tr>
+                                        <th>NIS</th>
                                         <th>Siswa Name</th>
                                         <th>Kelas</th>
+                                        <th>Tanggal Ujian</th>
                                         <th>Jumlah Benar</th>
                                         <th>Jumlah Salah</th>
                                         <th>Total Nilai</th>

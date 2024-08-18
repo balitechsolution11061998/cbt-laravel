@@ -38,8 +38,10 @@ function fetchHistoryUjian() {
             data.forEach(function(row) {
                 tableBody.append(`
                     <tr>
+                        <td>${row.siswa_nis}</td>
                         <td>${row.siswa_name}</td>
                         <td>${row.kelas_name}</td>
+                        <td>${row.created_at}</td>
                         <td>${row.jumlah_benar}</td>
                         <td>${row.jumlah_salah}</td>
                         <td>${row.total_nilai}</td>

@@ -140,8 +140,10 @@ public function store(Request $request)
             ->join('siswas', 'ujian_histories.siswa_id', '=', 'siswas.id')
             ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
             ->select(
+                'siswas.nis as siswa_nis',
                 'siswas.nama as siswa_name', // Add student's name
                 'kelas.name as kelas_name',
+                'ujian_histories.created_at as created_at',
                 'ujian_histories.jumlah_benar',
                 'ujian_histories.jumlah_salah',
                 'ujian_histories.total_nilai'

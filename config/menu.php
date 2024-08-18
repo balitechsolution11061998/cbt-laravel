@@ -21,36 +21,6 @@ return [
             'type' => 'heading'
         ],
         [
-            'label'          => 'Paket Soal',
-            'type'           => 'item',
-            'permission'     => ['paketsoal-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'fas',
-            'iconName'       => 'fa-book',
-            'iconPath'       => '',
-            'route'          => 'paket-soal.index',
-        ],
-        [
-            'label'          => 'Manajement Soal',
-            'type'           => 'item',
-            'permission'     => ['manajementsoal-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'fas',
-            'iconName'       => 'fa-book',
-            'iconPath'       => '', // Usually not needed for Font Awesome icons
-            'route'          => 'soal.index', // Ensure this route exists in your web.php routes file
-        ],
-        [
-            'label'          => 'Ujian',
-            'type'           => 'item',
-            'permission'     => ['ujian-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'fas',
-            'iconName'       => 'fa-book',
-            'iconPath'       => '', // Usually not needed for Font Awesome icons
-            'route'          => 'ujian.index', // Ensure this route exists in your web.php routes file
-        ],
-        [
             'label'          => 'Siswa',
             'type'           => 'item',
             'route'          => 'siswa.index',
@@ -58,10 +28,60 @@ return [
             'permission'     => ['siswa-show'],
             'permissionType' => 'gate',
             'icon'           => 'fas',
-            'iconName'       => 'fa-user',
+            'iconName'       => 'fa-user-graduate', // Graduate Icon, representing students
             'iconPath'       => '',
-
         ],
+        [
+            'label'          => 'Kelas',
+            'type'           => 'item',
+            'permission'     => ['kelas-show'],
+            'permissionType' => 'gate',
+            'icon'           => 'fas',
+            'iconName'       => 'fa-chalkboard-teacher', // Chalkboard Teacher Icon
+            'iconPath'       => '',
+            'route'          => 'kelas.index',
+        ],
+        [
+            'label'          => 'Mata Pelajaran',
+            'type'           => 'item',
+            'permission'     => ['matapelajaran-show'],
+            'permissionType' => 'gate',
+            'icon'           => 'fas',
+            'iconName'       => 'fa-book-open', // Open Book Icon, representing subjects
+            'iconPath'       => '',
+            'route'          => 'mata-pelajaran.index',
+        ],
+        [
+            'label'          => 'Paket Soal',
+            'type'           => 'item',
+            'permission'     => ['paketsoal-show'],
+            'permissionType' => 'gate',
+            'icon'           => 'fas',
+            'iconName'       => 'fa-file-alt', // File Icon, representing a collection of questions
+            'iconPath'       => '',
+            'route'          => 'paket-soal.index',
+        ],
+        [
+            'label'          => 'Manajemen Soal',
+            'type'           => 'item',
+            'permission'     => ['manajementsoal-show'],
+            'permissionType' => 'gate',
+            'icon'           => 'fas',
+            'iconName'       => 'fa-tasks', // Tasks Icon, representing question management
+            'iconPath'       => '',
+            'route'          => 'soal.index',
+        ],
+        [
+            'label'          => 'Ujian',
+            'type'           => 'item',
+            'permission'     => ['ujian-show'],
+            'permissionType' => 'gate',
+            'icon'           => 'fas',
+            'iconName'       => 'fa-pencil-alt', // Pencil Icon, representing exams
+            'iconPath'       => '',
+            'route'          => 'ujian.index',
+        ],
+
 
         [
 
@@ -104,28 +124,9 @@ return [
 
             ]
         ],
-        [
-            'label'          => 'Kelas',
-            'type'           => 'item',
-            'permission'     => ['kelas-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'fas',
-            'iconName'       => 'fa-chalkboard-teacher',
-            'iconPath'       => 7,
-            'route'          => 'kelas.index',
-        ],
 
 
-        [
-            'label'          => 'Mata Pelajaran',
-            'type'           => 'item',
-            'permission'     => ['matapelajaran-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'fas',
-            'iconName'       => 'fa-book',
-            'iconPath'       => 7,
-            'route'          => 'mata-pelajaran.index',
-        ],
+
 
 
 
