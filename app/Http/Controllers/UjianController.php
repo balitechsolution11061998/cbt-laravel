@@ -249,10 +249,10 @@ public function store(Request $request)
 
         // Fetch all questions for the given paket_soal_id
         $questions = Soal::where('paket_soal_id', $ujian->paket_soal_id)->get();
-        dd($questions);
         foreach ($answeredQuestions as $questionId => $userAnswer) {
             // Find the specific question by its ID in the fetched questions
-            $soal = $questions->find($questionId);
+            $soal = $questions[$questionId];
+            dd($soal);
 
             // Ensure the question exists
             if (!$soal) continue;
