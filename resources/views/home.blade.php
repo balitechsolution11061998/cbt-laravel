@@ -29,9 +29,7 @@
                                         <span id="female-count">Perempuan: 0</span>
                                     </div>
                                 </div>
-                                <a href="/students" class="btn btn-sm btn-primary mt-3">
-                                    <i class="fas fa-user-graduate"></i> View Students
-                                </a>
+                          
 
                             </div>
                         </div>
@@ -46,9 +44,7 @@
                                     <i class="fas fa-chalkboard icon-animate" style="font-size: 48px; color: #007bff;"></i>
                                     <span class="chart-number custom-font" id="kelas-content">0</span>
                                 </div>
-                                <a href="/classes" class="btn btn-sm btn-primary mt-3">
-                                    <i class="fas fa-chalkboard"></i> View Classes
-                                </a>
+                              
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
@@ -61,9 +57,7 @@
                                     <i class="fas fa-book icon-animate" style="font-size: 48px; color: #28a745;"></i>
                                     <span class="chart-number custom-font" id="mata-pelajaran-content">0</span>
                                 </div>
-                                <a href="/subjects" class="btn btn-sm btn-primary mt-3">
-                                    <i class="fas fa-book"></i> View Subjects
-                                </a>
+                             
                             </div>
                         </div>
                     </div>

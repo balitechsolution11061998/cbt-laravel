@@ -1,7 +1,7 @@
 $(document).ready(function () {
     fetchStudentData();
     fetchKelasData();
-    // fetchMataPelajaranData();
+    fetchMataPelajaranData();
     fetchHistoryUjian();
 });
 
@@ -22,7 +22,18 @@ $(document).ready(function () {
     }
 
 
+    function fetchMataPelajaranData() {
 
+        fetch('/mata-pelajaran/getMataPelajaranData')
+            .then(response => response.json())
+            .then(data => {
+
+                document.getElementById('mata-pelajaran-content').textContent = data.total_mata_pelajaran;
+            })
+            .catch(error => {
+                console.error('Error fetching class data:', error);
+            });
+    }
 
 
 function fetchHistoryUjian() {
