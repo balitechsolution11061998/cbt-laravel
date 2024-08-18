@@ -61,16 +61,7 @@ return [
             'iconPath'       => '',
             'route'          => 'paket-soal.index',
         ],
-        [
-            'label'          => 'Manajemen Soal',
-            'type'           => 'item',
-            'permission'     => ['manajementsoal-show'],
-            'permissionType' => 'gate',
-            'icon'           => 'fas',
-            'iconName'       => 'fa-tasks', // Tasks Icon, representing question management
-            'iconPath'       => '',
-            'route'          => 'soal.index',
-        ],
+
         [
             'label'          => 'Ujian',
             'type'           => 'item',
@@ -81,7 +72,16 @@ return [
             'iconPath'       => '',
             'route'          => 'ujian.index',
         ],
-
+        [
+            'label'          => 'Manajemen Soal',
+            'type'           => 'item',
+            'permission'     => ['manajementsoal-show'],
+            'permissionType' => 'gate',
+            'icon'           => 'fas',
+            'iconName'       => 'fa-tasks', // Tasks Icon, representing question management
+            'iconPath'       => '',
+            'route'          => 'soal.index',
+        ],
 
         [
 
