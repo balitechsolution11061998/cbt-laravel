@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         $dataUser = [
             [
                 'username' => 'guru',
-                'name' => 'Guru',
+                'name' => 'guru',
                 'email' => 'guru@gmail.com',
                 'password_show' => '12345678',
                 'password' => Hash::make('12345678'),
