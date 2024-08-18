@@ -252,7 +252,6 @@ public function store(Request $request)
         foreach ($answeredQuestions as $questionId => $userAnswer) {
             // Find the specific question by its ID in the fetched questions
             $soal = $questions[$questionId];
-            dd($soal);
 
             // Ensure the question exists
             if (!$soal) continue;
