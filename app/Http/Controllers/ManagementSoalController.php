@@ -16,59 +16,110 @@ class ManagementSoalController extends Controller
         return view('manajement-soal.index');
     }
 
+    // public function store(Request $request)
+    // {
+    //     dd($request->all());
+    //     // Validate the request data
+    //     $request->validate([
+    //         'id' => 'nullable|exists:soal,id', // Validate ID for update
+    //         'paket_soal_id' => 'required|exists:paket_soal,id',
+    //         'jenis' => 'required|in:pilihan_ganda,essai',
+    //         'pertanyaan' => 'nullable|string',
+    //         'pertanyaan_a' => 'nullable|string',
+    //         'pertanyaan_b' => 'nullable|string',
+    //         'pertanyaan_c' => 'nullable|string',
+    //         'pertanyaan_d' => 'nullable|string',
+    //         'jawaban_benar' => 'nullable|string', // For storing the correct answer for pilihan_ganda
+    //         'pilihan' => 'nullable|array', // For pilihan_ganda, ensure it's an array if provided
+    //         'pilihan.*.jawaban' => 'required_with:pilihan|string', // Ensure jawaban is a string if pilihan is provided
+    //         'pilihan.*.pilihan' => 'required_with:pilihan|string', // Ensure pilihan is a string if pilihan is provided
+    //     ]);
+
+    //     // Start a database transaction
+    //     \DB::transaction(function () use ($request) {
+    //         // Create or update the Soal
+    //         $soal = Soal::updateOrCreate(
+    //             ['id' => $request->id],
+    //             [
+    //                 'paket_soal_id' => $request->paket_soal_id,
+    //                 'jenis' => $request->jenis,
+    //                 'pertanyaan' => $request->pertanyaan,
+    //                 'pertanyaan_a' => $request->pilihan_ganda_a,
+    //                 'pertanyaan_b' => $request->pilihan_ganda_b,
+    //                 'pertanyaan_c' => $request->pilihan_ganda_c,
+    //                 'pertanyaan_d' => $request->pilihan_ganda_d,
+    //                 'jawaban_benar' => $request->jawaban_benar,
+    //             ]
+    //         );
+
+    //         // Handle pilihan_ganda type only
+    //         if ($request->jenis === 'pilihan_ganda') {
+    //             // Delete existing pilihan for this soal
+    //             SoalPilihan::where('soal_id', $soal->id)->delete();
+
+    //             // Insert new pilihan
+
+    //             SoalPilihan::create([
+    //                 'soal_id' => $soal->id,
+    //                 'jawaban' => $request->jawaban_benar,
+    //             ]);
+    //         }
+    //     });
+
+    //     return response()->json(['success' => true]);
+    // }
+
     public function store(Request $request)
-    {
-        // Validate the request data
-        $request->validate([
-            'id' => 'nullable|exists:soal,id', // Validate ID for update
-            'paket_soal_id' => 'required|exists:paket_soal,id',
-            'jenis' => 'required|in:pilihan_ganda,essai',
-            'pertanyaan' => 'nullable|string',
-            'pertanyaan_a' => 'nullable|string',
-            'pertanyaan_b' => 'nullable|string',
-            'pertanyaan_c' => 'nullable|string',
-            'pertanyaan_d' => 'nullable|string',
-            'jawaban_benar' => 'nullable|string', // For storing the correct answer for pilihan_ganda
-            'pilihan' => 'nullable|array', // For pilihan_ganda, ensure it's an array if provided
-            'pilihan.*.jawaban' => 'required_with:pilihan|string', // Ensure jawaban is a string if pilihan is provided
-            'pilihan.*.pilihan' => 'required_with:pilihan|string', // Ensure pilihan is a string if pilihan is provided
-            'pilihan.*.media' => 'nullable|string' // Ensure media is a string if provided
-        ]);
+{
+    // Validate the request data
+    $request->validate([
+        'id' => 'nullable|exists:soal,id', // Validate ID for update
+        'paket_soal_id' => 'required|exists:paket_soal,id',
+        'jenis' => 'required|in:pilihan_ganda,essai',
+        'pertanyaan' => 'nullable|string',
+        'jawaban_essai' => 'nullable|string', // Validate for essay answer
+        'pilihan_ganda_a' => 'nullable|string',
+        'pilihan_ganda_b' => 'nullable|string',
+        'pilihan_ganda_c' => 'nullable|string',
+        'pilihan_ganda_d' => 'nullable|string',
+        'jawaban_benar' => 'nullable|string', // For storing the correct answer for pilihan_ganda
+    ]);
 
-        // Start a database transaction
-        \DB::transaction(function () use ($request) {
-            // Create or update the Soal
-            $soal = Soal::updateOrCreate(
-                ['id' => $request->id],
-                [
-                    'paket_soal_id' => $request->paket_soal_id,
-                    'jenis' => $request->jenis,
-                    'pertanyaan' => $request->pertanyaan,
-                    'pertanyaan_a' => $request->pilihan_ganda_a,
-                    'pertanyaan_b' => $request->pilihan_ganda_b,
-                    'pertanyaan_c' => $request->pilihan_ganda_c,
-                    'pertanyaan_d' => $request->pilihan_ganda_d,
-                    'jawaban_benar' => $request->jawaban_benar,
-                ]
-            );
+    // Start a database transaction
+    \DB::transaction(function () use ($request) {
+        // Determine the correct answer based on the type
+        $jawabanBenar = $request->jenis === 'essai' ? $request->jawaban_essai : $request->jawaban_benar;
 
-            // Handle pilihan_ganda type only
-            if ($request->jenis === 'pilihan_ganda') {
-                // Delete existing pilihan for this soal
-                SoalPilihan::where('soal_id', $soal->id)->delete();
+        // Create or update the Soal
+        $soal = Soal::updateOrCreate(
+            ['id' => $request->id],
+            [
+                'paket_soal_id' => $request->paket_soal_id,
+                'jenis' => $request->jenis,
+                'pertanyaan' => $request->pertanyaan,
+                'pertanyaan_a' => $request->pilihan_ganda_a,
+                'pertanyaan_b' => $request->pilihan_ganda_b,
+                'pertanyaan_c' => $request->pilihan_ganda_c,
+                'pertanyaan_d' => $request->pilihan_ganda_d,
+                'jawaban_benar' => $jawabanBenar,
+            ]
+        );
 
-                // Insert new pilihan
+        // Handle pilihan_ganda type only
+        if ($request->jenis === 'pilihan_ganda') {
+            // Delete existing pilihan for this soal
+            SoalPilihan::where('soal_id', $soal->id)->delete();
 
-                SoalPilihan::create([
-                    'soal_id' => $soal->id,
-                    'jawaban' => $request->jawaban_benar,
-                ]);
-            }
-        });
+            // Insert new pilihan for pilihan_ganda
+            SoalPilihan::create([
+                'soal_id' => $soal->id,
+                'jawaban' => $request->jawaban_benar,
+            ]);
+        }
+    });
 
-        return response()->json(['success' => true]);
-    }
-
+    return response()->json(['success' => true]);
+}
 
 
     public function edit($id)

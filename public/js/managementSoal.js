@@ -148,7 +148,7 @@ function createSoal(data = null) {
             <div id="essai_section" class="form-group" style="display: ${data && data.jenis === 'essai' ? 'block' : 'none'};">
                 <label for="jawaban_essai" class="col-sm-2 control-label">Jawaban Essai</label>
                 <div class="col-sm-12">
-                    <textarea class="form-control" id="jawaban_essai" name="jawaban_essai" placeholder="Enter Jawaban Essai">${data ? data.jawaban_essai : ''}</textarea>
+                    <textarea class="form-control" id="jawaban_essai" name="jawaban_essai" placeholder="Enter Jawaban Essai">${data ? data.jawaban_benar : ''}</textarea>
                 </div>
             </div>
             <div class="col-sm-offset-2 col-sm-10 mt-3">

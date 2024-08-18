@@ -187,23 +187,43 @@
             currentQuestion = index;
             document.getElementById('question-number').textContent = `Soal No. ${index + 1}`;
             document.getElementById('question-text').textContent = questions[index].pertanyaan;
+            // Cek apakah soal adalah pilihan ganda atau essay
+            if (questions[index].jenis === 'essai') {
+                const answer = answeredQuestions[index] || '';
+                document.getElementById('question-options').innerHTML = `
+            <div class="form-group">
+                <label for="essay-answer">Jawaban:</label>
+                <textarea class="form-control" id="essay-answer" rows="4" onchange="markAnsweredEssay(${index})">${answer}</textarea>
+            </div>
+        `;
+            } else {
+                const options = [
+                    questions[index].pertanyaan_a,
+                    questions[index].pertanyaan_b,
+                    questions[index].pertanyaan_c,
+                    questions[index].pertanyaan_d
+                ];
 
-            const options = [
-                questions[index].pertanyaan_a,
-                questions[index].pertanyaan_b,
-                questions[index].pertanyaan_c,
-                questions[index].pertanyaan_d
-            ];
+                const optionsHtml = options.map((option, i) => `
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="question${index}" id="option${String.fromCharCode(65 + i)}" ${answeredQuestions[index] === String.fromCharCode(65 + i) ? 'checked' : ''} onclick="markAnswered(${index}, '${String.fromCharCode(65 + i)}')">
+                <label class="form-check-label" for="option${String.fromCharCode(65 + i)}">${String.fromCharCode(65 + i)}. ${option}</label>
+            </div>
+        `).join('');
 
-            const optionsHtml = options.map((option, i) => `
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question${index}" id="option${String.fromCharCode(65 + i)}" ${answeredQuestions[index] === String.fromCharCode(65 + i) ? 'checked' : ''} onclick="markAnswered(${index}, '${String.fromCharCode(65 + i)}')">
-                    <label class="form-check-label" for="option${String.fromCharCode(65 + i)}">${String.fromCharCode(65 + i)}. ${option}</label>
-                </div>
-            `).join('');
-
-            document.getElementById('question-options').innerHTML = optionsHtml;
+                document.getElementById('question-options').innerHTML = optionsHtml;
+            }
         }
+
+        function markAnsweredEssay(index) {
+            const answer = document.getElementById('essay-answer').value;
+            answeredQuestions[index] = answer;
+            localStorage.setItem('answeredQuestions', JSON.stringify(answeredQuestions));
+            document.getElementById(`question-btn-${index}`).classList.remove('btn-outline-primary');
+            document.getElementById(`question-btn-${index}`).classList.add('btn-warning');
+            updateAnsweredCount();
+        }
+
 
         function navigateQuestion(direction) {
             const newIndex = currentQuestion + direction;
@@ -284,6 +304,7 @@
                                 },
                                 body: JSON.stringify({
                                     ujian_id: {{ $ujian->id }},
+                                    user_id: {{ Auth::user()->id }},
                                     answeredQuestions
                                 })
                             })
