@@ -9,6 +9,7 @@ use App\Models\Soal;
 use App\Models\Ujian;
 use App\Models\UjianHistory;
 use App\Models\UjianHistoryDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -227,21 +228,31 @@ public function store(Request $request)
         ]);
     }
 
-    private function calculateExamResult($ujianId, $answeredQuestions,$siswa_id)
+    private function calculateExamResult($ujianId, $answeredQuestions, $siswa_id)
     {
         $ujian = Ujian::findOrFail($ujianId);
         $totalQuestions = $ujian->paketSoal->soals->count();
         $correctAnswers = 0;
+        $wrongAnswers = 0;
+
+        // Fetch the siswa_id based on user ID
+        $siswa = User::where('users.id', $siswa_id)
+            ->join('siswas', 'siswas.nis', '=', 'users.username')
+            ->select('siswas.id as siswa_id')
+            ->first();
+
+        if (!$siswa) {
+            throw new \Exception('Siswa not found');
+        }
+
+        $siswa_id = $siswa->siswa_id;
 
         // Fetch all questions for the given paket_soal_id
         $questions = Soal::where('paket_soal_id', $ujian->paket_soal_id)->get();
-        $correctAnswers = 0;
-        $wrongAnswers = 0;
 
         foreach ($answeredQuestions as $questionId => $userAnswer) {
-
             // Find the specific question by its ID in the fetched questions
-            $soal = $questions[$questionId];
+            $soal = $questions->find($questionId);
 
             // Ensure the question exists
             if (!$soal) continue;
@@ -266,6 +277,7 @@ public function store(Request $request)
                     $correctAnswers++;
                     $status = 'correct'; // Similar enough
                 } else {
+                    $wrongAnswers++;
                     $status = 'wrong'; // The user's answer is wrong
                 }
             }
@@ -281,35 +293,32 @@ public function store(Request $request)
             ]);
         }
 
-
-
         // Calculate the score
-        $score = ($correctAnswers / $totalQuestions) * 100;
+        $score = ($totalQuestions > 0) ? ($correctAnswers / $totalQuestions) * 100 : 0;
+
         // Create the exam result record
         $hasilUjian = new HasilUjian();
         $hasilUjian->ujian_id = $ujianId;
         $hasilUjian->jumlah_benar = $correctAnswers;
-        $hasilUjian->jumlah_salah = $totalQuestions - $correctAnswers;
+        $hasilUjian->jumlah_salah = $wrongAnswers;
         $hasilUjian->nilai = $score;
-
-        // Calculate total score (adjust the calculation as needed)
-        $totalQuestions = $correctAnswers + $wrongAnswers;
-        $totalNilai = $totalQuestions > 0 ? ($correctAnswers / $totalQuestions) * 100 : 0;
+        $hasilUjian->save();
 
         // Insert or update the ujian_histories table
         DB::table('ujian_histories')->insert([
             'ujian_id' => $ujianId,
-            'siswa_id' => $siswa_id,
+            'siswa_id' => $siswa_id, // Use the correct integer value
             'paket_soal_id' => $ujian->paket_soal_id,
             'jumlah_benar' => $correctAnswers,
             'jumlah_salah' => $wrongAnswers,
-            'total_nilai' => $totalNilai,
+            'total_nilai' => $score,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         return $hasilUjian;
     }
+
 
 
 

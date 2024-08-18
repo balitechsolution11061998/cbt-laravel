@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('pertanyaan_b')->nullable(); // No `after` clause needed
             $table->text('pertanyaan_c')->nullable(); // No `after` clause needed
             $table->text('pertanyaan_d')->nullable(); // No `after` clause needed
-            $table->string('jawaban_benar')->nullable();
+            $table->text('jawaban_benar')->nullable();
             $table->timestamps();
         });
 

@@ -26,6 +26,7 @@ return new class extends Migration
                 $table->boolean('tampilkan_nilai')->default(false);
                 $table->boolean('tampilkan_hasil')->default(false);
                 $table->boolean('gunakan_token')->default(false);
+                $table->enum('status',['end','no']);
                 $table->unsignedBigInteger('mata_pelajaran_id');
                 $table->timestamps();
 
