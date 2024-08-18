@@ -150,6 +150,16 @@ public function store(Request $request)
 
     // If an ID is provided, we are updating an existing record
     if ($request->has('id')) {
+        // Check if the record exists
+        $ujian = Ujian::find($request->id);
+        if (!$ujian) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ujian record not found.'
+            ], 404);
+        }
+
+        // Check if the combination of paket_soal_id and kelas_id is unique
         $existingUjian = Ujian::where('paket_soal_id', $request->paket_soal_id)
                               ->where('kelas_id', $request->kelas_id)
                               ->where('id', '!=', $request->id) // Exclude the current ID from the check
@@ -163,8 +173,8 @@ public function store(Request $request)
         }
 
         // Update the existing record
-        $ujian = Ujian::findOrFail($request->id);
         $ujian->update($validatedData);
+
     } else {
         // Check if the combination of paket_soal_id and kelas_id already exists
         $existingUjian = Ujian::where('paket_soal_id', $request->paket_soal_id)
