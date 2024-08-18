@@ -242,7 +242,7 @@ public function store(Request $request)
             ->first();
 
         if (!$siswa) {
-            throw new \Exception('Siswa not found');
+            throw new \Exception('Siswa not found',$siswa_id);
         }
 
         $siswa_id = $siswa->siswa_id;
