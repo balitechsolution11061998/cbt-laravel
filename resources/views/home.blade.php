@@ -78,7 +78,7 @@
                         <h2 class="section-title mb-0"><i class="fas fa-info-circle"></i> History Ujian</h2>
                         <div>
                             <button id="download-pdf" class="btn btn-danger btn-sm"><i class="fas fa-file-pdf"></i> Download PDF</button>
-                            <button id="download-excel" class="btn btn-success btn-sm"><i class="fas fa-file-excel"></i> Download Excel</button>
+                            {{-- <button id="download-excel" class="btn btn-success btn-sm"><i class="fas fa-file-excel"></i> Download Excel</button> --}}
                         </div>
                     </div>
                     <div class="card-body">
