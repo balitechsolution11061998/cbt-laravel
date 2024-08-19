@@ -29,7 +29,7 @@
                                         <span id="female-count">Perempuan: 0</span>
                                     </div>
                                 </div>
-                          
+
 
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                     <i class="fas fa-chalkboard icon-animate" style="font-size: 48px; color: #007bff;"></i>
                                     <span class="chart-number custom-font" id="kelas-content">0</span>
                                 </div>
-                              
+
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
@@ -57,7 +57,7 @@
                                     <i class="fas fa-book icon-animate" style="font-size: 48px; color: #28a745;"></i>
                                     <span class="chart-number custom-font" id="mata-pelajaran-content">0</span>
                                 </div>
-                             
+
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,38 @@
         <!-- Rombel and Kelas Detail Card -->
 
         <div class="row">
-            <div id="additional-details" class="col-md-6 mt-4">
+            <div class="col-md-12">
+                <div class="card shadow-sm border-light">
+                    <div class="card-header">
+                        <h2 class="section-title mb-0"><i class="fas fa-info-circle"></i>History Ujian</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="spinner-detail" class="text-center mb-3" style="display: none;">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
+                        </div>
+                        <div class="chart-container table-responsive">
+                            <table class="table align-middle table-row-dashed fs-6 gy-5">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>NIS</th>
+                                        <th>Siswa Name</th>
+                                        <th>Kelas</th>
+                                        <th>Tanggal Ujian</th>
+                                        <th>Mata Pelajaran</th>
+                                        <th>Jumlah Benar</th>
+                                        <th>Jumlah Salah</th>
+                                        <th>Total Nilai</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historyUjian-table-body">
+                                    <!-- Data will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="additional-details" class="col-md-12 mt-4">
                 <div class="card shadow-sm border-light">
                     <div class="card-header">
                         <h2 class="section-title mb-0"><i class="fas fa-info-circle"></i> Detail Per Kelas</h2>
@@ -97,36 +128,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card shadow-sm border-light">
-                    <div class="card-header">
-                        <h2 class="section-title mb-0"><i class="fas fa-info-circle"></i>History Ujian</h2>
-                    </div>
-                    <div class="card-body">
-                        <div id="spinner-detail" class="text-center mb-3" style="display: none;">
-                            <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
-                        </div>
-                        <div class="chart-container table-responsive">
-                            <table class="table align-middle table-row-dashed fs-6 gy-5">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>NIS</th>
-                                        <th>Siswa Name</th>
-                                        <th>Kelas</th>
-                                        <th>Tanggal Ujian</th>
-                                        <th>Jumlah Benar</th>
-                                        <th>Jumlah Salah</th>
-                                        <th>Total Nilai</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="historyUjian-table-body">
-                                    <!-- Data will be populated here -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
 
         </div>

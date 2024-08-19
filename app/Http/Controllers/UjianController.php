@@ -198,10 +198,13 @@ public function store(Request $request)
         $histories = DB::table('ujian_histories')
             ->join('siswas', 'ujian_histories.siswa_id', '=', 'siswas.id')
             ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
+            ->join('paket_soal', 'paket_soal.id', '=', 'ujian_histories.paket_soal_id')
+            ->join('mata_pelajaran', 'paket_soal.kode_mata_pelajaran', '=', 'mata_pelajaran.id')
             ->select(
                 'siswas.nis as siswa_nis',
                 'siswas.nama as siswa_name', // Add student's name
                 'kelas.name as kelas_name',
+                'mata_pelajaran.nama as nama_pelajaran',
                 'ujian_histories.created_at as created_at',
                 'ujian_histories.jumlah_benar',
                 'ujian_histories.jumlah_salah',
