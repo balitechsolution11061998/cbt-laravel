@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UjianHistoryExport;
 use App\Models\HasilUjian;
 use App\Models\PaketSoal;
 use App\Models\Siswa;
@@ -10,8 +11,10 @@ use App\Models\Ujian;
 use App\Models\UjianHistory;
 use App\Models\UjianHistoryDetail;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class UjianController extends Controller
@@ -26,7 +29,7 @@ class UjianController extends Controller
     {
         try {
             // Retrieve the Ujian, Siswa, and PaketSoal models
-            $ujian = Ujian::where('id',$ujian_id)->first();
+            $ujian = Ujian::where('id', $ujian_id)->first();
             $siswa = Siswa::where('id', $nis)->firstOrFail();
 
             $paketSoal = PaketSoal::findOrFail($paketSoal_id);
@@ -81,114 +84,115 @@ class UjianController extends Controller
     }
 
     public function edit($id)
-{
-    $ujian = Ujian::with('paketSoal', 'mataPelajaran', 'kelas')->findOrFail($id);
-    return response()->json($ujian);
-}
-
-
-
-
-// public function store(Request $request)
-// {
-
-//     // Validate the request data
-//     $validatedData = $request->validate([
-//         'nama' => 'required|max:255',
-//         'paket_soal_id' => 'required|exists:paket_soal,id',
-//         'kelas_id' => 'required',
-//         'waktu_mulai' => 'required|date',
-//         'durasi' => 'required|integer',
-//         'poin_benar' => 'required|integer',
-//         'poin_salah' => 'required|integer',
-//         'poin_tidak_jawab' => 'required|integer',
-//         'keterangan' => 'nullable|string',
-//         'tampilkan_nilai' => 'nullable|boolean',
-//         'tampilkan_hasil' => 'nullable|boolean',
-//         'gunakan_token' => 'nullable|boolean',
-//         'mata_pelajaran_id' => 'required',
-//     ]);
-
-//     // Check if the combination of paket_soal_id already exists in the Ujian table
-//     $existingUjian = Ujian::where('paket_soal_id', $request->paket_soal_id)
-//                           ->where('kelas_id', $request->kelas_id)
-//                           ->first();
-
-//     if ($existingUjian) {
-//         return response()->json(['success' => false, 'message' => 'The selected paket soal is already associated with an ujian in this class.'], 422);
-//     }
-
-//     // Store the data in the database
-//     $ujian = Ujian::updateOrCreate(
-//         ['id' => $request->id], // This will update the existing record or create a new one if ID doesn't exist
-//         $validatedData
-//     );
-
-//     // Return a success response
-//     return response()->json(['success' => true, 'data' => $ujian]);
-// }
-
-public function store(Request $request)
-{
-    // Validate the request data
-    $validatedData = $request->validate([
-        'id' => 'nullable|exists:ujian,id',
-        'nama' => 'required|max:255',
-        'paket_soal_id' => 'required|exists:paket_soal,id',
-        'kelas_id' => 'required|exists:kelas,id',
-        'waktu_mulai' => 'required|date',
-        'durasi' => 'required|integer',
-        'poin_benar' => 'required|integer',
-        'poin_salah' => 'required|integer',
-        'poin_tidak_jawab' => 'required|integer',
-        'keterangan' => 'nullable|string',
-        'tampilkan_nilai' => 'nullable|boolean',
-        'tampilkan_hasil' => 'nullable|boolean',
-        'gunakan_token' => 'nullable|boolean',
-        'mata_pelajaran_id' => 'required|exists:mata_pelajaran,id',
-    ]);
-
-    // If an ID is provided, we are updating an existing record
-    if ($request->id != null) {
-        $existingUjian = Ujian::where('paket_soal_id', $request->paket_soal_id)
-                              ->where('kelas_id', $request->kelas_id)
-                              ->where('id', '!=', $request->id) // Exclude the current ID from the check
-                              ->first();
-
-        if ($existingUjian) {
-            return response()->json([
-                'success' => false,
-                'message' => 'The selected paket soal is already associated with another ujian in this class.'
-            ], 422);
-        }
-
-        // Update the existing record
-        $ujian = Ujian::findOrFail($request->id);
-        $ujian->update($validatedData);
-    } else {
-        // Check if the combination of paket_soal_id and kelas_id already exists
-        $existingUjian = Ujian::where('paket_soal_id', $request->paket_soal_id)
-                              ->where('kelas_id', $request->kelas_id)
-                              ->first();
-
-        if ($existingUjian) {
-            return response()->json([
-                'success' => false,
-                'message' => 'The selected paket soal is already associated with an ujian in this class.'
-            ], 422);
-        }
-
-        // Create a new record
-        $ujian = Ujian::create($validatedData);
+    {
+        $ujian = Ujian::with('paketSoal', 'mataPelajaran', 'kelas')->findOrFail($id);
+        return response()->json($ujian);
     }
 
-    // Return a success response
-    return response()->json(['success' => true, 'data' => $ujian]);
-}
 
 
 
-    public function showHasilUjian($id) {
+    // public function store(Request $request)
+    // {
+
+    //     // Validate the request data
+    //     $validatedData = $request->validate([
+    //         'nama' => 'required|max:255',
+    //         'paket_soal_id' => 'required|exists:paket_soal,id',
+    //         'kelas_id' => 'required',
+    //         'waktu_mulai' => 'required|date',
+    //         'durasi' => 'required|integer',
+    //         'poin_benar' => 'required|integer',
+    //         'poin_salah' => 'required|integer',
+    //         'poin_tidak_jawab' => 'required|integer',
+    //         'keterangan' => 'nullable|string',
+    //         'tampilkan_nilai' => 'nullable|boolean',
+    //         'tampilkan_hasil' => 'nullable|boolean',
+    //         'gunakan_token' => 'nullable|boolean',
+    //         'mata_pelajaran_id' => 'required',
+    //     ]);
+
+    //     // Check if the combination of paket_soal_id already exists in the Ujian table
+    //     $existingUjian = Ujian::where('paket_soal_id', $request->paket_soal_id)
+    //                           ->where('kelas_id', $request->kelas_id)
+    //                           ->first();
+
+    //     if ($existingUjian) {
+    //         return response()->json(['success' => false, 'message' => 'The selected paket soal is already associated with an ujian in this class.'], 422);
+    //     }
+
+    //     // Store the data in the database
+    //     $ujian = Ujian::updateOrCreate(
+    //         ['id' => $request->id], // This will update the existing record or create a new one if ID doesn't exist
+    //         $validatedData
+    //     );
+
+    //     // Return a success response
+    //     return response()->json(['success' => true, 'data' => $ujian]);
+    // }
+
+    public function store(Request $request)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'id' => 'nullable|exists:ujian,id',
+            'nama' => 'required|max:255',
+            'paket_soal_id' => 'required|exists:paket_soal,id',
+            'kelas_id' => 'required|exists:kelas,id',
+            'waktu_mulai' => 'required|date',
+            'durasi' => 'required|integer',
+            'poin_benar' => 'required|integer',
+            'poin_salah' => 'required|integer',
+            'poin_tidak_jawab' => 'required|integer',
+            'keterangan' => 'nullable|string',
+            'tampilkan_nilai' => 'nullable|boolean',
+            'tampilkan_hasil' => 'nullable|boolean',
+            'gunakan_token' => 'nullable|boolean',
+            'mata_pelajaran_id' => 'required|exists:mata_pelajaran,id',
+        ]);
+
+        // If an ID is provided, we are updating an existing record
+        if ($request->id != null) {
+            $existingUjian = Ujian::where('paket_soal_id', $request->paket_soal_id)
+                ->where('kelas_id', $request->kelas_id)
+                ->where('id', '!=', $request->id) // Exclude the current ID from the check
+                ->first();
+
+            if ($existingUjian) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The selected paket soal is already associated with another ujian in this class.'
+                ], 422);
+            }
+
+            // Update the existing record
+            $ujian = Ujian::findOrFail($request->id);
+            $ujian->update($validatedData);
+        } else {
+            // Check if the combination of paket_soal_id and kelas_id already exists
+            $existingUjian = Ujian::where('paket_soal_id', $request->paket_soal_id)
+                ->where('kelas_id', $request->kelas_id)
+                ->first();
+
+            if ($existingUjian) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The selected paket soal is already associated with an ujian in this class.'
+                ], 422);
+            }
+
+            // Create a new record
+            $ujian = Ujian::create($validatedData);
+        }
+
+        // Return a success response
+        return response()->json(['success' => true, 'data' => $ujian]);
+    }
+
+
+
+    public function showHasilUjian($id)
+    {
         $hasilUjian = HasilUjian::with('ujian')->find($id);
         return view('ujians.hasil-ujian', ['hasilUjian' => $hasilUjian]);
     }
@@ -215,13 +219,14 @@ public function store(Request $request)
         return response()->json($histories);
     }
 
-    public function end(Request $request){
+    public function end(Request $request)
+    {
 
         $ujianId = $request->input('ujian_id');
         $answeredQuestions = $request->input('answeredQuestions');
 
         // Logika untuk menghitung hasil ujian
-        $hasilUjian = $this->calculateExamResult($ujianId, $answeredQuestions,$request->user_id);
+        $hasilUjian = $this->calculateExamResult($ujianId, $answeredQuestions, $request->user_id);
         // Simpan hasil ujian ke database
         $hasilUjian->save();
 
@@ -229,6 +234,33 @@ public function store(Request $request)
             'success' => true,
             'hasil_ujian_id' => $hasilUjian->id
         ]);
+    }
+
+    public function downloadExcel()
+    {
+        return Excel::download(new UjianHistoryExport, 'history_ujian.xlsx');
+    }
+
+    public function downloadPdf()
+    {
+        $ujianHistories = DB::table('ujian_histories')
+        ->join('siswas', 'ujian_histories.siswa_id', '=', 'siswas.id')
+        ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
+        ->join('paket_soal', 'paket_soal.id', '=', 'ujian_histories.paket_soal_id')
+        ->join('mata_pelajaran', 'paket_soal.kode_mata_pelajaran', '=', 'mata_pelajaran.id')
+        ->select(
+            'siswas.nis as siswa_nis',
+            'siswas.nama as siswa_name', // Add student's name
+            'kelas.name as kelas_name',
+            'mata_pelajaran.nama as nama_pelajaran',
+            'ujian_histories.created_at as created_at',
+            'ujian_histories.jumlah_benar',
+            'ujian_histories.jumlah_salah',
+            'ujian_histories.total_nilai'
+        )
+        ->get();
+        $pdf = Pdf::loadView('pdf.ujian_history', compact('ujianHistories'));
+        return $pdf->download('history_ujian.pdf');
     }
 
     private function calculateExamResult($ujianId, $answeredQuestions, $siswa_id)
@@ -244,7 +276,7 @@ public function store(Request $request)
             ->select('siswas.id as siswa_id')
             ->first();
         if (!$siswa) {
-            throw new \Exception('Siswa not found',$siswa_id);
+            throw new \Exception('Siswa not found', $siswa_id);
         }
 
         $siswa_id = $siswa->siswa_id;
@@ -366,7 +398,7 @@ public function store(Request $request)
     // }
     public function show(Request $request)
     {
-        $ujian = Ujian::with(['paketSoal.soals'])->where('id',$request->ujian)->first();
+        $ujian = Ujian::with(['paketSoal.soals'])->where('id', $request->ujian)->first();
         return view('ujians.show', compact('ujian'));
     }
 

@@ -3,6 +3,16 @@ $(document).ready(function () {
     fetchKelasData();
     fetchMataPelajaranData();
     fetchHistoryUjian();
+
+      // Download PDF
+      $('#download-pdf').click(function() {
+        window.location.href = '/ujian/download-pdf';
+    });
+
+    // Download Excel
+    $('#download-excel').click(function() {
+        window.location.href = '/ujian/download-excel';
+    });
 });
 
 

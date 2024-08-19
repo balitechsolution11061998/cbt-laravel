@@ -178,6 +178,10 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
         Route::post('/end', 'UjianController@end')->name('end');
         Route::get('/hasil-ujian/{id}', 'UjianController@showHasilUjian')->name('hasil-ujian');
         Route::get('/fetchHistory', 'UjianController@fetchHistory')->name('fetchHistory');
+
+        Route::get('/download-pdf', 'UjianController@downloadPdf')->name('downloadPdf');
+        Route::get('/download-excel', 'UjianController@downloadExcel')->name('downloadExcel');
+
     });
 
 });

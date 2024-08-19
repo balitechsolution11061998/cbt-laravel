@@ -74,8 +74,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card shadow-sm border-light">
-                    <div class="card-header">
-                        <h2 class="section-title mb-0"><i class="fas fa-info-circle"></i>History Ujian</h2>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h2 class="section-title mb-0"><i class="fas fa-info-circle"></i> History Ujian</h2>
+                        <div>
+                            <button id="download-pdf" class="btn btn-danger btn-sm"><i class="fas fa-file-pdf"></i> Download PDF</button>
+                            <button id="download-excel" class="btn btn-success btn-sm"><i class="fas fa-file-excel"></i> Download Excel</button>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div id="spinner-detail" class="text-center mb-3" style="display: none;">
@@ -103,6 +107,7 @@
                     </div>
                 </div>
             </div>
+
             <div id="additional-details" class="col-md-12 mt-4">
                 <div class="card shadow-sm border-light">
                     <div class="card-header">
