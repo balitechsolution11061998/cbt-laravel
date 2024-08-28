@@ -303,18 +303,46 @@ class UserController extends Controller
     public function profile(Request $request)
     {
         $hashedId = $request->query('id');
-        $user = User::with(['siswa.kelas', 'siswa.kelas.ujian.paketSoal'])->get()->first(function($user) use ($hashedId) {
+        $user = User::with(['siswa.kelas', 'siswa.kelas.ujian.paketSoal'])->get()->first(function ($user) use ($hashedId) {
             return Hash::check($user->id, $hashedId);
         });
 
         $currentUjian = null;
-        $now = now(); // Get current datetime
+        // $now = now(); // Get current datetime
+
+        // if ($user && $user->siswa && $user->siswa->kelas) {
+        //     $currentUjian = $user->siswa->kelas->ujian->filter(function($ujian) use ($now) {
+        //         $ujianStartTime = \Carbon\Carbon::parse($ujian->waktu_mulai);
+        //         $ujianEndTime = $ujianStartTime->copy()->addMinutes($ujian->durasi); // Assuming 'durasi' is the exam duration in minutes
+        //         dd($ujianStartTime,$ujianEndTime,$now);
+        //         return $now->between($ujianStartTime, $ujianEndTime);
+        //     });
+        //     if ($currentUjian && $currentUjian->isNotEmpty()) {
+        //         $ujianIds = $currentUjian->pluck('id');
+        //         $hasUjianHistory = \App\Models\UjianHistory::whereIn('ujian_id', $ujianIds)
+        //             ->where('siswa_id', $user->siswa->id)
+        //             ->exists();
+
+        //         if ($hasUjianHistory) {
+        //             $currentUjian = null; // Set currentUjian to null if there's a history
+        //         }
+        //     }
+        // }
+        // Fetch the user's timezone or use a default one
+        $userTimezone = $user->timezone ?? 'Asia/Jakarta';
+
+        // Get the current time in the user's timezone
+        $now = \Carbon\Carbon::now($userTimezone);
 
         if ($user && $user->siswa && $user->siswa->kelas) {
-            $currentUjian = $user->siswa->kelas->ujian->filter(function($ujian) use ($now) {
-                $ujianStartTime = \Carbon\Carbon::parse($ujian->waktu_mulai);
-                $ujianEndTime = $ujianStartTime->copy()->addMinutes($ujian->durasi); // Assuming 'durasi' is the exam duration in minutes
+            $currentUjian = $user->siswa->kelas->ujian->filter(function ($ujian) use ($now, $userTimezone) {
+                // Parse the exam start time in the user's timezone
+                $ujianStartTime = \Carbon\Carbon::parse($ujian->waktu_mulai, $userTimezone);
+                $ujianEndTime = $ujianStartTime->copy()->addMinutes($ujian->durasi); // Assuming 'durasi' is in minutes
 
+                // Debugging output to verify the time values
+
+                // Check if the current time falls within the exam time
                 return $now->between($ujianStartTime, $ujianEndTime);
             });
 
@@ -329,6 +357,7 @@ class UserController extends Controller
                 }
             }
         }
+
 
         if ($user) {
             return view('users.profile', [

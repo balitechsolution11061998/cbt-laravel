@@ -236,39 +236,13 @@ class UjianController extends Controller
         ]);
     }
 
-    public function downloadExcel()
-    {
-        return Excel::download(new UjianHistoryExport, 'history_ujian.xlsx');
-    }
-
-    public function downloadPdf()
-    {
-        $ujianHistories = DB::table('ujian_histories')
-        ->join('siswas', 'ujian_histories.siswa_id', '=', 'siswas.id')
-        ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
-        ->join('paket_soal', 'paket_soal.id', '=', 'ujian_histories.paket_soal_id')
-        ->join('mata_pelajaran', 'paket_soal.kode_mata_pelajaran', '=', 'mata_pelajaran.id')
-        ->select(
-            'siswas.nis as siswa_nis',
-            'siswas.nama as siswa_name', // Add student's name
-            'kelas.name as kelas_name',
-            'mata_pelajaran.nama as nama_pelajaran',
-            'ujian_histories.created_at as created_at',
-            'ujian_histories.jumlah_benar',
-            'ujian_histories.jumlah_salah',
-            'ujian_histories.total_nilai'
-        )
-        ->get();
-        $pdf = Pdf::loadView('pdf.ujian_history', compact('ujianHistories'));
-        return $pdf->download('history_ujian.pdf');
-    }
-
     private function calculateExamResult($ujianId, $answeredQuestions, $siswa_id)
     {
         $ujian = Ujian::findOrFail($ujianId);
         $totalQuestions = $ujian->paketSoal->soals->count();
         $correctAnswers = 0;
         $wrongAnswers = 0;
+        $notAnswered = 0;
 
         // Fetch the siswa_id based on user ID
         $siswa = User::where('users.id', $siswa_id)
@@ -293,8 +267,10 @@ class UjianController extends Controller
             // Convert answers to lowercase for a case-insensitive comparison
             $userAnswer = strtolower(trim($userAnswer));
             $correctAnswer = strtolower(trim($soal->jawaban_benar));
+
             // Check if the user's answer is correct, not answered, or wrong
             if (empty($userAnswer)) {
+                $notAnswered++;
                 $status = 'not answered'; // The user did not provide an answer
             } elseif ($userAnswer === $correctAnswer) {
                 $correctAnswers++;
@@ -326,8 +302,7 @@ class UjianController extends Controller
         }
 
         // Calculate the score
-        $score = ($totalQuestions > 0) ? ($correctAnswers / $totalQuestions) * 100 : 0;
-
+        $score = ($correctAnswers * $ujian->poin_benar) - ($wrongAnswers * $ujian->poin_salah) - ($notAnswered * $ujian->poin_tidak_jawab);
         // Create the exam result record
         $hasilUjian = new HasilUjian();
         $hasilUjian->ujian_id = $ujianId;
@@ -350,6 +325,36 @@ class UjianController extends Controller
 
         return $hasilUjian;
     }
+
+
+    public function downloadExcel()
+    {
+        return Excel::download(new UjianHistoryExport, 'history_ujian.xlsx');
+    }
+
+    public function downloadPdf()
+    {
+        $ujianHistories = DB::table('ujian_histories')
+            ->join('siswas', 'ujian_histories.siswa_id', '=', 'siswas.id')
+            ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
+            ->join('paket_soal', 'paket_soal.id', '=', 'ujian_histories.paket_soal_id')
+            ->join('mata_pelajaran', 'paket_soal.kode_mata_pelajaran', '=', 'mata_pelajaran.id')
+            ->select(
+                'siswas.nis as siswa_nis',
+                'siswas.nama as siswa_name', // Add student's name
+                'kelas.name as kelas_name',
+                'mata_pelajaran.nama as nama_pelajaran',
+                'ujian_histories.created_at as created_at',
+                'ujian_histories.jumlah_benar',
+                'ujian_histories.jumlah_salah',
+                'ujian_histories.total_nilai'
+            )
+            ->get();
+        $pdf = Pdf::loadView('pdf.ujian_history', compact('ujianHistories'));
+        return $pdf->download('history_ujian.pdf');
+    }
+
+
 
 
 
