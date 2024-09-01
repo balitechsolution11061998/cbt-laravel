@@ -18,19 +18,41 @@ class UserSeeder extends Seeder
         $faker = Faker::create('id_ID');
 
         // Predefined users without the role in the data array
-        $dataUser = [
-            [
-                'username' => 'guru',
-                'name' => 'guru',
-                'email' => 'guru@gmail.com',
+        for ($i = 1; $i <= 30; $i++) {
+            $username =  $faker->numerify('##########' . str_pad($i, 6, '0', STR_PAD_LEFT));
+
+            $guruUsers[] = [
+                'username' => $username,
+                'name' => 'Guru ' . $i,
+                'email' => 'guru' . $i . '@gmail.com',
                 'password_show' => '12345678',
                 'password' => Hash::make('12345678'),
-                'phone_number' => '089534386678',
-                'nik' => '219092349',
+                'phone_number' => $faker->phoneNumber,
+                'nik' => $username,
                 'status' => 'y',
-                'alamat' => 'Sumenep',
+                'alamat' => $faker->address,
                 'photo' => '/image/logo.png',
-            ],
+            ];
+        }
+
+        for ($i = 1; $i <= 30; $i++) {
+            $username =  $faker->numerify('##########' . str_pad($i, 6, '0', STR_PAD_LEFT));
+
+            $guruUsers[] = [
+                'username' => $username,
+                'name' => 'Test' . $i,
+                'email' => 'guru' . $i . '@gmail.com',
+                'password_show' => '12345678',
+                'password' => Hash::make('12345678'),
+                'phone_number' => $faker->phoneNumber,
+                'nik' => $username,
+                'status' => 'y',
+                'alamat' => $faker->address,
+                'photo' => '/image/logo.png',
+            ];
+        }
+
+        $dataUser = array_merge($guruUsers, [
             [
                 'username' => 'admin_cbt1',
                 'name' => 'Admin CBT 1',
@@ -43,7 +65,7 @@ class UserSeeder extends Seeder
                 'alamat' => 'Tabanan',
                 'photo' => '/image/logo.png',
             ],
-        ];
+        ]);
 
         // Add predefined users
         foreach ($dataUser as $data) {
@@ -54,7 +76,7 @@ class UserSeeder extends Seeder
             );
 
             // Determine role based on the user's name
-            if ($user->name === 'guru') {
+            if (strpos($user->name, 'Guru') !== false) {
                 $roleName = 'guru';
             } elseif ($user->name === 'Admin CBT 1') {
                 $roleName = 'admin_cbt';

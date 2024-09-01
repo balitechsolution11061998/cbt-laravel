@@ -54,6 +54,6 @@ class UserRepositoryImplement extends Eloquent implements UserRepository{
 
     public function getUserWithRelationships()
     {
-        return User::with('jabatan', 'department', 'cabang')->latest();
+        return User::latest();
     }
 }

@@ -26,12 +26,13 @@ class DatabaseSeeder extends Seeder
         $this->call(LaratrustSeeder::class);
         $this->call(KelasSeeder::class);
         $this->call(MataPelajaranSeeder::class);
-        AddUsersJob::dispatch();
+        $this->call(UserSeeder::class);
+        // AddUsersJob::dispatch();
         $this->call(PaketSoalSeeder::class);
         SeedSoalJob::dispatch();
 
         $this->call(UjianSeeder::class);
-
+        $this->call(GuruSeeder::class);
 
 
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PerformanceController;
@@ -58,6 +59,16 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
         Route::get('/getRolesByUser', 'RoleController@getRolesByUser')->name('getRolesByUser');
     });
 
+
+    Route::prefix('guru')->name('guru.')->group(function () {
+        Route::get('/', [GuruController::class, 'index'])->name('index');
+        Route::get('/data', [GuruController::class, 'getData'])->name('data'); // This is the important line
+        Route::post('/store', [GuruController::class, 'store'])->name('store');
+        Route::get('/{guru}/edit', [GuruController::class, 'edit'])->name('edit');
+        Route::put('/{guru}', [GuruController::class, 'update'])->name('update');
+        Route::delete('/{guru}', [GuruController::class, 'destroy'])->name('destroy');
+    });
+
     Route::prefix('users')->name('users.')->namespace('App\Http\Controllers')->group(function () {
         Route::get('/', 'UserController@index')->name('index');
         Route::get('/create', 'UserController@create')->name('create');
@@ -76,27 +87,6 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
 
     });
 
-
-
-    Route::prefix('provinsi')->name('provinsi.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/data', 'ProvinsiController@data')->name('data');
-    });
-
-    Route::prefix('kabupaten')->name('kabupaten.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/data', 'KabupatenController@data')->name('data');
-    });
-
-    Route::prefix('kecamatan')->name('kecamatan.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/data', 'KecamatanController@data')->name('data');
-    });
-
-    Route::prefix('kelurahan')->name('kelurahan.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/data', 'KelurahanController@data')->name('data');
-    });
-
-    Route::prefix('jabatan')->name('jabatan.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/data', 'JabatanController@data')->name('data');
-    });
 
 
 
@@ -123,16 +113,6 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
 
     });
 
-    Route::prefix('rombel')->name('rombel.')->namespace('App\Http\Controllers')->group(function () {
-        Route::get('/index', 'RombelController@index')->name('index');
-        Route::get('/data', 'RombelController@data')->name('data');
-        Route::post('/store', 'RombelController@store')->name('store');
-        Route::get('{id}/edit', 'RombelController@edit')->name('edit');
-        Route::delete('/delete/{id}', 'RombelController@destroy')->name('destroy');
-        Route::get('/options', 'RombelController@getRombelOptions')->name('getRombelOptions');
-        Route::get('/getRombelData', 'RombelController@getRombelData')->name('getRombelData');
-
-    });
 
     Route::prefix('siswa')->name('siswa.')->namespace('App\Http\Controllers')->group(function () {
         Route::get('/index', 'SiswaController@index')->name('index');
