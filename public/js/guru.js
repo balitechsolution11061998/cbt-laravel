@@ -1,4 +1,21 @@
 $(document).ready(function () {
+
+    const userTypeRadios = document.getElementsByName('user_type');
+        const existingUserSection = document.getElementById('existing_user_section');
+        const newUserSection = document.getElementById('new_user_section');
+
+        userTypeRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                if (this.value === 'existing') {
+                    existingUserSection.classList.remove('d-none');
+                    newUserSection.classList.add('d-none');
+                } else {
+                    existingUserSection.classList.add('d-none');
+                    newUserSection.classList.remove('d-none');
+                }
+            });
+        });
+
     // Initialize DataTables for Guru Management
     let table = $("#guru_table").DataTable({
         processing: true,

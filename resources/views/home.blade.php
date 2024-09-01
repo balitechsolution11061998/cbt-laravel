@@ -15,7 +15,7 @@
                 @can('siswa-show')
                 <div class="container mt-5">
                     <div class="row">
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-3 mb-4">
                             <div class="card equal-height">
                                 <h2 class="section-title"><i class="fas fa-user-graduate"></i> Jumlah Siswa</h2>
                                 <div id="spinner-student" style="display: none;">
@@ -29,12 +29,10 @@
                                         <span id="female-count">Perempuan: 0</span>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-3 mb-4">
                             <div class="card equal-height">
                                 <h2 class="section-title"><i class="fas fa-chalkboard"></i> Jumlah Kelas</h2>
                                 <div id="spinner-kelas" style="display: none;">
@@ -44,10 +42,10 @@
                                     <i class="fas fa-chalkboard icon-animate" style="font-size: 48px; color: #007bff;"></i>
                                     <span class="chart-number custom-font" id="kelas-content">0</span>
                                 </div>
-
                             </div>
                         </div>
-                        <div class="col-md-4 mb-4">
+
+                        <div class="col-md-3 mb-4">
                             <div class="card equal-height">
                                 <h2 class="section-title"><i class="fas fa-book"></i> Mata Pelajaran</h2>
                                 <div id="spinner-mata-pelajaran" style="display: none;">
@@ -57,17 +55,31 @@
                                     <i class="fas fa-book icon-animate" style="font-size: 48px; color: #28a745;"></i>
                                     <span class="chart-number custom-font" id="mata-pelajaran-content">0</span>
                                 </div>
+                            </div>
+                        </div>
 
+                        <div class="col-md-3 mb-4">
+                            <div class="card equal-height">
+                                <h2 class="section-title"><i class="fas fa-chalkboard-teacher"></i> Jumlah Guru</h2>
+                                <div id="spinner-guru" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
+                                </div>
+                                <div class="chart-container text-center">
+                                    <i class="fas fa-chalkboard-teacher icon-animate" style="font-size: 48px; color: #17a2b8;"></i>
+                                    <span class="chart-number custom-font" id="guru-content">0</span>
+                                    <div>
+                                        <span id="male-guru-count">Laki-laki: 0</span> |
+                                        <span id="female-guru-count">Perempuan: 0</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Additional Details Section -->
-
                 </div>
                 @endcan
             </div>
         </div>
+
 
         <!-- Rombel and Kelas Detail Card -->
 

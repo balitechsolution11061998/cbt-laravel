@@ -63,6 +63,8 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
     Route::prefix('guru')->name('guru.')->group(function () {
         Route::get('/', [GuruController::class, 'index'])->name('index');
         Route::get('/data', [GuruController::class, 'getData'])->name('data'); // This is the important line
+        Route::get('/countData', [GuruController::class, 'countData'])->name('countData'); // This is the important line
+
         Route::post('/store', [GuruController::class, 'store'])->name('store');
         Route::get('/{guru}/edit', [GuruController::class, 'edit'])->name('edit');
         Route::put('/{guru}', [GuruController::class, 'update'])->name('update');

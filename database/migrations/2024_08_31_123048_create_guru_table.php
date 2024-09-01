@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nik');
             $table->unsignedBigInteger('kelas_id');
             $table->unsignedBigInteger('user_id');
+            $table->enum('gender', ['laki', 'perempuan']); // Add gender field
             $table->timestamps();
 
             // Define foreign keys

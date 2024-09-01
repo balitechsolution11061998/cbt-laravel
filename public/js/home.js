@@ -3,6 +3,7 @@ $(document).ready(function () {
     fetchKelasData();
     fetchMataPelajaranData();
     fetchHistoryUjian();
+    fetchCountGuru();
 
       // Download PDF
       $('#download-pdf').click(function() {
@@ -16,7 +17,27 @@ $(document).ready(function () {
 });
 
 
+function fetchCountGuru(){
+    $('#spinner-guru').show();
 
+    $.ajax({
+        url: '/guru/countData', // Adjust this URL to your actual endpoint
+        method: 'GET',
+        success: function(response) {
+            // Assuming response contains { totalGuru, maleGuru, femaleGuru }
+            $('#guru-content').text(response.totalGuru);
+            $('#male-guru-count').text('Laki-laki: ' + response.maleGuru);
+            $('#female-guru-count').text('Perempuan: ' + response.femaleGuru);
+
+            // Hide spinner
+            $('#spinner-guru').hide();
+        },
+        error: function() {
+            $('#spinner-guru').hide();
+            // Handle errors here
+        }
+    });
+}
 
     function fetchKelasData() {
 

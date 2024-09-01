@@ -10,7 +10,16 @@
     <!-- Include Toastify CSS and JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
+    <style>
+          .toastify-icon {
+        display: flex;
+        align-items: center;
+    }
+    .toastify-icon i {
+        font-size: 16px;
+        margin-right: 8px; /* Adjust the space between the icon and the text */
+    }
+    </style>
     <!--begin::Card-->
     <div class="card">
         <!--begin::Card header-->
@@ -23,7 +32,9 @@
                         <span class="path1"></span>
                         <span class="path2"></span>
                     </i>
-                    <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid form-control-sm w-250px ps-13" placeholder="Search Guru" />
+                    <input type="text" data-kt-user-table-filter="search"
+                        class="form-control form-control-solid form-control-sm w-250px ps-13"
+                        placeholder="Search Guru" />
                 </div>
                 <!--end::Search-->
             </div>
@@ -72,19 +83,23 @@
     <!-- Toastify Notifications -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            @if(session('success'))
+            @if (session('success'))
                 Toastify({
-                    text: "{{ session('success') }}",
+                    text: "<i class='ki-duotone ki-check-circle me-2'></i>{{ session('success') }}",
                     backgroundColor: "green",
-                    duration: 3000
+                    duration: 3000,
+                    className: "toastify-icon", // Custom class for icon styling
+                    escapeMarkup: false, // Allow HTML in the toast text
                 }).showToast();
             @endif
 
-            @if(session('error'))
+            @if (session('error'))
                 Toastify({
-                    text: "{{ session('error') }}",
+                    text: "<i class='ki-duotone ki-alert-triangle me-2'></i>{{ session('error') }}",
                     backgroundColor: "red",
-                    duration: 3000
+                    duration: 3000,
+                    className: "toastify-icon", // Custom class for icon styling
+                    escapeMarkup: false, // Allow HTML in the toast text
                 }).showToast();
             @endif
         });

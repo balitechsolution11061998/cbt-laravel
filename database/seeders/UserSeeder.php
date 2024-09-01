@@ -35,22 +35,22 @@ class UserSeeder extends Seeder
             ];
         }
 
-        for ($i = 1; $i <= 30; $i++) {
-            $username =  $faker->numerify('##########' . str_pad($i, 6, '0', STR_PAD_LEFT));
+        // for ($i = 1; $i <= 30; $i++) {
+        //     $username =  $faker->numerify('##########' . str_pad($i, 6, '0', STR_PAD_LEFT));
 
-            $guruUsers[] = [
-                'username' => $username,
-                'name' => 'Test' . $i,
-                'email' => 'guru' . $i . '@gmail.com',
-                'password_show' => '12345678',
-                'password' => Hash::make('12345678'),
-                'phone_number' => $faker->phoneNumber,
-                'nik' => $username,
-                'status' => 'y',
-                'alamat' => $faker->address,
-                'photo' => '/image/logo.png',
-            ];
-        }
+        //     $guruUsers[] = [
+        //         'username' => $username,
+        //         'name' => 'Test' . $i,
+        //         'email' => 'guru' . $i . '@gmail.com',
+        //         'password_show' => '12345678',
+        //         'password' => Hash::make('12345678'),
+        //         'phone_number' => $faker->phoneNumber,
+        //         'nik' => $username,
+        //         'status' => 'y',
+        //         'alamat' => $faker->address,
+        //         'photo' => '/image/logo.png',
+        //     ];
+        // }
 
         $dataUser = array_merge($guruUsers, [
             [

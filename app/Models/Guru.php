@@ -14,6 +14,7 @@ class Guru extends Model
         'nik',
         'kelas_id',
         'user_id',
+        'gender',
     ];
 
     public function user()
