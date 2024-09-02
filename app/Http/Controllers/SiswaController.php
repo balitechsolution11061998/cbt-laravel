@@ -101,10 +101,21 @@ class SiswaController extends Controller
         ]);
     }
 
-
     public function data()
     {
-        return datatables()->of(Siswa::with('kelas', 'users')->get())
+        // Get the authenticated user
+        $user = auth()->user();
+
+        // Query the Siswa data with related kelas and users
+        $query = Siswa::with('kelas', 'users');
+
+        // Check if the authenticated user has the 'guru' role
+        if ($user->hasRole('guru')) {
+            // Assuming 'guru' has access to 'kelas_id'
+            $query->where('kelas_id', $user->guru->kelas_id);
+        }
+
+        return datatables()->of($query->get())
             ->addIndexColumn()
             ->addColumn('action', function($row) {
                 // Check if the users relationship exists
@@ -127,6 +138,7 @@ class SiswaController extends Controller
             ->rawColumns(['action'])
             ->make(true);
     }
+
 
 
 

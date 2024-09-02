@@ -94,42 +94,49 @@ class UserSeeder extends Seeder
         }
 
         // Generate random users for Siswa
+        $faker = Faker::create();
         $roleName = 'siswa';
         $role = Role::where('name', $roleName)->first();
 
         if ($role) {
             $kelasIds = Kelas::pluck('id')->toArray(); // Assuming 'Rombel' is your 'Kelas'
-            for ($i = 1; $i <= 200; $i++) {
-                $username = $faker->unique()->numberBetween(10000000, 99999999);
 
-                $userData = [
-                    'username' => $username,
-                    'name' => $faker->name,
-                    'email' => $faker->unique()->safeEmail,
-                    'password_show' => '12345678',
-                    'password' => Hash::make('12345678'),
-                    'phone_number' => $faker->phoneNumber,
-                    'nik' => $faker->unique()->numberBetween(10000000, 99999999),
-                    'status' => 'y',
-                    'alamat' => $faker->address,
-                    'photo' => $faker->imageUrl,
-                ];
+            // Define the total number of students per class
+            $studentsPerClass = 30; // You can adjust this number between 30 and 40
 
-                $user = User::updateOrCreate(
-                    ['username' => $userData['username']],  // Use username to avoid duplicates
-                    $userData
-                );
+            foreach ($kelasIds as $kelasId) {
+                for ($i = 1; $i <= $studentsPerClass; $i++) {
+                    $username = $faker->unique()->numberBetween(10000000, 99999999);
 
-                // Assign role to user
-                $user->syncRoles([$role->name]);
+                    $userData = [
+                        'username' => $username,
+                        'name' => $faker->name,
+                        'email' => $faker->unique()->safeEmail,
+                        'password_show' => '12345678',
+                        'password' => Hash::make('12345678'),
+                        'phone_number' => $faker->phoneNumber,
+                        'nik' => $faker->unique()->numberBetween(10000000, 99999999),
+                        'status' => 'y',
+                        'alamat' => $faker->address,
+                        'photo' => $faker->imageUrl,
+                    ];
 
-                // Create corresponding siswa record
-                Siswa::create([
-                    'kelas_id' => $faker->randomElement($kelasIds), // Match with 'kelas_id' in the migration
-                    'nama' => $user->name,
-                    'nis' => $username,  // Set NIS same as username
-                    'jenis_kelamin' => $faker->randomElement(['L', 'P']),
-                ]);
+                    $user = User::updateOrCreate(
+                        ['username' => $userData['username']],  // Use username to avoid duplicates
+                        $userData
+                    );
+
+                    // Assign role to user
+                    $user->syncRoles([$role->name]);
+
+                    // Create corresponding siswa record
+                    Siswa::create([
+                        'kelas_id' => $kelasId, // Assign to the current class
+                        'nama' => $user->name,
+                        'nis' => $username,  // Set NIS same as username
+                        'jenis_kelamin' => $faker->randomElement(['L', 'P']),
+                    ]);
+                }
             }
         } else {
             echo "Role '{$roleName}' not found!";

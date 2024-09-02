@@ -21,6 +21,7 @@ return [
             'soal' => 's',
             'paketsoal' => 's',
             'manajementsoal' => 's',
+            'guru' => 's',
             'siswa' => 's',
             'kelas' => 's',
             'rombel' => 's',

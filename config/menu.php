@@ -24,8 +24,8 @@ return [
             'label'          => 'Guru',
             'type'           => 'item',
             'route'          => 'guru.index',
-            'active'         => [],
-            'permission'     => [],
+            'active'         => ['guru-show'],
+            'permission'     => ['guru-show'],
             'permissionType' => 'gate',
             'icon'           => 'fas',
             'iconName'       => 'fa-chalkboard-teacher', // Graduate Icon, representing students

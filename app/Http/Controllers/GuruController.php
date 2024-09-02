@@ -91,6 +91,7 @@ class GuruController extends Controller
                     'email' => $request->email,
                     'nik' => $request->nik,
                     'password' => Hash::make($request->password),
+                    'status'=>'y',
                 ]);
 
                 // Assign 'guru' role to the new user
