@@ -778,5 +778,200 @@
         "question": "Apa makna idiom 'cuci tangan'?",
         "options": ["Lepas tanggung jawab", "Kebersihan", "Pekerjaan selesai", "Bersiap-siap"],
         "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'besar kepala'?",
+        "options": ["Sombong", "Pandai", "Bijaksana", "Pemalu"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'buah bibir'?",
+        "options": ["Topik pembicaraan", "Makanan ringan", "Janji palsu", "Kabar burung"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'keringat dingin'?",
+        "options": ["Ketakutan", "Panas", "Pusing", "Sedih"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'panjang tangan'?",
+        "options": ["Suka mencuri", "Pemurah", "Pemalu", "Penyabar"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'buah tangan'?",
+        "options": ["Oleh-oleh", "Pekerjaan", "Janji", "Pertolongan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'makan hati'?",
+        "options": ["Menderita", "Kenyang", "Bersyukur", "Bahagia"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'besar mulut'?",
+        "options": ["Sombong", "Jujur", "Berkata benar", "Pembohong"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'jatuh cinta'?",
+        "options": ["Tergila-gila", "Sedih", "Kehilangan", "Kebencian"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'panjang akal'?",
+        "options": ["Pintar", "Bodoh", "Pemalu", "Bingung"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'cari muka'?",
+        "options": ["Mencari perhatian", "Mengabaikan orang lain", "Pemalu", "Bersikap cuek"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'gigit jari'?",
+        "options": ["Kecewa", "Gembira", "Bingung", "Malas"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'melempar batu sembunyi tangan'?",
+        "options": ["Pengecut", "Berani", "Bijaksana", "Pemalu"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'buah hati'?",
+        "options": ["Anak", "Teman", "Orang tua", "Saudara"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa makna idiom 'jatuh hati'?",
+        "options": ["Tergila-gila", "Benci", "Takut", "Bingung"],
+        "correct_option": "c"
+    },
+    {
+        "question": "Apa makna idiom 'naik daun'?",
+        "options": ["Sedang terkenal", "Gagal", "Marah", "Sedih"],
+        "correct_option": "d"
+    },
+    {
+        "question": "Apa makna idiom 'darah daging'?",
+        "options": ["Keturunan", "Makanan", "Kesehatan", "Kekuatan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'lepas tangan'?",
+        "options": ["Lepas tanggung jawab", "Bertanggung jawab", "Membantu", "Menjaga"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa makna idiom 'patah hati'?",
+        "options": ["Kecewa", "Gembira", "Bingung", "Berharap"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna idiom 'angkat kaki'?",
+        "options": ["Pergi", "Datang", "Diam", "Berpikir"],
+        "correct_option": "d"
+    },
+    {
+        "question": "Apa makna kata 'kontemplasi'?",
+        "options": ["Perenungan mendalam", "Perdebatan", "Kebingungan", "Keputusan cepat"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa fungsi utama majas hiperbola dalam sebuah karya sastra?",
+        "options": ["Melebih-lebihkan suatu hal", "Menyejajarkan dua hal berbeda", "Menyindir secara halus", "Menggambarkan keadaan nyata"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Manakah dari berikut ini yang termasuk karya sastra klasik?",
+        "options": ["Hamlet karya William Shakespeare", "Laskar Pelangi karya Andrea Hirata", "Perahu Kertas karya Dewi Lestari", "5 CM karya Donny Dhirgantoro"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Dalam struktur teks eksposisi, bagian yang berisi argumen penulis disebut?",
+        "options": ["Tesis", "Argumentasi", "Simpulan", "Orientasi"],
+        "correct_option": "b"
+    },
+    {
+        "question": "Apa yang dimaksud dengan 'cerpen'?",
+        "options": ["Cerita pendek", "Cerita panjang", "Cerita novel", "Cerita legenda"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna kata 'ambigu'?",
+        "options": ["Bermakna ganda", "Jelas", "Terperinci", "Sederhana"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa fungsi dari kalimat argumentasi dalam teks eksposisi?",
+        "options": ["Memperkuat pendapat penulis", "Menghibur pembaca", "Menyampaikan kesimpulan", "Memberi gambaran awal"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan 'tokoh antagonis' dalam sebuah cerita?",
+        "options": ["Tokoh yang berperan sebagai penentang protagonis", "Tokoh utama dalam cerita", "Tokoh yang selalu benar", "Tokoh yang membantu protagonis"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Dalam teks prosedur, apa yang dimaksud dengan 'langkah-langkah'?",
+        "options": ["Tahapan yang harus diikuti", "Ringkasan cerita", "Deskripsi umum", "Argumentasi penulis"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tujuan dari penggunaan majas personifikasi?",
+        "options": ["Menghidupkan benda mati", "Menyindir dengan halus", "Membuat sesuatu terlihat lebih buruk", "Memberikan perbandingan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna kata 'redundansi'?",
+        "options": ["Pengulangan yang tidak perlu", "Kesesuaian", "Penegasan", "Ketepatan"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa fungsi dari penggunaan konjungsi kausal dalam teks argumentasi?",
+        "options": ["Menunjukkan hubungan sebab-akibat", "Menghubungkan dua gagasan yang sejalan", "Menunjukkan waktu kejadian", "Menyimpulkan suatu peristiwa"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Dalam teks eksplanasi, bagian yang menjelaskan penyebab suatu fenomena disebut?",
+        "options": ["Deret penjelas", "Tesis", "Simpulan", "Orientasi"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan 'paradoks' dalam karya sastra?",
+        "options": ["Pernyataan yang bertentangan namun mengandung kebenaran", "Pernyataan yang selalu benar", "Pernyataan yang jelas dan mudah dipahami", "Pernyataan yang ambigu"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna kata 'kronologi' dalam sebuah teks sejarah?",
+        "options": ["Urutan waktu kejadian", "Penyebab kejadian", "Kesimpulan akhir", "Latar tempat"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan 'tokoh protagonis' dalam sebuah cerita?",
+        "options": ["Tokoh utama yang mendukung cerita", "Tokoh yang berperan antagonis", "Tokoh tambahan yang tidak berperan penting", "Tokoh yang selalu benar"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa tujuan utama dari teks persuasi?",
+        "options": ["Meyakinkan pembaca untuk melakukan sesuatu", "Menyampaikan informasi secara obyektif", "Menceritakan pengalaman pribadi", "Menggambarkan suatu kejadian"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Dalam sebuah puisi, apa fungsi dari majas metafora?",
+        "options": ["Membandingkan dua hal tanpa kata penghubung", "Menggunakan kata-kata yang berlebihan", "Memberikan efek bunyi", "Menyindir dengan halus"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa makna kata 'antagonis'?",
+        "options": ["Penentang tokoh utama", "Tokoh yang selalu benar", "Tokoh yang baik hati", "Tokoh pendukung utama"],
+        "correct_option": "a"
+    },
+    {
+        "question": "Apa yang dimaksud dengan 'latar' dalam sebuah cerita?",
+        "options": ["Tempat dan waktu terjadinya peristiwa", "Tokoh utama cerita", "Dialog antara tokoh", "Masalah utama dalam cerita"],
+        "correct_option": "a"
     }
 ]

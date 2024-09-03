@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\SoalImport;
 use App\Models\ManagementPaketSoal;
 use App\Models\Soal;
 use App\Models\SoalPilihan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class ManagementSoalController extends Controller
@@ -16,58 +18,18 @@ class ManagementSoalController extends Controller
         return view('manajement-soal.index');
     }
 
-    // public function store(Request $request)
-    // {
-    //     dd($request->all());
-    //     // Validate the request data
-    //     $request->validate([
-    //         'id' => 'nullable|exists:soal,id', // Validate ID for update
-    //         'paket_soal_id' => 'required|exists:paket_soal,id',
-    //         'jenis' => 'required|in:pilihan_ganda,essai',
-    //         'pertanyaan' => 'nullable|string',
-    //         'pertanyaan_a' => 'nullable|string',
-    //         'pertanyaan_b' => 'nullable|string',
-    //         'pertanyaan_c' => 'nullable|string',
-    //         'pertanyaan_d' => 'nullable|string',
-    //         'jawaban_benar' => 'nullable|string', // For storing the correct answer for pilihan_ganda
-    //         'pilihan' => 'nullable|array', // For pilihan_ganda, ensure it's an array if provided
-    //         'pilihan.*.jawaban' => 'required_with:pilihan|string', // Ensure jawaban is a string if pilihan is provided
-    //         'pilihan.*.pilihan' => 'required_with:pilihan|string', // Ensure pilihan is a string if pilihan is provided
-    //     ]);
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
 
-    //     // Start a database transaction
-    //     \DB::transaction(function () use ($request) {
-    //         // Create or update the Soal
-    //         $soal = Soal::updateOrCreate(
-    //             ['id' => $request->id],
-    //             [
-    //                 'paket_soal_id' => $request->paket_soal_id,
-    //                 'jenis' => $request->jenis,
-    //                 'pertanyaan' => $request->pertanyaan,
-    //                 'pertanyaan_a' => $request->pilihan_ganda_a,
-    //                 'pertanyaan_b' => $request->pilihan_ganda_b,
-    //                 'pertanyaan_c' => $request->pilihan_ganda_c,
-    //                 'pertanyaan_d' => $request->pilihan_ganda_d,
-    //                 'jawaban_benar' => $request->jawaban_benar,
-    //             ]
-    //         );
+        Excel::import(new SoalImport, $request->file('file'));
 
-    //         // Handle pilihan_ganda type only
-    //         if ($request->jenis === 'pilihan_ganda') {
-    //             // Delete existing pilihan for this soal
-    //             SoalPilihan::where('soal_id', $soal->id)->delete();
+        return redirect()->back()->with('success', 'Soal imported successfully.');
+    }
 
-    //             // Insert new pilihan
 
-    //             SoalPilihan::create([
-    //                 'soal_id' => $soal->id,
-    //                 'jawaban' => $request->jawaban_benar,
-    //             ]);
-    //         }
-    //     });
-
-    //     return response()->json(['success' => true]);
-    // }
 
     public function store(Request $request)
 {

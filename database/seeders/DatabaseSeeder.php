@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         // AddUsersJob::dispatch();
         $this->call(PaketSoalSeeder::class);
-        SeedSoalJob::dispatch();
+        // SeedSoalJob::dispatch();
 
         $this->call(UjianSeeder::class);
         // $this->call(GuruSeeder::class);

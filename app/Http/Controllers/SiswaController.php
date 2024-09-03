@@ -86,12 +86,38 @@ class SiswaController extends Controller
 
     public function getStudentData()
     {
-        $total = Siswa::count();
-        $male = Siswa::where('jenis_kelamin', 'L')->count();
-        $female = Siswa::where('jenis_kelamin', 'P')->count();
+        $user = auth()->user();
 
-        $students = Siswa::with('kelas')->get();
+        // Query for counting total students
+        $totalQuery = Siswa::query();
 
+        // Query for counting male students
+        $maleQuery = Siswa::where('jenis_kelamin', 'L');
+
+        // Query for counting female students
+        $femaleQuery = Siswa::where('jenis_kelamin', 'P');
+
+        // Check if the authenticated user has the 'guru' role
+        if ($user->hasRole('guru')) {
+            // Assuming 'guru' has access to 'kelas_id'
+            $totalQuery->where('kelas_id', $user->guru->kelas_id);
+            $maleQuery->where('kelas_id', $user->guru->kelas_id);
+            $femaleQuery->where('kelas_id', $user->guru->kelas_id);
+        }
+
+        // Get the counts
+        $total = $totalQuery->count();
+        $male = $maleQuery->count();
+        $female = $femaleQuery->count();
+
+        // Get the students with their related class
+        $studentsQuery = Siswa::with('kelas');
+
+        if ($user->hasRole('guru')) {
+            $studentsQuery->where('kelas_id', $user->guru->kelas_id);
+        }
+
+        $students = $studentsQuery->get();
 
         return response()->json([
             'total' => $total,
@@ -100,6 +126,7 @@ class SiswaController extends Controller
             'students' => $students,
         ]);
     }
+
 
     public function data()
     {

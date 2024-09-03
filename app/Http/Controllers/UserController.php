@@ -302,11 +302,16 @@ class UserController extends Controller
     }
     public function profile(Request $request)
     {
-        $hashedId = $request->query('id');
-        $user = User::with(['siswa.kelas', 'siswa.kelas.ujian.paketSoal'])->get()->first(function ($user) use ($hashedId) {
-            return Hash::check($user->id, $hashedId);
-        });
+        $hashedId = $request->id;
 
+           // Directly query the user with the hashed ID
+          $user = User::with(['siswa.kelas', 'siswa.kelas.ujian.paketSoal'])
+        ->whereHas('siswa', function ($query) use ($hashedId) {
+            // Assuming 'hashed_id' field stores MD5 hash of ID
+            $query->where('id', Hash::check($hashedId));
+        })
+        ->first(); // Retrieves the first matching user
+        dd(Hash::check($hashedId));
         $currentUjian = null;
         // $now = now(); // Get current datetime
 

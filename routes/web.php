@@ -145,6 +145,7 @@ Route::group(['middleware' => ['verifiedmiddleware','verified','auth','log.user.
         Route::post('/update/{id}', 'ManagementSoalController@update')->name('update');
         Route::delete('/delete/{id}', 'ManagementSoalController@destroy')->name('destroy');
         Route::get('/options', 'ManagementSoalController@dataoptions')->name('options');
+        Route::post('/import', 'ManagementSoalController@import')->name('import');
     });
 
     Route::prefix('ujian')->name('ujian.')->namespace('App\Http\Controllers')->group(function () {

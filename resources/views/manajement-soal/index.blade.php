@@ -32,6 +32,9 @@
                     <button type="button" class="btn btn-primary btn-sm" onclick="createSoal()">
                         <i class="ki-duotone ki-plus fs-2"></i> Add Soal
                     </button>
+                    <button type="button" class="btn btn-primary" onclick="importSoal()">
+                        Import Soal
+                    </button>
                     <!--end::Add Soal-->
                 </div>
                 <!--end::Toolbar-->
@@ -66,7 +69,8 @@
     </div>
     <!--end::Card-->
 
-    @include('modals.modal') <!-- Make sure this file exists and is properly set up -->
+    @include('modals.modal')
+    @include('modals.importsoal')
 
     @push('scripts')
         <script src="{{ asset('js/managementSoal.js') }}"></script>

@@ -125,18 +125,18 @@
                                 N/A
                             @endif
                         </div>
-                        <div class="info-item"><strong>Ujian Saat Ini:</strong>
+                        <div class="info-item">
+                            <strong>Ujian Saat Ini:</strong>
                             @if($currentUjian && $currentUjian->isNotEmpty())
                                 <ul>
                                     @foreach($currentUjian as $ujian)
                                         <li>
-                                            {{ $ujian->nama }} - {{ \Carbon\Carbon::parse($ujian->waktu_mulai)->format('H:i') }}
+                                            {{ $ujian->nama }} - {{ \Carbon\Carbon::parse($ujian->waktu_mulai)->format('d/m/Y H:i') }}
                                             <br>
                                             <strong>Kode Paket:</strong> {{ $ujian->paketSoal->kode_paket }}
                                             <br>
                                             {{-- <strong>Nama Paket Soal:</strong> {{ $ujian->paketSoal->kode_paket }} --}}
                                             {{-- <br> --}}
-
                                             <strong>Durasi:</strong> <span id="countdown-{{ $ujian->id }}"></span>
                                         </li>
                                     @endforeach
@@ -145,6 +145,7 @@
                                 Tidak ada ujian yang dimulai saat ini.
                             @endif
                         </div>
+
                         <div class="text-center mt-4">
                             @if($currentUjian && $currentUjian->isNotEmpty())
                                 <button id="startExamButton" class="btn btn-primary btn-sm">
