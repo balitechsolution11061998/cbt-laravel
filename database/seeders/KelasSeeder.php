@@ -11,22 +11,20 @@ class KelasSeeder extends Seeder
     {
         $classes = [];
 
-        // Kelas 10-12 with 7 IPA classes and 3 IPS classes
+        // Kelas 10-12 with 1 IPA class and 1 IPS class per level
         for ($i = 10; $i <= 12; $i++) {
-            // Create 7 IPA classes for each level
-            for ($j = 1; $j <= 7; $j++) {
-                $classes[] = [
-                    'name' => "Kelas $i IPA $j",
-                ];
-            }
-            // Create 3 IPS classes for each level
-            for ($j = 1; $j <= 3; $j++) {
-                $classes[] = [
-                    'name' => "Kelas $i IPS $j",
-                ];
-            }
+            // Create 1 IPA class for each level
+            $classes[] = [
+                'name' => "Kelas $i IPA 1",
+            ];
+
+            // Create 1 IPS class for each level
+            $classes[] = [
+                'name' => "Kelas $i IPS 1",
+            ];
         }
 
         Kelas::insert($classes);
     }
+
 }
