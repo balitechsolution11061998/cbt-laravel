@@ -137,7 +137,7 @@
                                             <br>
                                             {{-- <strong>Nama Paket Soal:</strong> {{ $ujian->paketSoal->kode_paket }} --}}
                                             {{-- <br> --}}
-                                            <strong>Durasi:</strong> <span id="countdown-{{ $ujian->id }}"></span>
+                                            <strong>Durasi:</strong> {{ $ujian->durasi}} menit
                                         </li>
                                     @endforeach
                                 </ul>

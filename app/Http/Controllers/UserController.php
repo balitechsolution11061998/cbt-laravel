@@ -303,16 +303,11 @@ class UserController extends Controller
     public function profile(Request $request)
     {
         $hashedId = $request->id;
-
            // Directly query the user with the hashed ID
-          $user = User::with(['siswa.kelas', 'siswa.kelas.ujian.paketSoal'])
-        ->whereHas('siswa', function ($query) use ($hashedId) {
-            // Assuming 'hashed_id' field stores MD5 hash of ID
-            $query->where('id', Hash::check($hashedId));
-        })
-        ->first(); // Retrieves the first matching user
-        dd(Hash::check($hashedId));
-        $currentUjian = null;
+           $user = User::with(['siswa.kelas', 'siswa.kelas.ujian.paketSoal'])->get()->filter(function ($user) use ($hashedId) {
+            return Hash::check($user->id, $hashedId); // Verify if the bcrypt hash matches the user ID
+        })->first();
+
         // $now = now(); // Get current datetime
 
         // if ($user && $user->siswa && $user->siswa->kelas) {
@@ -334,7 +329,7 @@ class UserController extends Controller
         //     }
         // }
         // Fetch the user's timezone or use a default one
-        $userTimezone = $user->timezone ?? 'Asia/Jakarta';
+        $userTimezone = $user->timezone ?? 'Asia/Makassar';
 
         // Get the current time in the user's timezone
         $now = \Carbon\Carbon::now($userTimezone);

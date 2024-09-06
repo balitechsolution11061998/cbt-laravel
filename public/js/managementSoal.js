@@ -167,7 +167,6 @@ function createSoal(data = null) {
                     <select class="form-control" id="jenis" name="jenis" required>
                         <option value="">Select Jenis</option>
                         <option value="pilihan_ganda" ${data && data.jenis === 'pilihan_ganda' ? 'selected' : ''}>Pilihan Ganda</option>
-                        <option value="essai" ${data && data.jenis === 'essai' ? 'selected' : ''}>Essai</option>
                     </select>
                 </div>
             </div>

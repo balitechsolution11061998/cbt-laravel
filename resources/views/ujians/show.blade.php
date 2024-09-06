@@ -137,8 +137,10 @@
                     <div class="info-item"><strong>Durasi:</strong> {{ $ujian->durasi }} menit</div>
                     <div class="info-item"><strong>Paket Soal:</strong> {{ $ujian->paketSoal->kode_paket }}</div>
                     <div class="info-item"><strong>Kode Paket:</strong> {{ $ujian->paketSoal->kode_paket }}</div>
+                    <div class="info-item"><strong>Waktu Tersisa:</strong> <span id="countdown-timer"></span></div>
                 </div>
             </div>
+
 
             <div class="col-md-8">
                 <div id="question-card" class="card">
@@ -179,6 +181,7 @@
     </div>
 
     <script>
+
         const questions = @json($ujian->paketSoal->soals);
         const answeredQuestions = JSON.parse(localStorage.getItem('answeredQuestions')) || {};
         let currentQuestion = 0;
@@ -272,6 +275,60 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            const examDuration = {{ $ujian->durasi }} * 60; // Exam duration in seconds
+    const countdownElement = document.getElementById('countdown-timer');
+    const storageKey = 'examCountdown';
+
+    // Function to start the countdown
+    function startCountdown(endTime) {
+        const countdownInterval = setInterval(function () {
+            const now = new Date().getTime();
+            const timeRemaining = Math.floor((endTime - now) / 1000);
+
+            if (timeRemaining <= 0) {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = 'Waktu Habis';
+                // Trigger exam submission or redirection here
+                alert('Waktu ujian telah habis!');
+                // Optionally, redirect to a completion page
+                // window.location.href = '/ujian/selesai';
+            } else {
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                countdownElement.innerHTML = `${minutes} menit ${seconds < 10 ? '0' : ''}${seconds} detik`;
+            }
+        }, 1000);
+    }
+
+    // Check if there's an existing countdown in localStorage
+    if (localStorage.getItem(storageKey)) {
+        const savedData = JSON.parse(localStorage.getItem(storageKey));
+        const now = new Date().getTime();
+
+        // If the end time is in the future, continue the countdown
+        if (savedData.endTime > now) {
+            startCountdown(savedData.endTime);
+        } else {
+            countdownElement.innerHTML = 'Waktu Habis';
+            // Optionally handle exam timeout here
+        }
+    } else {
+        // If there's no saved countdown, start a new one
+        const now = new Date().getTime();
+        const endTime = now + (examDuration * 1000); // Calculate end time in milliseconds
+        localStorage.setItem(storageKey, JSON.stringify({ endTime }));
+        startCountdown(endTime);
+    }
+
+    // Prevent navigation during the exam
+    window.addEventListener('beforeunload', function (event) {
+        event.preventDefault();
+        event.returnValue = 'Ujian belum selesai, apakah Anda yakin ingin meninggalkan halaman ini?';
+        return 'Ujian belum selesai, apakah Anda yakin ingin meninggalkan halaman ini?';
+    });
+
+
+
             showQuestion(0);
             startCountdown();
             Object.keys(answeredQuestions).forEach(index => {
