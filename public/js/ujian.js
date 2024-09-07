@@ -325,17 +325,18 @@ function getUjianForm(data) {
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+             <div class="col-md-6">
     <div class="form-group">
         <label for="waktu_mulai" class="col-sm-12 control-label form-label">Waktu Mulai</label>
         <div class="col-sm-12">
             <input type="datetime-local" class="form-control" id="waktu_mulai" name="waktu_mulai"
-                   placeholder="Enter Waktu Mulai"
-                   value="${data ? new Date(data.waktu_mulai).toISOString().slice(0,16) : ''}"
-                   required>
+                placeholder="Enter Waktu Mulai"
+                value="${data ? new Date(new Date(data.waktu_mulai).getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16) : ''}"
+                required>
         </div>
     </div>
 </div>
+
 
 
                 <div class="col-md-6">
