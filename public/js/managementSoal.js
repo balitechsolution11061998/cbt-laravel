@@ -172,8 +172,8 @@ function createSoal(data = null) {
                 </div>
             </div>
 
-            <!-- Image upload section -->
-            <div id="gambar_section" class="form-group" style="display: ${data && data.jenis === 'gambar' ? 'block' : 'none'};">
+            <!-- Image section -->
+            <div id="gambar_section" class="form-group" style="display: none;">
                 <label for="pertanyaan" class="col-sm-2 control-label">Pertanyaan</label>
                 <div class="col-sm-12">
                     <input type="text" class="form-control" id="pertanyaan" name="pertanyaan" value="${data ? data.pertanyaan : ''}" placeholder="Enter the question text">
@@ -185,16 +185,45 @@ function createSoal(data = null) {
                     </div>
                     ${data && data.pertanyaan_image ? `<div class="form-group"><label class="col-sm-2 control-label">Current Image</label><div class="col-sm-12"><img src="${data.pertanyaan_image}" class="img-thumbnail" style="max-width: 200px;"></div></div>` : ''}
                 </div>
+
+                <!-- Options for multiple-choice questions, even when the type is 'gambar' -->
                 <div class="form-group">
-                    <label for="jawaban_benar" class="col-sm-2 control-label">Jawaban Benar</label>
+                    <label class="col-sm-2 control-label">Pilihan Ganda</label>
                     <div class="col-sm-12">
-                        <input type="text" class="form-control" id="jawaban_benar" name="jawaban_benar" value="${data ? data.jawaban_benar : ''}" placeholder="Enter the correct answer" ${data && data.jenis === 'gambar' ? '' : 'disabled'}>
+                        <div id="pilihan_ganda_container">
+                            ${data && data.jenis === 'pilihan_ganda' ? generatePilihanGandaFields(data) : generateEmptyPilihanGandaFields()}
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Jawaban Benar</label>
+                            <div class="col-sm-12">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="jawaban_a" name="jawaban_benar" value="a" ${data && data.jawaban_benar === 'a' ? 'checked' : ''}>
+                                    <label class="form-check-label" for="jawaban_a">A</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="jawaban_b" name="jawaban_benar" value="b" ${data && data.jawaban_benar === 'b' ? 'checked' : ''}>
+                                    <label class="form-check-label" for="jawaban_b">B</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="jawaban_c" name="jawaban_benar" value="c" ${data && data.jawaban_benar === 'c' ? 'checked' : ''}>
+                                    <label class="form-check-label" for="jawaban_c">C</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="jawaban_d" name="jawaban_benar" value="d" ${data && data.jawaban_benar === 'd' ? 'checked' : ''}>
+                                    <label class="form-check-label" for="jawaban_d">D</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Multiple-choice section -->
-            <div id="pilihan_ganda_section" class="form-group" style="display: ${data && data.jenis === 'pilihan_ganda' ? 'block' : 'none'};">
+            <div id="pilihan_ganda_section" class="form-group" style="display: none;">
+                <label for="pertanyaan_pg" class="col-sm-2 control-label">Pertanyaan</label>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="pertanyaan_pg" name="pertanyaan_pg" value="${data ? data.pertanyaan : ''}" placeholder="Enter the question text">
+                </div>
                 <label class="col-sm-2 control-label">Pilihan Ganda</label>
                 <div class="col-sm-12">
                     <div id="pilihan_ganda_container">
@@ -267,47 +296,30 @@ function createSoal(data = null) {
                 confirmButtonText: 'Yes, save it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'Saving...',
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
-
                     $.ajax({
-                        data: formData,
                         url: '/soal/store',
                         type: 'POST',
-                        dataType: 'json',
+                        data: formData,
                         processData: false,
                         contentType: false,
-                        success: function (response) {
-                            $(form).trigger("reset");
-                            $('#mdlForm').modal('hide');
-                            $('#soal_table').DataTable().draw();
-                            Swal.fire({
-                                title: 'Success!',
-                                text: 'Your data has been saved.',
-                                icon: 'success',
-                                confirmButtonText: 'OK'
+                        success: function(response) {
+                            Swal.fire(
+                                'Saved!',
+                                'The data has been saved.',
+                                'success'
+                            ).then(() => {
+                                $('#mdlForm').modal('hide');
+                                // Refresh data table or perform other necessary actions
                             });
+                            fetch
                         },
-                        error: function (response) {
-                            console.log('Error:', response);
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'There was an error saving your data.',
-                                icon: 'error',
-                                confirmButtonText: 'OK'
-                            });
-                            if (response.responseJSON && response.responseJSON.errors) {
-                                $.each(response.responseJSON.errors, function(key, value) {
-                                    var input = $('[name=' + key + ']');
-                                    input.addClass('is-invalid');
-                                    input.after('<div class="invalid-feedback">' + value + '</div>');
-                                });
-                            }
+                        error: function(error) {
+                            console.log('Error saving data:', error);
+                            Swal.fire(
+                                'Error!',
+                                'There was an error saving the data.',
+                                'error'
+                            );
                         }
                     });
                 }
@@ -315,62 +327,80 @@ function createSoal(data = null) {
         }
     });
 
-    // Show/hide sections based on the 'jenis' selection
+    // Show/hide sections based on selected type
     $('#jenis').change(function() {
-        if ($(this).val() === 'pilihan_ganda') {
-            $('#pilihan_ganda_section').show();
-            $('#gambar_section').hide();
-            $('#jawaban_benar').prop('disabled', true);
-        } else if ($(this).val() === 'gambar') {
+        const selectedJenis = $(this).val();
+        if (selectedJenis === 'gambar') {
             $('#gambar_section').show();
             $('#pilihan_ganda_section').hide();
-            $('#jawaban_benar').prop('disabled', false);
+        } else if (selectedJenis === 'pilihan_ganda') {
+            $('#pilihan_ganda_section').show();
+            $('#gambar_section').hide();
+        } else {
+            $('#gambar_section').hide();
+            $('#pilihan_ganda_section').hide();
         }
-    });
+    }).trigger('change');
+}
 
-    function generatePilihanGandaFields(data) {
-        let fieldsHtml = '';
-        ['a', 'b', 'c', 'd'].forEach((option, index) => {
-            fieldsHtml += `
-                <div class="form-group">
-                    <label for="pilihan_${option}" class="col-sm-2 control-label">Pilihan ${option.toUpperCase()}</label>
-                    <div class="col-sm-12">
-                        <input type="text" class="form-control" id="pilihan_${option}" name="pilihan[${index}]" value="${data['pilihan_' + option] || ''}" placeholder="Enter option ${option.toUpperCase()}">
-                    </div>
-                </div>
-            `;
-        });
-        return fieldsHtml;
-    }
+// Generate fields for Pilihan Ganda
+function generatePilihanGandaFields(data) {
+    return `
+        <div class="form-group">
+            <label for="pilihan_a" class="col-sm-2 control-label">A</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="pilihan_a" name="pilihan[a]" value="${data ? data.pilihan_a : ''}" placeholder="Enter option A">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pilihan_b" class="col-sm-2 control-label">B</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="pilihan_b" name="pilihan[b]" value="${data ? data.pilihan_b : ''}" placeholder="Enter option B">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pilihan_c" class="col-sm-2 control-label">C</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="pilihan_c" name="pilihan[c]" value="${data ? data.pilihan_c : ''}" placeholder="Enter option C">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pilihan_d" class="col-sm-2 control-label">D</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="pilihan_d" name="pilihan[d]" value="${data ? data.pilihan_d : ''}" placeholder="Enter option D">
+            </div>
+        </div>
+    `;
+}
 
-    function generateEmptyPilihanGandaFields() {
-        return `
-            <div class="form-group">
-                <label for="pilihan_a" class="col-sm-2 control-label">Pilihan A</label>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="pilihan_a" name="pilihan[0]" placeholder="Enter option A">
-                </div>
+// Generate empty fields for Pilihan Ganda
+function generateEmptyPilihanGandaFields() {
+    return `
+        <div class="form-group">
+            <label for="pilihan_a" class="col-sm-2 control-label">A</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="pilihan_a" name="pilihan[a]" placeholder="Enter option A">
             </div>
-            <div class="form-group">
-                <label for="pilihan_b" class="col-sm-2 control-label">Pilihan B</label>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="pilihan_b" name="pilihan[1]" placeholder="Enter option B">
-                </div>
+        </div>
+        <div class="form-group">
+            <label for="pilihan_b" class="col-sm-2 control-label">B</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="pilihan_b" name="pilihan[b]" placeholder="Enter option B">
             </div>
-            <div class="form-group">
-                <label for="pilihan_c" class="col-sm-2 control-label">Pilihan C</label>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="pilihan_c" name="pilihan[2]" placeholder="Enter option C">
-                </div>
+        </div>
+        <div class="form-group">
+            <label for="pilihan_c" class="col-sm-2 control-label">C</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="pilihan_c" name="pilihan[c]" placeholder="Enter option C">
             </div>
-            <div class="form-group">
-                <label for="pilihan_d" class="col-sm-2 control-label">Pilihan D</label>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="pilihan_d" name="pilihan[3]" placeholder="Enter option D">
-                </div>
+        </div>
+        <div class="form-group">
+            <label for="pilihan_d" class="col-sm-2 control-label">D</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="pilihan_d" name="pilihan[d]" placeholder="Enter option D">
             </div>
-        `;
-    }
+        </div>
+    `;
 }
 
 

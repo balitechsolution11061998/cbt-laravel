@@ -30,67 +30,59 @@ class ManagementSoalController extends Controller
     }
 
 
-
     public function store(Request $request)
     {
-        // Validate the request data
-        $request->validate([
-            'id' => 'nullable|exists:soal,id', // Validate ID for update
-            'paket_soal_id' => 'required|exists:paket_soal,id',
+        // Debugging purpose
+
+        // Validation rules
+        $rules = [
+            'paket_soal_id' => 'required|integer|exists:paket_soal,id',
             'jenis' => 'required|in:pilihan_ganda,gambar',
-            'pertanyaan' => 'nullable|string',
-            'jawaban_essai' => 'nullable|string', // Validate for essay answer
+            'pertanyaan_pg' => 'nullable|string', // Updated field name
+            'pertanyaan_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'pilihan_ganda_a' => 'nullable|string',
             'pilihan_ganda_b' => 'nullable|string',
             'pilihan_ganda_c' => 'nullable|string',
             'pilihan_ganda_d' => 'nullable|string',
-            'jawaban_benar' => 'nullable|string', // For storing the correct answer for pilihan_ganda
-            'pertanyaan_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048' // Validate image if exists
-        ]);
+            'jawaban_benar' => 'nullable|in:a,b,c,d',
+        ];
 
-        // Start a database transaction
-        \DB::transaction(function () use ($request) {
-            // Determine the correct answer based on the type
-            $jawabanBenar = $request->jenis === 'pilihan_ganda' ? $request->jawaban_benar : null;
+        // Validate the request
+        $request->validate($rules);
 
-            // Handle image upload if provided
-            $imagePath = null;
-            if ($request->hasFile('pertanyaan_image')) {
-                $image = $request->file('pertanyaan_image');
-                $imagePath = $image->store('public/images');
+        // Process the form data
+        $data = $request->except(['id']);
+
+        // Map pertanyaan_pg to pertanyaan if applicable
+        if ($request->jenis == 'pilihan_ganda') {
+            $data['pertanyaan'] = $request->input('pertanyaan_pg');
+        }
+
+        // Handle file upload
+        if ($request->hasFile('pertanyaan_image')) {
+            $image = $request->file('pertanyaan_image');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $data['pertanyaan_image'] = 'images/'.$imageName;
+        }
+
+        // Handle storing or updating data
+        if ($request->id) {
+            $soal = Soal::find($request->id);
+
+            if ($soal) {
+                $soal->update($data);
+            } else {
+                return response()->json(['error' => 'Soal not found'], 404);
             }
-
-            // Create or update the Soal
-            $soal = Soal::updateOrCreate(
-                ['id' => $request->id],
-                [
-                    'paket_soal_id' => $request->paket_soal_id,
-                    'jenis' => $request->jenis,
-                    'pertanyaan' => $request->pertanyaan,
-                    'pertanyaan_a' => $request->pilihan_ganda_a,
-                    'pertanyaan_b' => $request->pilihan_ganda_b,
-                    'pertanyaan_c' => $request->pilihan_ganda_c,
-                    'pertanyaan_d' => $request->pilihan_ganda_d,
-                    'jawaban_benar' => $jawabanBenar,
-                    'pertanyaan_image' => $imagePath
-                ]
-            );
-
-            // Handle pilihan_ganda type only
-            if ($request->jenis === 'pilihan_ganda') {
-                // Delete existing pilihan for this soal
-                SoalPilihan::where('soal_id', $soal->id)->delete();
-
-                // Insert new pilihan for pilihan_ganda
-                SoalPilihan::create([
-                    'soal_id' => $soal->id,
-                    'jawaban' => $request->jawaban_benar,
-                ]);
-            }
-        });
+        } else {
+            Soal::create($data);
+        }
 
         return response()->json(['success' => true]);
     }
+
+
 
 
     public function edit($id)
