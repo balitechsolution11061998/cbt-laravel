@@ -149,9 +149,8 @@ function importSoal(){
 function createSoal(data = null) {
     $('#mdlFormTitle').text(data ? 'Edit Soal' : 'Create New Soal');
 
-    // Define the common fields
     let formHtml = `
-        <form id="soalForm" name="soalForm" class="form-horizontal">
+        <form id="soalForm" name="soalForm" class="form-horizontal" enctype="multipart/form-data">
             <input type="hidden" name="id" id="id" value="${data ? data.id : ''}">
             <div class="form-group">
                 <label for="paket_soal_id" class="col-sm-2 control-label">Paket Soal</label>
@@ -161,21 +160,40 @@ function createSoal(data = null) {
                     </select>
                 </div>
             </div>
+
             <div class="form-group">
                 <label for="jenis" class="col-sm-2 control-label">Jenis</label>
                 <div class="col-sm-12">
                     <select class="form-control" id="jenis" name="jenis" required>
                         <option value="">Select Jenis</option>
                         <option value="pilihan_ganda" ${data && data.jenis === 'pilihan_ganda' ? 'selected' : ''}>Pilihan Ganda</option>
+                        <option value="gambar" ${data && data.jenis === 'gambar' ? 'selected' : ''}>Gambar</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group">
+
+            <!-- Image upload section -->
+            <div id="gambar_section" class="form-group" style="display: ${data && data.jenis === 'gambar' ? 'block' : 'none'};">
                 <label for="pertanyaan" class="col-sm-2 control-label">Pertanyaan</label>
                 <div class="col-sm-12">
-                    <textarea class="form-control" id="pertanyaan" name="pertanyaan" placeholder="Enter Pertanyaan">${data ? data.pertanyaan : ''}</textarea>
+                    <input type="text" class="form-control" id="pertanyaan" name="pertanyaan" value="${data ? data.pertanyaan : ''}" placeholder="Enter the question text">
+                </div>
+                <div class="form-group">
+                    <label for="pertanyaan_image" class="col-sm-2 control-label">Media (Image)</label>
+                    <div class="col-sm-12">
+                        <input type="file" class="form-control" id="pertanyaan_image" name="pertanyaan_image" accept="image/*">
+                    </div>
+                    ${data && data.pertanyaan_image ? `<div class="form-group"><label class="col-sm-2 control-label">Current Image</label><div class="col-sm-12"><img src="${data.pertanyaan_image}" class="img-thumbnail" style="max-width: 200px;"></div></div>` : ''}
+                </div>
+                <div class="form-group">
+                    <label for="jawaban_benar" class="col-sm-2 control-label">Jawaban Benar</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="jawaban_benar" name="jawaban_benar" value="${data ? data.jawaban_benar : ''}" placeholder="Enter the correct answer" ${data && data.jenis === 'gambar' ? '' : 'disabled'}>
+                    </div>
                 </div>
             </div>
+
+            <!-- Multiple-choice section -->
             <div id="pilihan_ganda_section" class="form-group" style="display: ${data && data.jenis === 'pilihan_ganda' ? 'block' : 'none'};">
                 <label class="col-sm-2 control-label">Pilihan Ganda</label>
                 <div class="col-sm-12">
@@ -205,12 +223,7 @@ function createSoal(data = null) {
                     </div>
                 </div>
             </div>
-            <div id="essai_section" class="form-group" style="display: ${data && data.jenis === 'essai' ? 'block' : 'none'};">
-                <label for="jawaban_essai" class="col-sm-2 control-label">Jawaban Essai</label>
-                <div class="col-sm-12">
-                    <textarea class="form-control" id="jawaban_essai" name="jawaban_essai" placeholder="Enter Jawaban Essai">${data ? data.jawaban_benar : ''}</textarea>
-                </div>
-            </div>
+
             <div class="col-sm-offset-2 col-sm-10 mt-3">
                 <button type="submit" class="btn btn-primary" id="saveBtn" value="${data ? 'edit' : 'create'}">Save changes</button>
             </div>
@@ -239,9 +252,11 @@ function createSoal(data = null) {
         }
     });
 
-    // Initialize form validation
+    // Initialize form validation and submission
     $('#soalForm').validate({
         submitHandler: function(form) {
+            let formData = new FormData(form);
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to save the changes?",
@@ -261,10 +276,12 @@ function createSoal(data = null) {
                     });
 
                     $.ajax({
-                        data: $(form).serialize(),
+                        data: formData,
                         url: '/soal/store',
                         type: 'POST',
                         dataType: 'json',
+                        processData: false,
+                        contentType: false,
                         success: function (response) {
                             $(form).trigger("reset");
                             $('#mdlForm').modal('hide');
@@ -284,7 +301,6 @@ function createSoal(data = null) {
                                 icon: 'error',
                                 confirmButtonText: 'OK'
                             });
-                            // Display validation errors
                             if (response.responseJSON && response.responseJSON.errors) {
                                 $.each(response.responseJSON.errors, function(key, value) {
                                     var input = $('[name=' + key + ']');
@@ -296,118 +312,70 @@ function createSoal(data = null) {
                     });
                 }
             });
-        },
-        rules: {
-            paket_soal_id: {
-                required: true
-            },
-            jenis: {
-                required: true
-            },
-            pertanyaan: {
-                required: true
-            },
-            media: {
-                required: true
-            },
-            ulang_media: {
-                required: true
-            },
-            pilihan_ganda_a: {
-                required: function(element) {
-                    return $('#jenis').val() === 'pilihan_ganda';
-                }
-            },
-            pilihan_ganda_b: {
-                required: function(element) {
-                    return $('#jenis').val() === 'pilihan_ganda';
-                }
-            },
-            pilihan_ganda_c: {
-                required: function(element) {
-                    return $('#jenis').val() === 'pilihan_ganda';
-                }
-            },
-            pilihan_ganda_d: {
-                required: function(element) {
-                    return $('#jenis').val() === 'pilihan_ganda';
-                }
-            },
-            jawaban_benar: {
-                required: function(element) {
-                    return $('#jenis').val() === 'pilihan_ganda';
-                }
-            },
-            jawaban_essai: {
-                required: function(element) {
-                    return $('#jenis').val() === 'essai';
-                }
-            }
-        },
-        messages: {
-            paket_soal_id: {
-                required: "Please select the Paket Soal"
-            },
-            jenis: {
-                required: "Please select the Jenis"
-            },
-            pertanyaan: {
-                required: "Please enter the Pertanyaan"
-            },
-            media: {
-                required: "Please enter the Media"
-            },
-            ulang_media: {
-                required: "Please enter the Ulang Media"
-            },
-            pilihan_ganda_a: {
-                required: "Please enter Option A"
-            },
-            pilihan_ganda_b: {
-                required: "Please enter Option B"
-            },
-            pilihan_ganda_c: {
-                required: "Please enter Option C"
-            },
-            pilihan_ganda_d: {
-                required: "Please enter Option D"
-            },
-            jawaban_benar: {
-                required: "Please select the correct answer"
-            },
-            jawaban_essai: {
-                required: "Please enter the answer for Essai"
-            }
-        },
-        errorClass: 'is-invalid',
-        validClass: 'is-valid',
-        errorElement: 'div',
-        errorPlacement: function(error, element) {
-            error.addClass('invalid-feedback');
-            element.closest('.form-group').append(error);
-        },
-        highlight: function(element, errorClass, validClass) {
-            $(element).addClass(errorClass).removeClass(validClass);
-        },
-        unhighlight: function(element, errorClass, validClass) {
-            $(element).removeClass(errorClass).addClass(validClass);
         }
     });
 
-    // Show/hide sections based on the jenis selection
+    // Show/hide sections based on the 'jenis' selection
     $('#jenis').change(function() {
         if ($(this).val() === 'pilihan_ganda') {
             $('#pilihan_ganda_section').show();
-            $('#essai_section').hide();
-        } else if ($(this).val() === 'essai') {
+            $('#gambar_section').hide();
+            $('#jawaban_benar').prop('disabled', true);
+        } else if ($(this).val() === 'gambar') {
+            $('#gambar_section').show();
             $('#pilihan_ganda_section').hide();
-            $('#essai_section').show();
-        } else {
-            $('#pilihan_ganda_section').hide();
-            $('#essai_section').hide();
+            $('#jawaban_benar').prop('disabled', false);
         }
-    }).trigger('change'); // Trigger change to set the initial state
+    });
+
+    function generatePilihanGandaFields(data) {
+        let fieldsHtml = '';
+        ['a', 'b', 'c', 'd'].forEach((option, index) => {
+            fieldsHtml += `
+                <div class="form-group">
+                    <label for="pilihan_${option}" class="col-sm-2 control-label">Pilihan ${option.toUpperCase()}</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="pilihan_${option}" name="pilihan[${index}]" value="${data['pilihan_' + option] || ''}" placeholder="Enter option ${option.toUpperCase()}">
+                    </div>
+                </div>
+            `;
+        });
+        return fieldsHtml;
+    }
+
+    function generateEmptyPilihanGandaFields() {
+        return `
+            <div class="form-group">
+                <label for="pilihan_a" class="col-sm-2 control-label">Pilihan A</label>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="pilihan_a" name="pilihan[0]" placeholder="Enter option A">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pilihan_b" class="col-sm-2 control-label">Pilihan B</label>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="pilihan_b" name="pilihan[1]" placeholder="Enter option B">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pilihan_c" class="col-sm-2 control-label">Pilihan C</label>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="pilihan_c" name="pilihan[2]" placeholder="Enter option C">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pilihan_d" class="col-sm-2 control-label">Pilihan D</label>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="pilihan_d" name="pilihan[3]" placeholder="Enter option D">
+                </div>
+            </div>
+        `;
+    }
 }
+
+
+
+
 function editSoal(id) {
     $.ajax({
         url: `/soal/${id}/edit`, // Adjust the endpoint to match your route

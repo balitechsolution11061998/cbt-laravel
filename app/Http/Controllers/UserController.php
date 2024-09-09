@@ -329,7 +329,7 @@ class UserController extends Controller
         //     }
         // }
         // Fetch the user's timezone or use a default one
-        $userTimezone = $user->timezone ?? 'Asia/Jakarta';
+        $userTimezone = $user->timezone ?? 'Asia/Makassar';
 
         // Get the current time in the user's timezone
         $now = \Carbon\Carbon::now($userTimezone);
