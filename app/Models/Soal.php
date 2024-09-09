@@ -13,6 +13,7 @@ class Soal extends Model
         'paket_soal_id',
         'jenis',
         'pertanyaan',
+        'pertanyaan_image',
         'pertanyaan_a',
         'pertanyaan_b',
         'pertanyaan_c',

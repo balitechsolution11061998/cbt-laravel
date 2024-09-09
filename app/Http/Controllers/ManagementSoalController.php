@@ -33,41 +33,53 @@ class ManagementSoalController extends Controller
     public function store(Request $request)
     {
         // Debugging purpose
+        // dd($request->all());
 
         // Validation rules
         $rules = [
             'paket_soal_id' => 'required|integer|exists:paket_soal,id',
             'jenis' => 'required|in:pilihan_ganda,gambar',
-            'pertanyaan_pg' => 'nullable|string', // Updated field name
+            'pertanyaan_pg' => 'nullable|string',
             'pertanyaan_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'pilihan_ganda_a' => 'nullable|string',
-            'pilihan_ganda_b' => 'nullable|string',
-            'pilihan_ganda_c' => 'nullable|string',
-            'pilihan_ganda_d' => 'nullable|string',
+            'pertanyaan_a' => 'nullable|string',
+            'pertanyaan_b' => 'nullable|string',
+            'pertanyaan_c' => 'nullable|string',
+            'pertanyaan_d' => 'nullable|string',
             'jawaban_benar' => 'nullable|in:a,b,c,d',
         ];
 
         // Validate the request
-        $request->validate($rules);
+        $validatedData = $request->validate($rules);
 
         // Process the form data
-        $data = $request->except(['id']);
+        $data = $request->only([
+            'paket_soal_id',
+            'jenis',
+            'jawaban_benar',
+            'pertanyaan_pg',
+            'pertanyaan_a',
+            'pertanyaan_b',
+            'pertanyaan_c',
+            'pertanyaan_d'
+        ]);
 
         // Map pertanyaan_pg to pertanyaan if applicable
-        if ($request->jenis == 'pilihan_ganda') {
+        if ($data['jenis'] === 'pilihan_ganda') {
             $data['pertanyaan'] = $request->input('pertanyaan_pg');
+        } else {
+            $data['pertanyaan'] = $request->input('pertanyaan');
         }
 
         // Handle file upload
         if ($request->hasFile('pertanyaan_image')) {
             $image = $request->file('pertanyaan_image');
-            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $imageName);
-            $data['pertanyaan_image'] = 'images/'.$imageName;
+            $data['pertanyaan_image'] = 'images/' . $imageName;
         }
 
         // Handle storing or updating data
-        if ($request->id) {
+        if ($request->has('id')) {
             $soal = Soal::find($request->id);
 
             if ($soal) {

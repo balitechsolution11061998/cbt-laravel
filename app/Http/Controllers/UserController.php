@@ -333,8 +333,8 @@ class UserController extends Controller
 
         // Get the current time in the user's timezone
         $now = \Carbon\Carbon::now($userTimezone);
-
         if ($user && $user->siswa && $user->siswa->kelas) {
+
             $currentUjian = $user->siswa->kelas->ujian->filter(function ($ujian) use ($now, $userTimezone) {
                 // Parse the exam start time in the user's timezone
                 $ujianStartTime = \Carbon\Carbon::parse($ujian->waktu_mulai, $userTimezone);
@@ -357,7 +357,6 @@ class UserController extends Controller
                 }
             }
         }
-
 
         if ($user) {
             return view('users.profile', [

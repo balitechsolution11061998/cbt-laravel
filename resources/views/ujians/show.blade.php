@@ -150,6 +150,7 @@
                     </div>
                     <div class="card-body">
                         <p id="question-text">Hasil dari 4 log 8 + 4 log 32 adalah ...</p>
+                        <img id="question-image" src="" alt="Question Image" style="display: none; max-width: 100%; height: auto;">
                         <div id="question-options" class="question-options">
                             <!-- Options will be inserted here by JavaScript -->
                         </div>
@@ -181,7 +182,6 @@
     </div>
 
     <script>
-
         const questions = @json($ujian->paketSoal->soals);
         const answeredQuestions = JSON.parse(localStorage.getItem('answeredQuestions')) || {};
         let currentQuestion = 0;
@@ -190,31 +190,44 @@
             currentQuestion = index;
             document.getElementById('question-number').textContent = `Soal No. ${index + 1}`;
             document.getElementById('question-text').textContent = questions[index].pertanyaan;
-            // Cek apakah soal adalah pilihan ganda atau essay
-            if (questions[index].jenis === 'essai') {
-                const answer = answeredQuestions[index] || '';
-                document.getElementById('question-options').innerHTML = `
-            <div class="form-group">
-                <label for="essay-answer">Jawaban:</label>
-                <textarea class="form-control" id="essay-answer" rows="4" onchange="markAnsweredEssay(${index})">${answer}</textarea>
-            </div>
-        `;
+
+            // Show or hide image based on question type
+            const imageElement = document.getElementById('question-image');
+            console.log(questions[index],'masuk sini');
+
+            if (questions[index].jenis === 'gambar') {
+                imageElement.src = '/'.questions[index].pertanyaan_image; // Set image source
+                imageElement.style.display = 'block'; // Show the image
+                document.getElementById('question-options').innerHTML = ''; // Clear options for image questions
             } else {
-                const options = [
-                    questions[index].pertanyaan_a,
-                    questions[index].pertanyaan_b,
-                    questions[index].pertanyaan_c,
-                    questions[index].pertanyaan_d
-                ];
+                imageElement.style.display = 'none'; // Hide the image
+                if (questions[index].jenis === 'essai') {
+                    const answer = answeredQuestions[index] || '';
+                    document.getElementById('question-options').innerHTML = `
+                        <div class="form-group">
+                            <label for="essay-answer">Jawaban:</label>
+                            <textarea class="form-control" id="essay-answer" rows="4" onchange="markAnsweredEssay(${index})">${answer}</textarea>
+                        </div>
+                    `;
+                } else {
+                    const options = [
+                        questions[index].pertanyaan_a,
+                        questions[index].pertanyaan_b,
+                        questions[index].pertanyaan_c,
+                        questions[index].pertanyaan_d
+                    ];
 
-                const optionsHtml = options.map((option, i) => `
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="question${index}" id="option${String.fromCharCode(65 + i)}" ${answeredQuestions[index] === String.fromCharCode(65 + i) ? 'checked' : ''} onclick="markAnswered(${index}, '${String.fromCharCode(65 + i)}')">
-                <label class="form-check-label" for="option${String.fromCharCode(65 + i)}">${String.fromCharCode(65 + i)}. ${option}</label>
-            </div>
-        `).join('');
+                    const optionsHtml = options.map((option, i) => `
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question${index}" id="option${String.fromCharCode(65 + i)}" ${answeredQuestions[index] === String.fromCharCode(65 + i) ? 'checked' : ''} onclick="markAnswered(${index}, '${String.fromCharCode(65 + i)}')">
+                            <label class="form-check-label" for="option${String.fromCharCode(65 + i)}">
+                                ${option}
+                            </label>
+                        </div>
+                    `).join('');
 
-                document.getElementById('question-options').innerHTML = optionsHtml;
+                    document.getElementById('question-options').innerHTML = optionsHtml;
+                }
             }
         }
 
@@ -226,7 +239,6 @@
             document.getElementById(`question-btn-${index}`).classList.add('btn-warning');
             updateAnsweredCount();
         }
-
 
         function navigateQuestion(direction) {
             const newIndex = currentQuestion + direction;
@@ -248,89 +260,56 @@
             document.getElementById('answered-count').textContent = `${answeredCount} dikerjakan`;
         }
 
-        function startCountdown() {
-            const waktuMulai = new Date('{{ $ujian->waktu_mulai }}').getTime();
-            const durasi = {{ $ujian->durasi }} * 60 * 1000;
-
-            const countdownElement = document.getElementById('time-remaining');
-
-            function updateCountdown() {
+        function startCountdown(endTime) {
+            const countdownElement = document.getElementById('countdown-timer');
+            const countdownInterval = setInterval(function () {
                 const now = new Date().getTime();
-                const elapsedTime = now - waktuMulai;
-                const remainingTime = durasi - elapsedTime;
+                const timeRemaining = Math.floor((endTime - now) / 1000);
 
-                if (remainingTime <= 0) {
-                    countdownElement.textContent = 'Waktu habis!';
+                if (timeRemaining <= 0) {
                     clearInterval(countdownInterval);
+                    countdownElement.innerHTML = 'Waktu Habis';
+                    // Trigger exam submission or redirection here
+                    alert('Waktu ujian telah habis!');
+                    // Optionally, redirect to a completion page
+                    // window.location.href = '/ujian/selesai';
                 } else {
-                    const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-                    const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-                    countdownElement.textContent = `${hours} jam, ${minutes} menit, ${seconds} detik`;
+                    const minutes = Math.floor(timeRemaining / 60);
+                    const seconds = timeRemaining % 60;
+                    countdownElement.innerHTML = `${minutes} menit ${seconds < 10 ? '0' : ''}${seconds} detik`;
                 }
-            }
-
-            updateCountdown();
-            const countdownInterval = setInterval(updateCountdown, 1000);
+            }, 1000);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const examDuration = {{ $ujian->durasi }} * 60; // Exam duration in seconds
-    const countdownElement = document.getElementById('countdown-timer');
-    const storageKey = 'examCountdown';
+            const countdownElement = document.getElementById('countdown-timer');
+            const storageKey = 'examCountdown';
 
-    // Function to start the countdown
-    function startCountdown(endTime) {
-        const countdownInterval = setInterval(function () {
-            const now = new Date().getTime();
-            const timeRemaining = Math.floor((endTime - now) / 1000);
+            if (localStorage.getItem(storageKey)) {
+                const savedData = JSON.parse(localStorage.getItem(storageKey));
+                const now = new Date().getTime();
 
-            if (timeRemaining <= 0) {
-                clearInterval(countdownInterval);
-                countdownElement.innerHTML = 'Waktu Habis';
-                // Trigger exam submission or redirection here
-                alert('Waktu ujian telah habis!');
-                // Optionally, redirect to a completion page
-                // window.location.href = '/ujian/selesai';
+                if (savedData.endTime > now) {
+                    startCountdown(savedData.endTime);
+                } else {
+                    countdownElement.innerHTML = 'Waktu Habis';
+                    // Optionally handle exam timeout here
+                }
             } else {
-                const minutes = Math.floor(timeRemaining / 60);
-                const seconds = timeRemaining % 60;
-                countdownElement.innerHTML = `${minutes} menit ${seconds < 10 ? '0' : ''}${seconds} detik`;
+                const now = new Date().getTime();
+                const endTime = now + (examDuration * 1000); // Calculate end time in milliseconds
+                localStorage.setItem(storageKey, JSON.stringify({ endTime }));
+                startCountdown(endTime);
             }
-        }, 1000);
-    }
 
-    // Check if there's an existing countdown in localStorage
-    if (localStorage.getItem(storageKey)) {
-        const savedData = JSON.parse(localStorage.getItem(storageKey));
-        const now = new Date().getTime();
-
-        // If the end time is in the future, continue the countdown
-        if (savedData.endTime > now) {
-            startCountdown(savedData.endTime);
-        } else {
-            countdownElement.innerHTML = 'Waktu Habis';
-            // Optionally handle exam timeout here
-        }
-    } else {
-        // If there's no saved countdown, start a new one
-        const now = new Date().getTime();
-        const endTime = now + (examDuration * 1000); // Calculate end time in milliseconds
-        localStorage.setItem(storageKey, JSON.stringify({ endTime }));
-        startCountdown(endTime);
-    }
-
-    // Prevent navigation during the exam
-    window.addEventListener('beforeunload', function (event) {
-        event.preventDefault();
-        event.returnValue = 'Ujian belum selesai, apakah Anda yakin ingin meninggalkan halaman ini?';
-        return 'Ujian belum selesai, apakah Anda yakin ingin meninggalkan halaman ini?';
-    });
-
-
+            window.addEventListener('beforeunload', function (event) {
+                event.preventDefault();
+                event.returnValue = 'Ujian belum selesai, apakah Anda yakin ingin meninggalkan halaman ini?';
+                return 'Ujian belum selesai, apakah Anda yakin ingin meninggalkan halaman ini?';
+            });
 
             showQuestion(0);
-            startCountdown();
             Object.keys(answeredQuestions).forEach(index => {
                 document.getElementById(`question-btn-${index}`).classList.remove('btn-outline-primary');
                 document.getElementById(`question-btn-${index}`).classList.add('btn-warning');
@@ -351,8 +330,6 @@
                     cancelButtonText: 'Tidak, lanjutkan'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Logic untuk mengakhiri ujian, seperti mengirim hasil ke server
-                        // Mengirim hasil ujian ke server menggunakan AJAX
                         fetch('/ujian/end', {
                                 method: 'POST',
                                 headers: {
@@ -368,29 +345,23 @@
                             .then(response => response.json())
                             .then(data => {
                                 if (data.success) {
-                                    Swal.fire('Ujian diakhiri!', 'Ujian Anda telah diakhiri.',
-                                            'success')
+                                    Swal.fire('Ujian diakhiri!', 'Ujian Anda telah diakhiri.', 'success')
                                         .then(() => {
-                                            // Redirect ke halaman hasil ujian setelah sukses mengakhiri ujian
-                                            window.location.href =
-                                                `/ujian/hasil-ujian/${data.hasil_ujian_id}`;
+                                            window.location.href = `/ujian/hasil-ujian/${data.hasil_ujian_id}`;
                                         });
                                 } else {
-                                    Swal.fire('Gagal!',
-                                        'Terjadi kesalahan saat mengakhiri ujian.', 'error');
+                                    Swal.fire('Gagal!', 'Terjadi kesalahan saat mengakhiri ujian.', 'error');
                                 }
                             })
                             .catch(error => {
-                                Swal.fire('Gagal!', 'Terjadi kesalahan saat mengakhiri ujian.',
-                                    'error');
+                                Swal.fire('Gagal!', 'Terjadi kesalahan saat mengakhiri ujian.', 'error');
                             });
-
-
                     }
                 });
             });
         });
     </script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

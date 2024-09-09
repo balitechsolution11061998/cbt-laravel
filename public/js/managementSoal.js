@@ -148,6 +148,7 @@ function importSoal(){
 
 function createSoal(data = null) {
     $('#mdlFormTitle').text(data ? 'Edit Soal' : 'Create New Soal');
+    console.log("masuk sini",data);
 
     let formHtml = `
         <form id="soalForm" name="soalForm" class="form-horizontal" enctype="multipart/form-data">
@@ -183,15 +184,28 @@ function createSoal(data = null) {
                     <div class="col-sm-12">
                         <input type="file" class="form-control" id="pertanyaan_image" name="pertanyaan_image" accept="image/*">
                     </div>
-                    ${data && data.pertanyaan_image ? `<div class="form-group"><label class="col-sm-2 control-label">Current Image</label><div class="col-sm-12"><img src="${data.pertanyaan_image}" class="img-thumbnail" style="max-width: 200px;"></div></div>` : ''}
+                    ${data && data.pertanyaan_image ? `<div class="form-group"><label class="col-sm-2 control-label">Current Image</label><div class="col-sm-12"><img src="/${data.pertanyaan_image}" class="img-thumbnail" style="max-width: 200px;"></div></div>` : ''}
                 </div>
 
                 <!-- Options for multiple-choice questions, even when the type is 'gambar' -->
-                <div class="form-group">
+
+            </div>
+
+            <!-- Multiple-choice section -->
+            <div id="pilihan_ganda_section" class="form-group" style="display: none;">
+                <label for="pertanyaan" class="col-sm-2 control-label">Pertanyaan</label>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="pertanyaan" name="pertanyaan" value="${data ? data.pertanyaan : ''}" placeholder="Enter the question text">
+                </div>
+                <label class="col-sm-2 control-label">Pilihan Ganda</label>
+
+            </div>
+            <div id="pilihan_menu">
+                    <div class="form-group">
                     <label class="col-sm-2 control-label">Pilihan Ganda</label>
                     <div class="col-sm-12">
                         <div id="pilihan_ganda_container">
-                            ${data && data.jenis === 'pilihan_ganda' ? generatePilihanGandaFields(data) : generateEmptyPilihanGandaFields()}
+                            ${data ? generatePilihanGandaFields(data) : generateEmptyPilihanGandaFields()}
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Jawaban Benar</label>
@@ -217,42 +231,6 @@ function createSoal(data = null) {
                     </div>
                 </div>
             </div>
-
-            <!-- Multiple-choice section -->
-            <div id="pilihan_ganda_section" class="form-group" style="display: none;">
-                <label for="pertanyaan_pg" class="col-sm-2 control-label">Pertanyaan</label>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="pertanyaan_pg" name="pertanyaan_pg" value="${data ? data.pertanyaan : ''}" placeholder="Enter the question text">
-                </div>
-                <label class="col-sm-2 control-label">Pilihan Ganda</label>
-                <div class="col-sm-12">
-                    <div id="pilihan_ganda_container">
-                        ${data && data.jenis === 'pilihan_ganda' ? generatePilihanGandaFields(data) : generateEmptyPilihanGandaFields()}
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Jawaban Benar</label>
-                        <div class="col-sm-12">
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" id="jawaban_a" name="jawaban_benar" value="a" ${data && data.jawaban_benar === 'a' ? 'checked' : ''}>
-                                <label class="form-check-label" for="jawaban_a">A</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" id="jawaban_b" name="jawaban_benar" value="b" ${data && data.jawaban_benar === 'b' ? 'checked' : ''}>
-                                <label class="form-check-label" for="jawaban_b">B</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" id="jawaban_c" name="jawaban_benar" value="c" ${data && data.jawaban_benar === 'c' ? 'checked' : ''}>
-                                <label class="form-check-label" for="jawaban_c">C</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" id="jawaban_d" name="jawaban_benar" value="d" ${data && data.jawaban_benar === 'd' ? 'checked' : ''}>
-                                <label class="form-check-label" for="jawaban_d">D</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="col-sm-offset-2 col-sm-10 mt-3">
                 <button type="submit" class="btn btn-primary" id="saveBtn" value="${data ? 'edit' : 'create'}">Save changes</button>
             </div>
@@ -345,59 +323,63 @@ function createSoal(data = null) {
 
 // Generate fields for Pilihan Ganda
 function generatePilihanGandaFields(data) {
+    console.log(data, 'data');
     return `
         <div class="form-group">
             <label for="pilihan_a" class="col-sm-2 control-label">A</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_a" name="pilihan[a]" value="${data ? data.pilihan_a : ''}" placeholder="Enter option A">
+                <input type="text" class="form-control" id="pilihan_a" name="pertanyaan_a" value="${data ? data.pertanyaan_a || '' : ''}" placeholder="Enter option A">
             </div>
         </div>
         <div class="form-group">
             <label for="pilihan_b" class="col-sm-2 control-label">B</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_b" name="pilihan[b]" value="${data ? data.pilihan_b : ''}" placeholder="Enter option B">
+                <input type="text" class="form-control" id="pilihan_b" name="pertanyaan_b" value="${data ? data.pertanyaan_b || '' : ''}" placeholder="Enter option B">
             </div>
         </div>
         <div class="form-group">
             <label for="pilihan_c" class="col-sm-2 control-label">C</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_c" name="pilihan[c]" value="${data ? data.pilihan_c : ''}" placeholder="Enter option C">
+                <input type="text" class="form-control" id="pilihan_c" name="pertanyaan_c" value="${data ? data.pertanyaan_c || '' : ''}" placeholder="Enter option C">
             </div>
         </div>
         <div class="form-group">
             <label for="pilihan_d" class="col-sm-2 control-label">D</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_d" name="pilihan[d]" value="${data ? data.pilihan_d : ''}" placeholder="Enter option D">
+                <input type="text" class="form-control" id="pilihan_d" name="pertanyaan_d" value="${data ? data.pertanyaan_d || '' : ''}" placeholder="Enter option D">
             </div>
         </div>
     `;
 }
 
+
+
 // Generate empty fields for Pilihan Ganda
 function generateEmptyPilihanGandaFields() {
+    console.log("masuk sini");
     return `
         <div class="form-group">
             <label for="pilihan_a" class="col-sm-2 control-label">A</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_a" name="pilihan[a]" placeholder="Enter option A">
+                <input type="text" class="form-control" id="pilihan_a" name="pertanyaan_a" value="" placeholder="Enter option A">
             </div>
         </div>
         <div class="form-group">
             <label for="pilihan_b" class="col-sm-2 control-label">B</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_b" name="pilihan[b]" placeholder="Enter option B">
+                <input type="text" class="form-control" id="pilihan_b" name="pertanyaan_b" value="" placeholder="Enter option B">
             </div>
         </div>
         <div class="form-group">
             <label for="pilihan_c" class="col-sm-2 control-label">C</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_c" name="pilihan[c]" placeholder="Enter option C">
+                <input type="text" class="form-control" id="pilihan_c" name="pertanyaan_c" value="" placeholder="Enter option C">
             </div>
         </div>
         <div class="form-group">
             <label for="pilihan_d" class="col-sm-2 control-label">D</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_d" name="pilihan[d]" placeholder="Enter option D">
+                <input type="text" class="form-control" id="pilihan_d" name="pertanyaan_d" value="" placeholder="Enter option D">
             </div>
         </div>
     `;
@@ -469,59 +451,4 @@ function deleteSoal(id) {
     });
 }
 
-function generateEmptyPilihanGandaFields() {
-    return `
-        <div class="form-group">
-            <label for="pilihan_ganda_a" class="col-sm-2 control-label">A</label>
-            <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_ganda_a" name="pilihan_ganda_a" placeholder="Enter Option A">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="pilihan_ganda_b" class="col-sm-2 control-label">B</label>
-            <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_ganda_b" name="pilihan_ganda_b" placeholder="Enter Option B">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="pilihan_ganda_c" class="col-sm-2 control-label">C</label>
-            <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_ganda_c" name="pilihan_ganda_c" placeholder="Enter Option C">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="pilihan_ganda_d" class="col-sm-2 control-label">D</label>
-            <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_ganda_d" name="pilihan_ganda_d" placeholder="Enter Option D">
-            </div>
-        </div>
-    `;
-}
-function generatePilihanGandaFields(data) {
-    return `
-        <div class="form-group">
-            <label for="pilihan_ganda_a" class="col-sm-2 control-label">A</label>
-            <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_ganda_a" name="pilihan_ganda_a" placeholder="Enter Option A" value="${data.pertanyaan_a}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="pilihan_ganda_b" class="col-sm-2 control-label">B</label>
-            <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_ganda_b" name="pilihan_ganda_b" placeholder="Enter Option B" value="${data.pertanyaan_b}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="pilihan_ganda_c" class="col-sm-2 control-label">C</label>
-            <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_ganda_c" name="pilihan_ganda_c" placeholder="Enter Option C" value="${data.pertanyaan_c}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="pilihan_ganda_d" class="col-sm-2 control-label">D</label>
-            <div class="col-sm-12">
-                <input type="text" class="form-control" id="pilihan_ganda_d" name="pilihan_ganda_d" placeholder="Enter Option D" value="${data.pertanyaan_d}">
-            </div>
-        </div>
-    `;
-}
+
