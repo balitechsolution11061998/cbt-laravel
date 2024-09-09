@@ -188,7 +188,6 @@
         let currentQuestion = 0;
 
         function showQuestion(index) {
-            console.log(questions.length, 'masuk sini');
             currentQuestion = index;
             document.getElementById('question-number').textContent = `Soal No. ${index + 1}`;
             document.getElementById('question-text').textContent = questions[index].pertanyaan;
@@ -201,7 +200,11 @@
                 imageElement.src = '/' + questions[index].pertanyaan_image; // Set image source
                 imageElement.style.display = 'block'; // Show the image
                 document.getElementById('question-options').innerHTML = ''; // Clear options for image questions
+            } else {
+                imageElement.style.display = 'none'; // Properly hide the image if it's not a 'gambar' type
+                document.getElementById('question-options').innerHTML = ''; // Clear options if needed
             }
+
             const options = [
                 questions[index].pertanyaan_a,
                 questions[index].pertanyaan_b,
@@ -299,7 +302,7 @@
             window.addEventListener('beforeunload', function(event) {
                 event.preventDefault();
                 event.returnValue =
-                'Ujian belum selesai, apakah Anda yakin ingin meninggalkan halaman ini?';
+                    'Ujian belum selesai, apakah Anda yakin ingin meninggalkan halaman ini?';
                 return 'Ujian belum selesai, apakah Anda yakin ingin meninggalkan halaman ini?';
             });
 

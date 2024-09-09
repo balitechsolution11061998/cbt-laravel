@@ -33,12 +33,12 @@ class ManagementSoalController extends Controller
     public function store(Request $request)
     {
         // Debugging purpose
-        // dd($request->all());
 
         // Validation rules
         $rules = [
             'paket_soal_id' => 'required|integer|exists:paket_soal,id',
             'jenis' => 'required|in:pilihan_ganda,gambar',
+            'pertanyaan' => 'nullable|string',
             'pertanyaan_pg' => 'nullable|string',
             'pertanyaan_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'pertanyaan_a' => 'nullable|string',
@@ -55,6 +55,7 @@ class ManagementSoalController extends Controller
         $data = $request->only([
             'paket_soal_id',
             'jenis',
+            'pertanyaan',
             'jawaban_benar',
             'pertanyaan_pg',
             'pertanyaan_a',
@@ -65,7 +66,7 @@ class ManagementSoalController extends Controller
 
         // Map pertanyaan_pg to pertanyaan if applicable
         if ($data['jenis'] === 'pilihan_ganda') {
-            $data['pertanyaan'] = $request->input('pertanyaan_pg');
+            $data['pertanyaan'] = $request->input('pertanyaan');
         } else {
             $data['pertanyaan'] = $request->input('pertanyaan');
         }
