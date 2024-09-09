@@ -152,7 +152,7 @@ body{
                 <form method="POST" action="{{ route('formlogin.check_login') }}" id="sign_in_form">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Please Insert NIP Or NIS" name="username" id="username" required>
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Please Insert Username" name="username" id="username" required>
                     </div>
                     <div class="input-group mb-1">
                         <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" name="password" id="password" required>
