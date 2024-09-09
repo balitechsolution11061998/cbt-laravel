@@ -80,7 +80,7 @@ class ManagementSoalController extends Controller
         }
 
         // Handle storing or updating data
-        if ($request->has('id')) {
+        if ($request->id != null) {
             $soal = Soal::find($request->id);
 
             if ($soal) {
