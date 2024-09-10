@@ -146,7 +146,7 @@ body{
           <div class="row align-items-center">
                 <div class="header-text mb-4 spacing">
                      <h2>Selamat Datang</h2>
-                     <p>We are happy to have you back.</p>
+                     <p>COMPUTER BASIC TEST.</p>
                      {{-- <p class="fs-5">Welcome to our system</p> --}}
                 </div>
                 <form method="POST" action="{{ route('formlogin.check_login') }}" id="sign_in_form">
