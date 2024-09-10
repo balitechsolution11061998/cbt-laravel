@@ -63,7 +63,7 @@ body{
 }
 
 .rounded-image-container {
-    border-radius: 50%; /* Makes the container a circle */
+    border-radius: 10%; /* Makes the container a circle */
     overflow: hidden; /* Hides the overflow */
     width: 350px; /* Container size */
     height: 350px; /* Container size */
@@ -134,7 +134,7 @@ body{
 
        <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #103cbe;">
             <div class="rounded-image-container left-box-content">
-                <img src="{{ asset('image/logo2.jpg') }}" class="rounded-image">
+                <img src="{{ asset('image/logo2.png') }}" class="rounded-image">
             </div>
            <p class="text-white fs-2 text-animate" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">CBT</p>
            <small class="text-white text-wrap text-center text-animate" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Sistem Informasi Ujian Online Madrasah Aliyah Al Furqan</small>
@@ -145,9 +145,9 @@ body{
        <div class="col-md-6 right-box">
           <div class="row align-items-center">
                 <div class="header-text mb-4 spacing">
-                     <h2>Hello Again</h2>
+                     <h2>Selamat Datang</h2>
                      <p>We are happy to have you back.</p>
-                     <p class="fs-5">Welcome to our system</p>
+                     {{-- <p class="fs-5">Welcome to our system</p> --}}
                 </div>
                 <form method="POST" action="{{ route('formlogin.check_login') }}" id="sign_in_form">
                     @csrf
